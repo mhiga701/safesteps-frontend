@@ -106,10 +106,9 @@ export default function App() {
   };
 
   return (
-    <SafeAreaProvider>
+    <View>
       <StatusBar style="auto" />
-      <SafeAreaView
-        edges={["bottom", "left", "right", "top"]}
+      <View
         style={tw`text-red-200 flex`}
       >
         <View style={tw` h-full flex`}>
@@ -126,7 +125,7 @@ export default function App() {
             style={tw`flex border-b`}
           />
         </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </View>
+    </View>
   );
 }
