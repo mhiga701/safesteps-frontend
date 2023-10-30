@@ -1,7 +1,7 @@
 # safesteps-frontend
 
 ## About
-Mobile App
+
 To properly align each component of our app, we separated our front and backend repos for more clarity. This repo holds the code for the frontend design, as well as the client-side Bluetooth Low Energy (BLE) scanner that will run in the background and scan for nearby sensors when the app is running. 
 ## Required Software
 
