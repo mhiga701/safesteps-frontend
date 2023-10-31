@@ -54,8 +54,10 @@
         </dict>
       </dict>
     </dict>
-    <key>NSBluetoothAlwaysUsageDescription</key>
-    <string>Allow $(PRODUCT_NAME) to connect to bluetooth devices</string>
+   <key>NSBluetoothAlwaysUsageDescription</key>
+<string>Allow $(PRODUCT_NAME)  to use Bluetooth for connecting to devices.</string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>Allow $(PRODUCT_NAME)  to use Bluetooth for scanning nearby devices.</string>
     <key>UIBackgroundModes</key>
     <array>
       <string>bluetooth-central</string>

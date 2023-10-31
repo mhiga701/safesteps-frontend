@@ -17,15 +17,18 @@ const reducer = (state, action) => {
     case "setBLEReady":
       return { ...state, bleReady: true };
 
-      break;
+      //break;
     case "setBLEScan":
       return { ...state, isScanning: action.payload };
     case "addItem":
       let items = state.items;
+      //console.log(action.payload);
 
       if (items.findIndex((x) => x.id == action.payload.id) == -1) {
+        if (items.name !== null) {
         items.push(action.payload);
       }
+    }
 
       return { ...state, items: items };
     case "stopScan":
@@ -79,7 +82,7 @@ export default function App() {
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       stopBLEScan();
-    }, 1000 * 10);
+    }, 1000 * 3);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -99,7 +102,7 @@ export default function App() {
   const renderItem = ({ item }) => {
     return (
       <View style={tw`p-2 border rounded-md m-2`}>
-        <Text style={tw`text-[24px]`}>{item.name || "No name found"}</Text>
+        <Text style={tw`text-[24px]`}>{item.name || "Unknown Device"}</Text>
         <Text style={tw`text-[12px]`}>{item.id}</Text>
       </View>
     );
