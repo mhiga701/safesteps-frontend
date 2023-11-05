@@ -1,11 +1,11 @@
 import { React, useState } from 'react';
 import { Audio } from 'expo-av';
-import {Text, View, Modal, TouchableOpacity, Image, Switch, StatusBar} from 'react-native';
+import { Text, View, Modal, TouchableOpacity, Image, Switch, StatusBar } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
-import * as Font from 'expo-font'
-import { styles } from './components/styles'
+import * as Font from 'expo-font';
+import { styles } from './components/styles';
 import { BleManager } from 'react-native-ble-plx';
-
+// import * as Notifications from 'expo-notifications';
 
 export default function App() {
 
