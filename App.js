@@ -5,7 +5,7 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Font from 'expo-font';
 import { styles } from './components/styles';
 import { BleManager } from 'react-native-ble-plx';
-// import * as Notifications from 'expo-notifications';
+import * as Notifications from 'expo-notifications';
 
 export default function App() {
 
