@@ -4,6 +4,8 @@
 
 ## To build the app:
 ```
-npm install
+# install dependencies
+./setup.sh
+# start the app
 npx expo start
 ```
