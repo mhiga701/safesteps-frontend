@@ -1,11 +1,13 @@
 import { React, useState } from 'react';
 import { Audio } from 'expo-av';
-import { Text, View, Modal, TouchableOpacity, Image, Switch, StatusBar } from 'react-native';
+import { Text, View, Modal, TouchableOpacity, Image, Switch, StatusBar, ScrollView } from 'react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import * as Font from 'expo-font';
 import { styles } from './components/styles';
 import { BleManager } from 'react-native-ble-plx';
-import * as Notifications from 'expo-notifications';
+import FeedbackForm from './components/FeedbackForm';
+// import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
+// import * as Notifications from 'expo-notifications';
 
 export default function App() {
 
@@ -38,10 +40,11 @@ export default function App() {
     });
     setFontLoaded(true);
   };
-loadFont();
+
+  loadFont();
 
 
-playSound = async () => {
+  playSound = async () => {
     const sound = new Audio.Sound();
     try {
       let source = require('./beep.mp3');
@@ -80,7 +83,9 @@ playSound = async () => {
       return (
         <>
         
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
+        
+        {/* <View style={styles.container}> */}
           <Text style={styles.mainHeadingText}>Alert Types</Text>
           <Text style={styles.subheadingText}>VISUAL ALERT</Text>
     
@@ -155,7 +160,12 @@ playSound = async () => {
     
           </View>
 
-        </View>
+          <FeedbackForm />
+
+        {/* </View> */}
+
+        </ScrollView>
+
         <AwesomeAlert
             show={alert1}
             showProgress={false}
