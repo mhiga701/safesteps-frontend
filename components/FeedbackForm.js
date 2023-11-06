@@ -50,6 +50,7 @@ export default function FeedbackForm() {
               value={name}
               onChangeText={setName}
               placeholder="Enter your name here"
+              maxLength={100}
             />
           </View>
 
@@ -60,6 +61,8 @@ export default function FeedbackForm() {
               value={message}
               onChangeText={setMessage}
               placeholder="Enter your message here"
+              multiline={true}
+              maxLength={500}
             />
           </View>
 
