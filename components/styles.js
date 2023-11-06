@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingVertical: 10,
+      paddingVertical: 15,
       paddingHorizontal: 15,
       borderBottomWidth: 1,
       borderBottomColor: 'rgba(0, 0, 0, 0.1)',
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingVertical: 10,
+      paddingVertical: 15,
     },
     buttonContainer: {
       flexDirection: 'row', // Make buttons horizontal
@@ -129,6 +129,13 @@ export const styles = StyleSheet.create({
     },
     button2: {
       backgroundColor: '#ad5459',
+      borderRadius: 50,
+      paddingVertical: 10,
+      paddingHorizontal: 24,
+      marginBottom: 10,
+    },
+    button3: {
+      backgroundColor: '#fff',
       borderRadius: 50,
       paddingVertical: 10,
       paddingHorizontal: 24,

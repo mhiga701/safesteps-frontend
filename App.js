@@ -10,7 +10,7 @@ import { BleManager } from 'react-native-ble-plx';
 export default function App() {
 
   const manager = new BleManager();
-  
+  const [soundSelection, setSoundSelection] = useState('Beep (Default)');
   const [fontLoaded, setFontLoaded] = useState(false);
   const [splash, setSplash] = useState(true);
   const [alert1, setAlert1] = useState(false);
@@ -24,6 +24,7 @@ export default function App() {
 
   const handleNewAudio = () => {
     setNewAudio(!newAudio);
+    setChangeAudio(false);
   };
 
   const handleConfirmAudio = () => {
@@ -40,7 +41,7 @@ export default function App() {
   };
 loadFont();
 
-
+const sounds = ['./beep.mp3'];
 playSound = async () => {
     const sound = new Audio.Sound();
     try {
@@ -148,8 +149,8 @@ playSound = async () => {
 
             <View style={styles.rowContainer3}>
               <Text style={styles.toggleText}>Change Alert Sound</Text>
-              <TouchableOpacity style={styles.button} onPress={() => setChangeAudio(true)}>
-                <Text style={styles.buttonText}>Reflection (Default)</Text>
+              <TouchableOpacity style={styles.button3} onPress={() => setChangeAudio(true)}>
+                <Text style={styles.toggleText}>{soundSelection}</Text>
               </TouchableOpacity>
             </View>
     
@@ -165,7 +166,8 @@ playSound = async () => {
             messageStyle={styles.alert1Text}
             showConfirmButton={true}
             confirmText="I acknowledge"
-            confirmButtonStyle={styles.button2}
+            confirmButtonStyle={styles.button1}
+            confirmButtonTextStyle={styles.ackButtonText2}
             onConfirmPressed={() => setAlert1(false)} />
     
         <AwesomeAlert
@@ -213,10 +215,10 @@ playSound = async () => {
                 <Text style={styles.subheadingText}>SOUNDS</Text>
                   <View style={styles.settingsContainer}>
                   <TouchableOpacity style={styles.rowContainer} onPress={() => handleNewAudio}>
-                      <Text style={styles.toggleText}>Reflection (Default)</Text>
+                      <Text style={styles.toggleText}>Beep (Default)</Text>
                       </TouchableOpacity>
                     <TouchableOpacity style={styles.rowContainer} onPress={() => handleNewAudio}>
-                      <Text style={styles.toggleText}>Apex</Text>
+                      <Text style={styles.toggleText}>Alert</Text>
                       </TouchableOpacity>
                     <TouchableOpacity style={styles.rowContainer} onPress={() => handleNewAudio}>
                       <Text style={styles.toggleText}>Beacon</Text>
@@ -235,8 +237,8 @@ playSound = async () => {
                   </View>
 
                   <View style={styles.settingsContainer}>
-                  <TouchableOpacity style={styles.button} onPress={() => handleConfirmAudio}>
-                      <Text style={styles.buttonText}>Save</Text>
+                  <TouchableOpacity style={styles.rowContainer3} onPress={() => handleConfirmAudio}>
+                      <Text style={styles.ackButtonText}>Save</Text>
                       </TouchableOpacity>
                   </View>
               </View>
