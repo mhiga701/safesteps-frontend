@@ -15,6 +15,7 @@ import * as Font from "expo-font";
 import { styles } from "./components/styles";
 import { BleManager } from "react-native-ble-plx";
 import FeedbackForm from "./components/FeedbackForm";
+// import VisAlert1 from "./components/VisAlert1";
 // import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 // import * as Notifications from 'expo-notifications';
 

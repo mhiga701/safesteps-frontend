@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 import { styles } from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
@@ -51,18 +51,27 @@ export default function FeedbackForm() {
               onChangeText={setName}
               placeholder="Enter your name here"
               maxLength={100}
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                this.secondTextInput.focus();
+              }}
+              blurOnSubmit={false}
             />
           </View>
 
           <View style={styles.rowContainer}>
             <Text style={styles.toggleText}>Message</Text>
             <TextInput
+              ref={(input) => {
+                this.secondTextInput = input;
+              }}
               style={styles.input}
               value={message}
               onChangeText={setMessage}
               placeholder="Enter your message here"
               multiline={true}
               maxLength={500}
+              returnKeyType="done"
             />
           </View>
 
