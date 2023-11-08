@@ -1,4 +1,4 @@
-import { React, useState, useRef } from "react";
+import { React, useState } from "react";
 import { styles } from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
@@ -39,8 +39,6 @@ export default function FeedbackForm() {
 
   return (
     <>
-      <Text style={styles.subheadingText}>Feedback Form</Text>
-
       <View>
         <View style={styles.settingsContainer}>
           <View style={styles.rowContainer}>
@@ -72,6 +70,7 @@ export default function FeedbackForm() {
               multiline={true}
               maxLength={500}
               returnKeyType="done"
+              blurOnSubmit={true}
             />
           </View>
 

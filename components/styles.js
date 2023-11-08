@@ -7,6 +7,20 @@ export const styles = StyleSheet.create({
     padding: 20,
     textAlign: "left",
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backgroundImage: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
+  },
+  contentContainer: {
+    alignItems: "center",
+  },
   mainHeadingText: {
     color: "black",
     fontSize: 30,
@@ -61,6 +75,13 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: 10,
+  },
+  buttonHomeScreen: {
+    backgroundColor: "#7e678f",
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    bottom: "-800%", // Adjust this value as needed
   },
   buttonText: {
     textAlign: "center",
