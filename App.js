@@ -5,7 +5,6 @@ import {
   Modal,
   TouchableOpacity,
   Image,
-  StatusBar,
   ScrollView,
 } from "react-native";
 import * as Font from "expo-font";

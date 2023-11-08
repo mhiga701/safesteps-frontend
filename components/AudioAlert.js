@@ -30,6 +30,15 @@ export default function AudioAlert() {
     "flutes.wav",
   ];
 
+  const soundNames = [
+    "Beep (Default)",
+    "Alert",
+    "Beacon",
+    "Bulletin",
+    "By The Seaside",
+    "Chimes",
+  ];
+
   const soundFiles = {
     "beep.mp3": require("../assets/sounds/beep.mp3"),
     "chimes.wav": require("../assets/sounds/chimes.wav"),
@@ -38,6 +47,22 @@ export default function AudioAlert() {
     "dundun.wav": require("../assets/sounds/dundun.wav"),
     "flutes.wav": require("../assets/sounds/flutes.wav"),
   };
+
+  const soundRows = [];
+
+  for (let i = 0; i < soundNames.length; i++) {
+    soundRows.push(
+      <TouchableOpacity
+        style={styles.rowContainer}
+        onPress={() => {
+          handleNewAudio(i);
+          setSoundSelection(soundNames[i]);
+        }}
+      >
+        <Text style={styles.toggleText}>{soundNames[i]}</Text>
+      </TouchableOpacity>
+    );
+  }
 
   playSound = async () => {
     const sound = new Audio.Sound();
@@ -140,62 +165,7 @@ export default function AudioAlert() {
         <View style={styles.container}>
           <Text style={styles.mainHeadingText}>Alert Sounds</Text>
           <Text style={styles.subheadingText}>SOUNDS</Text>
-          <View style={styles.settingsContainer}>
-            <TouchableOpacity
-              style={styles.rowContainer}
-              onPress={() => {
-                handleNewAudio(0);
-                setSoundSelection("Beep (Default)");
-              }}
-            >
-              <Text style={styles.toggleText}>Beep (Default)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rowContainer}
-              onPress={() => {
-                handleNewAudio(1);
-                setSoundSelection("Alert");
-              }}
-            >
-              <Text style={styles.toggleText}>Alert</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rowContainer}
-              onPress={() => {
-                handleNewAudio(2);
-                setSoundSelection("Beacon");
-              }}
-            >
-              <Text style={styles.toggleText}>Beacon</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rowContainer}
-              onPress={() => {
-                handleNewAudio(3);
-                setSoundSelection("Bulletin");
-              }}
-            >
-              <Text style={styles.toggleText}>Bulletin</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rowContainer}
-              onPress={() => {
-                handleNewAudio(4);
-                setSoundSelection("By The Seaside");
-              }}
-            >
-              <Text style={styles.toggleText}>By The Seaside</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.rowContainer3}
-              onPress={() => {
-                handleNewAudio(5);
-                setSoundSelection("Chimes");
-              }}
-            >
-              <Text style={styles.toggleText}>Chimes</Text>
-            </TouchableOpacity>
-          </View>
+          <View style={styles.settingsContainer}>{soundRows}</View>
         </View>
       </Modal>
     </>
