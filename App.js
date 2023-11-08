@@ -15,7 +15,7 @@ import * as Font from "expo-font";
 import { styles } from "./components/styles";
 import { BleManager } from "react-native-ble-plx";
 import FeedbackForm from "./components/FeedbackForm";
-// import VisAlert1 from "./components/VisAlert1";
+import VisAlert from "./components/VisAlert";
 // import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 // import * as Notifications from 'expo-notifications';
 
@@ -26,13 +26,10 @@ export default function App() {
   const [soundSelection, setSoundSelection] = useState("Beep (Default)");
   const [fontLoaded, setFontLoaded] = useState(false);
   const [splash, setSplash] = useState(true);
-  const [alert1, setAlert1] = useState(false);
-  const [alert2, setAlert2] = useState(false);
   const [alert3, setAlert3] = useState(false);
   const [newAudio, setNewAudio] = useState(false);
   const [confirmAudio, setConfirmAudio] = useState(false);
   const [changeAudio, setChangeAudio] = useState(false);
-  const [visualAlertEnabled, setVisualAlertEnabled] = useState(false);
   const [audioAlertEnabled, setAudioAlertEnabled] = useState(false);
 
   const handleNewAudio = (index) => {
@@ -122,46 +119,7 @@ export default function App() {
             <Text style={styles.mainHeadingText}>Alert Types</Text>
             <Text style={styles.subheadingText}>VISUAL ALERT</Text>
 
-            <View style={styles.settingsContainer}>
-              <View style={styles.rowContainer}>
-                <Text style={styles.toggleText}>Enable Visual Alerts</Text>
-                <Switch
-                  value={visualAlertEnabled}
-                  onValueChange={() =>
-                    setVisualAlertEnabled(!visualAlertEnabled)
-                  }
-                  trackColor={{ false: "#e8e5ea", true: "#7e678f" }}
-                />
-              </View>
-
-              <View style={styles.rowContainer}>
-                <Text style={styles.toggleText}>Visual Alert #1</Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                    if (visualAlertEnabled) {
-                      setAlert1(true);
-                    }
-                  }}
-                >
-                  <Text style={styles.buttonText}>Test</Text>
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.rowContainer3}>
-                <Text style={styles.toggleText}>Visual Alert #2</Text>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => {
-                    if (visualAlertEnabled) {
-                      setAlert2(true);
-                    }
-                  }}
-                >
-                  <Text style={styles.buttonText}>Test</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+            <VisAlert />
 
             <Text style={styles.subheadingText}>AUDIO ALERT</Text>
 
@@ -204,19 +162,6 @@ export default function App() {
 
             {/* </View> */}
           </ScrollView>
-
-          <AwesomeAlert
-            show={alert1}
-            showProgress={false}
-            title="Approaching Intersection"
-            titleStyle={styles.alert1Text}
-            message="Look Up!"
-            messageStyle={styles.alert1Text}
-            showConfirmButton={true}
-            confirmText="I acknowledge"
-            confirmButtonStyle={styles.button2}
-            onConfirmPressed={() => setAlert1(false)}
-          />
 
           <AwesomeAlert
             show={alert3}
@@ -318,30 +263,6 @@ export default function App() {
                   <Text style={styles.toggleText}>Chimes</Text>
                 </TouchableOpacity>
               </View>
-
-              {/* <View style={styles.settingsContainer}>
-    <TouchableOpacity style={styles.rowContainer3} onPress={() => handleConfirmAudio()}>
-        <Text style={styles.ackButtonText}>Save</Text>
-        </TouchableOpacity>
-    </View> */}
-            </View>
-          </Modal>
-
-          <Modal visible={alert2} animationType="fade">
-            <View style={styles.alert2Container}>
-              <Text style={styles.alert2Text}>Approaching</Text>
-              <Text style={styles.alert2Text}>Intersection</Text>
-              <Image
-                source={require("./assets/alert.png")}
-                style={styles.alert2Image}
-              />
-              <Text style={styles.alert2Text}>Look Up!</Text>
-              <TouchableOpacity
-                style={styles.button1}
-                onPress={() => setAlert2(false)}
-              >
-                <Text style={styles.ackButtonText}>I acknowledge</Text>
-              </TouchableOpacity>
             </View>
           </Modal>
 
