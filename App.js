@@ -13,6 +13,7 @@ import { BleManager } from "react-native-ble-plx";
 import FeedbackForm from "./components/FeedbackForm";
 import VisAlert from "./components/VisAlert";
 import AudioAlert from "./components/AudioAlert";
+import Splash from './splash.svg';
 // import * as Notifications from "expo-notifications";
 
 export default function App() {
@@ -43,10 +44,8 @@ export default function App() {
       return (
         <Modal visible={splash} animationType="fade">
           <View style={styles.modalContainer}>
-            <Image
-              source={require("./assets/sc.png")}
-              style={styles.backgroundImage}
-            />
+           
+            <Splash style={styles.backgroundImage}/>
             <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}

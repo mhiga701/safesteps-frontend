@@ -366,4 +366,5 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 10,
   },
+
 });
