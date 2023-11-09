@@ -54,6 +54,7 @@ export default function AudioAlert() {
     soundRows.push(
       <TouchableOpacity
         style={styles.rowContainer}
+        key={i}
         onPress={() => {
           handleNewAudio(i);
           setSoundSelection(soundNames[i]);
