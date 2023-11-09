@@ -1,19 +1,10 @@
 import { React, useState } from "react";
-import {
-  Text,
-  View,
-  Modal,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from "react-native";
+import { Text, View, Modal, TouchableOpacity, Image } from "react-native";
 import * as Font from "expo-font";
 import { styles } from "./components/styles";
 import { BleManager } from "react-native-ble-plx";
-import FeedbackForm from "./components/FeedbackForm";
-import VisAlert from "./components/VisAlert";
-import AudioAlert from "./components/AudioAlert";
-import Splash from './splash.svg';
+import Splash from "./splash.svg";
+import Profile from "./app/profile";
 // import * as Notifications from "expo-notifications";
 
 export default function App() {
@@ -44,8 +35,7 @@ export default function App() {
       return (
         <Modal visible={splash} animationType="fade">
           <View style={styles.modalContainer}>
-           
-            <Splash style={styles.backgroundImage}/>
+            <Splash style={styles.backgroundImage} />
             <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}
@@ -60,26 +50,7 @@ export default function App() {
     } else {
       return (
         <>
-          <ScrollView
-            style={styles.container}
-            automaticallyAdjustKeyboardInsets={true}
-            contentContainerStyle={{
-              flexGrow: 1,
-            }}
-          >
-            <Text style={styles.mainHeadingText}>Alert Types</Text>
-            <Text style={styles.subheadingText}>VISUAL ALERT</Text>
-
-            <VisAlert />
-
-            <Text style={styles.subheadingText}>AUDIO ALERT</Text>
-
-            <AudioAlert />
-
-            <Text style={styles.subheadingText}>Feedback Form</Text>
-
-            <FeedbackForm />
-          </ScrollView>
+          <Profile />
         </>
       );
     }
