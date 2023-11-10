@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#e8e5ea",
   },
   backgroundImage: {
     position: "absolute",
@@ -366,5 +367,4 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 10,
   },
-
 });

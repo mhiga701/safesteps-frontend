@@ -1,10 +1,10 @@
 import { React, useState } from "react";
 import { Text, View, Modal, TouchableOpacity, Image } from "react-native";
 import * as Font from "expo-font";
-import { styles } from "./components/styles";
+import { styles } from "../components/styles";
 import { BleManager } from "react-native-ble-plx";
-import Splash from "./splash.svg";
-import Profile from "./app/profile";
+import Splash from "../assets/splash.svg";
+import Profile from "./profile";
 // import * as Notifications from "expo-notifications";
 
 export default function App() {
@@ -15,9 +15,9 @@ export default function App() {
 
   async function loadFont() {
     await Font.loadAsync({
-      "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.otf"),
-      "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.otf"),
-      "Bitter-Regular": require("./assets/fonts/Bitter-Regular.otf"),
+      "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.otf"),
+      "Montserrat-Bold": require("../assets/fonts/Montserrat-Bold.otf"),
+      "Bitter-Regular": require("../assets/fonts/Bitter-Regular.otf"),
     });
     setFontLoaded(true);
   }
@@ -26,7 +26,7 @@ export default function App() {
   if (!fontLoaded) {
     return (
       <Image
-        source={require("./assets/splash.png")}
+        source={require("../assets/splash.png")}
         style={styles.backgroundImage}
       />
     );
