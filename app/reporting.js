@@ -2,10 +2,10 @@ import { Text } from "react-native";
 import { Link } from "expo-router";
 
 
-export default function Page() {
+export default function RPage() {
   return (
     <>
-      <Text>Home page</Text>
+      <Text>Reporting page</Text>
       <Link href="/">Go to main page!</Link>
    
     </>

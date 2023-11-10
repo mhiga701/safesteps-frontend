@@ -19,6 +19,10 @@ export const styles = StyleSheet.create({
     height: "100%",
     resizeMode: "contain",
   },
+  navContainer: {
+    position: "absolute",
+    width: "100%",
+    backgroundColor: 'black'  },
   contentContainer: {
     alignItems: "center",
   },

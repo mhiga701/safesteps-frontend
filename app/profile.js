@@ -6,6 +6,7 @@ import FeedbackForm from "../components/FeedbackForm";
 import VisAlert from "../components/VisAlert";
 import AudioAlert from "../components/AudioAlert";
 import { Link } from "expo-router";
+import  Nav  from "../components/Nav";
 
 export default function Profile() {
   const manager = new BleManager();
