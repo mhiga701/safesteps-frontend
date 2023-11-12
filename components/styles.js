@@ -20,9 +20,12 @@ export const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   navContainer: {
-    position: "absolute",
-    width: "100%",
-    backgroundColor: 'black'  },
+    height: 50, // Adjust the height as needed
+    backgroundColor: 'blue', // Change the background color
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
   contentContainer: {
     alignItems: "center",
   },
