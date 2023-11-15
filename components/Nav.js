@@ -1,9 +1,9 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Page from "../app/main";
-import Profile from "../app/profile";
-import RPage from "../app/reporting";
+import Page from "../app/(tabs)/main";
+import Profile from "../app/(tabs)/profile";
+import RPage from "../app/(tabs)/reporting";
 import { StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();

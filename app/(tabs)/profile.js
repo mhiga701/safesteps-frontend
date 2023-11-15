@@ -1,11 +1,10 @@
 import { React } from "react";
 import { Text, ScrollView } from "react-native";
-import { styles } from "../components/styles";
+import { styles } from "../../components/styles";
 import { BleManager } from "react-native-ble-plx";
-import FeedbackForm from "../components/FeedbackForm";
-import VisAlert from "../components/VisAlert";
-import AudioAlert from "../components/AudioAlert";
-import { Link } from "expo-router";
+import FeedbackForm from "../../components/FeedbackForm";
+import VisAlert from "../../components/VisAlert";
+import AudioAlert from "../../components/AudioAlert";
 
 export default function Profile() {
   const manager = new BleManager();
@@ -21,8 +20,6 @@ export default function Profile() {
       >
         <Text style={styles.mainHeadingText}>Alert Types</Text>
         <Text style={styles.subheadingText}>VISUAL ALERT</Text>
-
-        <Link href="/main">Go to main page!</Link>
 
         <VisAlert />
 

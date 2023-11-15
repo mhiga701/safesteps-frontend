@@ -4,8 +4,8 @@ import * as Font from "expo-font";
 import { styles } from "../components/styles";
 import { BleManager } from "react-native-ble-plx";
 import Splash from "../assets/splash.svg";
-import Profile from "./profile";
-import Nav from "../components/Nav";
+import Profile from "./(tabs)/profile";
+// import Nav from "../components/Nav";
 // import * as Notifications from "expo-notifications";
 
 export default function App() {
@@ -51,8 +51,8 @@ export default function App() {
     } else {
       return (
         <>
-          {/* <Profile /> */}
-          <Nav style={styles.navContainer}/>
+          <Profile />
+          {/* <Nav style={styles.navContainer} /> */}
         </>
       );
     }

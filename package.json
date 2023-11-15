@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/runtime": "^7.23.2",
     "@config-plugins/react-native-ble-plx": "^7.0.0",
+    "@expo/vector-icons": "^13.0.0",
     "@react-navigation/stack": "^6.3.20",
     "bootstrap-icons": "^1.11.1",
     "eas-cli": "^5.6.0",
@@ -36,8 +37,8 @@
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
     "react-native-splash-screen": "^3.3.0",
-    "react-native-svg": "13.9.0",
-    "react-navigation": "^5.0.0"
+    "react-navigation": "^5.0.0",
+    "react-native-svg": "13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
