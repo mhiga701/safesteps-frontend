@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "safesteps",
-    "slug": "safesteps",
+    "name": "safesteps-bostonu",
+    "slug": "safesteps-bostonu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +12,10 @@
         "@config-plugins/react-native-ble-plx",
         {
           "isBackgroundEnabled": true,
-          "modes": ["peripheral", "central"],
+          "modes": [
+            "peripheral",
+            "central"
+          ],
           "bluetoothAlwaysPermission": "Allow $(PRODUCT_NAME) to connect to bluetooth devices"
         }
       ],
@@ -23,7 +26,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.doshir.safesteps"
@@ -61,7 +66,10 @@
         ]
       },
       "eas": {
-        "projectId": "fae10563-515a-4e6e-a9fd-faa18337936a"
+        "projectId": "9bcd3192-263f-4c4d-afdf-d973ff546705"
+      },
+      "router": {
+        "origin": false
       }
     }
   }

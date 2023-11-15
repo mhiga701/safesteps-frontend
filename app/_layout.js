@@ -1,19 +1,41 @@
+import { RootContainer, SplashScreen, Stack, Tabs } from "expo-router";
 import { React, useState } from "react";
-import { Text, View, Modal, TouchableOpacity, Image } from "react-native";
 import * as Font from "expo-font";
+import {
+  useColorScheme,
+  Image,
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { styles } from "../components/styles";
-import { BleManager } from "react-native-ble-plx";
 import Splash from "../assets/splash.svg";
-import Profile from "./(tabs)/profile";
-// import Nav from "../components/Nav";
-// import * as Notifications from "expo-notifications";
+import { BleManager } from "react-native-ble-plx";
 
-export default function App() {
-  const manager = new BleManager();
-  // const [sound, setSound] = useState(new Audio.Sound());
+const manager = new BleManager();
+
+export const unstable_settings = {
+  initialRouteName: "(tabs)",
+};
+
+function RootLayoutNav() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <>
+      <Stack>
+        {/* <Stack.Screen name="(tabs)/profile" options={{ headerShown: false }} /> */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        {/* <Stack.Screen name="modal" options={{ presentation: "modal" }} /> */}
+      </Stack>
+    </>
+  );
+}
+
+export default function RootLayout() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [splash, setSplash] = useState(true);
-
   async function loadFont() {
     await Font.loadAsync({
       "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.otf"),
@@ -51,8 +73,7 @@ export default function App() {
     } else {
       return (
         <>
-          <Profile />
-          {/* <Nav style={styles.navContainer} /> */}
+          <RootLayoutNav />
         </>
       );
     }
