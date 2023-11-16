@@ -44,6 +44,47 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     fontFamily: "Montserrat-Regular",
   },
+  centerheadingText:{
+    // Report
+    color: 'black',
+    fontSize: 20,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 50,
+    letterSpacing: 0.40,
+    marginTop: 45,
+    textAlign:'center',
+  },
+  ReportText:{
+   color: '#52525A',
+   fontSize: 15,
+   fontFamily: 'Bitter',
+   fontWeight: '400',
+   lineHeight: 22.5,
+   letterSpacing: 0.4,
+   textAlign: 'center',
+  },
+  ReportContainer:{
+ 
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '15%',
+    backgroundColor: 'white',
+    borderRadius: 16,
+    paddingHorizontal: 20, // Adjust this value for horizontal padding
+    paddingVertical: 30, // Adjust this value for vertical padding
+    // Shadow/elevation for iOS and Android respectively
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  
   settingsContainer: {
     backgroundColor: "white",
     borderRadius: 16,
