@@ -57,6 +57,8 @@ export default function Page() {
       center: {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
       },
     });
   };
@@ -71,8 +73,8 @@ export default function Page() {
           initialRegion={{
             latitude: 42.35012,
             longitude: -71.10472,
-            latitudeDelta: 0.0622,
-            longitudeDelta: 0.0221,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
