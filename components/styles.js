@@ -65,17 +65,19 @@ export const styles = StyleSheet.create({
    textAlign: 'center',
   },
   ReportContainer:{
- 
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
     height: '15%',
     backgroundColor: 'white',
     borderRadius: 16,
+    marginVertical: 10,
+    
     paddingHorizontal: 20, // Adjust this value for horizontal padding
     paddingVertical: 30, // Adjust this value for vertical padding
     // Shadow/elevation for iOS and Android respectively
     shadowColor: '#000',
+    
     shadowOffset: {
       width: 0,
       height: 1,
@@ -131,6 +133,29 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     bottom: "-800%", // Adjust this value as needed
+  },
+  CarSVGcontainer:{
+    top:-10,
+    left: -40,
+  },
+  CarSubText:{
+    color: '#52525A',
+    fontSize: 13,
+    fontFamily: 'Montserrat',
+    fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.40,
+    right:-16,
+    top:-20,
+
+  },
+  ObstacleSVGcontainer:{
+    top:5,
+    left: -40,
+  },
+  ObstacleSubText:{
+    left:20,
+    top:-20,
   },
   buttonText: {
     textAlign: "center",
@@ -257,6 +282,26 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 35,
     fontFamily: "Montserrat-Bold",
+  },
+  carText:{
+    color: '#52525A',
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.4,
+    left: 15, 
+    top: 5
+  },
+  obstacleText:{
+    color: '#52525A',
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.4,
+    left: 20, 
+    top: 15
   },
   input: {
     flex: 1,
