@@ -629,5 +629,24 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
 
+  },emergencyButton:{
+    backgroundColor:'#AD5459',
+    borderRadius: 50,
+    width:'105%',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    marginTop: 50,
+    marginRight:30,
+    height: 44,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#7E678F',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });
