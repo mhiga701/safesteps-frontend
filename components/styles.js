@@ -157,6 +157,33 @@ export const styles = StyleSheet.create({
     left:20,
     top:-20,
   },
+  ArrowSVGContainer:{
+    bottom: -30,
+    left: 0
+  },
+  ReportAccident:{
+    color: 'black',
+    fontSize: 20,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.40,
+    bottom: -60,
+    left:5,
+  },
+  Intersection:{
+    color: '#52525A',
+    fontSize: 17,
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
+    lineHeight: 25,
+    bottom: -90,
+    left:5,
+
+  },
+  DropDown:{
+    top:110
+  },
   buttonText: {
     textAlign: "center",
     color: "#fff",

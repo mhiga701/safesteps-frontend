@@ -5,7 +5,8 @@ import Page from "../app/(tabs)/main";
 import Profile from "../app/(tabs)/profile";
 import RPage from "../app/(tabs)/reporting";
 import { StyleSheet } from "react-native";
-
+import AccidentScreen from "./Accident";
+import Report from "./Report";
 const Tab = createBottomTabNavigator();
 
 const navContainerStyle = StyleSheet.create({
@@ -46,6 +47,9 @@ export default function Nav() {
     >
       <Stack.Screen name="stackScreen" component={BarTabs} />
       {/* Add more Stack.Screen components for additional pages */}
+      {/* <Stack.Screen name="Report" component={Report}/>*/}
+      <Stack.Screen name="AccidentS" component={AccidentScreen}/> 
+      
     </Stack.Navigator>
   );
 }
