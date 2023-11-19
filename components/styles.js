@@ -64,6 +64,49 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     fontFamily: "Montserrat-Regular",
   },
+  centerheadingText:{
+    // Report
+    color: 'black',
+    fontSize: 20,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 50,
+    letterSpacing: 0.40,
+    marginTop: 45,
+    textAlign:'center',
+  },
+  ReportText:{
+   color: '#52525A',
+   fontSize: 15,
+   fontFamily: 'Bitter',
+   fontWeight: '400',
+   lineHeight: 22.5,
+   letterSpacing: 0.4,
+   textAlign: 'center',
+  },
+  ReportContainer:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '15%',
+    backgroundColor: 'white',
+    borderRadius: 16,
+    marginVertical: 10,
+    
+    paddingHorizontal: 20, // Adjust this value for horizontal padding
+    paddingVertical: 30, // Adjust this value for vertical padding
+    // Shadow/elevation for iOS and Android respectively
+    shadowColor: '#000',
+    
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  
   settingsContainer: {
     backgroundColor: "white",
     borderRadius: 16,
@@ -110,6 +153,85 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     bottom: "-800%", // Adjust this value as needed
+  },
+  CarSVGcontainer:{
+    top:-10,
+    left: -40,
+  },
+  CarSubText:{
+    color: '#52525A',
+    fontSize: 13,
+    fontFamily: 'Montserrat',
+    fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.40,
+    right:-16,
+    top:-20,
+
+  },
+  ObstacleSVGcontainer:{
+    top:5,
+    left: -40,
+  },
+  ObstacleSubText:{
+    left:20,
+    top:-20,
+  },
+  ArrowSVGContainer:{
+    bottom: -30,
+    left: 0
+  },
+  MessageContainer:{
+    top:50,
+    width: '100%',
+    height: '20%',
+    background: 'white', 
+    borderRadius: 10,
+    backgroundColor: "white",
+    borderRadius: 16,
+    elevation: 5,
+    marginBottom: 15,
+    paddingHorizontal: 15, // Add padding to separate elements
+
+  },
+  ReportAccident:{
+    color: 'black',
+    fontSize: 20,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.40,
+    bottom: -60,
+    left:5,
+  },
+  Intersection:{
+    color: '#52525A',
+    fontSize: 17,
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
+    lineHeight: 25,
+    bottom: -90,
+    left:5,
+
+  },
+  Present:{
+    color: '#52525A',
+    fontSize: 17,
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
+    lineHeight: 25,
+    bottom: -130,
+    left:5,
+  },
+  Options:{
+    color: '#52525A',
+    fontSize: 14,
+    fontFamily: 'Montserrat',
+    fontWeight: '400',
+    lineHeight: 20,
+    letterSpacing: 0.40,
+    bottom: -150,
+    left:5,
   },
   buttonText: {
     textAlign: "center",
@@ -236,6 +358,26 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     marginTop: 35,
     fontFamily: "Montserrat-Bold",
+  },
+  carText:{
+    color: '#52525A',
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.4,
+    left: 15, 
+    top: 5
+  },
+  obstacleText:{
+    color: '#52525A',
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    fontWeight: '700',
+    lineHeight: 20,
+    letterSpacing: 0.4,
+    left: 20, 
+    top: 15
   },
   input: {
     flex: 1,
@@ -394,4 +536,137 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 10,
   },
+  Collisionbutton: {
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:140,
+    marginBottom: 10,
+    top:159
+  },
+  Rolloverbutton:{
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:140,
+    marginBottom: 10,
+    right:-150,
+    top:115
+  },
+  Subwaybutton:{
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:140,
+    marginBottom: 10,
+    top:120
+  },
+  Pedestrianbutton:{
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:170,
+    marginBottom: 10,
+    right:-150,
+    top:75
+  },SingleCar:{
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:160,
+    marginBottom: 10,
+    top:80
+  },
+  Other:{
+    backgroundColor: "#808080",
+    color:'white',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width:75,
+    marginBottom: 10,
+    right:-170,
+    top: 35
+
+  },
+  AccidentOptions:{
+    color: 'white',
+    fontSize: 12,
+    fontFamily: 'Montserrat',
+    textAlign: 'center',
+  },
+  buttonsContainer: {
+    flexDirection: 'row', // Arrange items horizontally
+  },
+  SubmitButton:{
+    backgroundColor: '#7E678F',
+    borderRadius: 50,
+    width:'45%',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    marginTop: 50,
+    marginRight:30,
+    height: 44,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#7E678F',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+
+  },cancelButton:{
+    borderRadius: 50,
+    width:'45%',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    marginTop: 50,
+    marginRight:30,
+    height: 44,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#7E678F',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+
+  },emergencyButton:{
+    backgroundColor:'#AD5459',
+    borderRadius: 50,
+    width:'105%',
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    marginTop: 50,
+    marginRight:30,
+    height: 44,
+    paddingLeft: 14,
+    paddingRight: 14,
+    paddingTop: 7,
+    paddingBottom: 7,
+    borderRadius: 40,
+    borderWidth: 1,
+    borderColor: '#7E678F',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
