@@ -11,9 +11,6 @@ import {
 } from "react-native";
 import { styles } from "../components/styles";
 import Splash from "../assets/splash.svg";
-import { BleManager } from "react-native-ble-plx";
-
-const manager = new BleManager();
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",

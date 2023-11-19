@@ -7,6 +7,26 @@ export const styles = StyleSheet.create({
     padding: 20,
     textAlign: "left",
   },
+  map_container: {
+    flex: 1,
+  },
+  locationButton: {
+    position: "absolute",
+    right: 20,
+    bottom: 90,
+    padding: 6,
+    backgroundColor: "white",
+    borderRadius: 300,
+    elevation: 10, // for Android
+    shadowColor: "#000000", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.8, // for iOS
+    shadowRadius: 3, // for iOS
+  },
+  map: {
+    width: "100%",
+    height: "100%",
+  },
   modalContainer: {
     flex: 1,
     justifyContent: "center",
@@ -21,10 +41,10 @@ export const styles = StyleSheet.create({
   },
   navContainer: {
     height: 50, // Adjust the height as needed
-    backgroundColor: 'blue', // Change the background color
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    backgroundColor: "blue", // Change the background color
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   contentContainer: {
     alignItems: "center",
