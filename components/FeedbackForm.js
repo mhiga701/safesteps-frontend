@@ -9,6 +9,12 @@ export default function FeedbackForm() {
   const [message, setMessage] = useState("");
 
   const handleSubmit = async () => {
+    // don't submit if name or message is empty
+    if (name === "" || message === "") {
+      console.log("Name or message is empty. Returning...");
+      return;
+    }
+
     // Post name and message to Firebase with auto-generated doc name
 
     // try {
