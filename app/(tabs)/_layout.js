@@ -25,35 +25,28 @@ export default function TabLayout() {
           fontSize: 12,
           lineHeight: 14,
         },
-    
       }}
     >
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="bell" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
         }}
       />
       <Tabs.Screen
         name="index"
         options={{
           title: "Main Page",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="home" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="reporting"
         options={{
           title: "Reporting",
-          display: 'flex',
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="flag" color={color} />
-          ),
+          display: "flex",
+          tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
         }}
       />
     </Tabs>

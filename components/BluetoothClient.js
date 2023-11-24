@@ -19,4 +19,10 @@ export default function BluetoothClient() {
       }
     })();
   }, []);
+
+  // return (
+  //   <Modal>
+
+  //   </Modal>
+  // )
 }
