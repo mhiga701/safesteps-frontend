@@ -9,12 +9,17 @@ export default function BluetoothClient() {
 
   useEffect(() => {
     (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
       let { status_b } = await Location.requestBackgroundPermissionsAsync();
       if (status_b !== "granted") {
         setErrorMsgBkg(
           "Permission to access location was denied - BluetoothClient.js"
         );
-        console.log(errorMsgBkg);
+        console.log(`Something went wrong: ${errorMsgBkg}`);
         return;
       }
     })();
