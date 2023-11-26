@@ -11,7 +11,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: false,
+        tabBarShowLabel: true,
         headerShown: false,
         tabBarActiveTintColor: "#7E678F",
         tabBarStyle: {
@@ -55,6 +55,7 @@ export default function TabLayout() {
             <TabBarIcon name="flag" color={color} />
           ),
         }}
+    
       />
     </Tabs>
   );

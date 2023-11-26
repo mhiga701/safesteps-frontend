@@ -1,7 +1,6 @@
 import { Text, View, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
-import MapView from "react-native-maps";
-import Marker from "react-native-maps";
+import MapView, {Marker} from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
 import React, { useState, useEffect } from "react";
@@ -15,6 +14,25 @@ export default function Page() {
   const mapRef = React.createRef();
 
   const [location, setLocation] = useState(null);
+
+  const locationData = [
+    {
+      latitude: 42.35074, 
+      longitude: 71.11078, 
+      title: 'BU Bridge'
+    },
+    {
+      latitude: 42.35021,
+      longitude: 71.10653,
+      title: 'Marsh Plaza'
+    },
+    {
+      latitude: 42.34986,
+      longitude: 71.10360,
+      title: 'CCDS'
+       
+    }
+  ];
 
   useEffect(() => {
     let locationWatcher = null;
@@ -78,9 +96,11 @@ export default function Page() {
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
-          // followsUserLocation={true}
-        />
-        <LocationButton />
+        >
+         
+          
+         </MapView> 
+         <LocationButton />
       </View>
     </>
   );
