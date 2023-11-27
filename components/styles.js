@@ -668,5 +668,15 @@ export const styles = StyleSheet.create({
     borderColor: '#7E678F',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  bottomSheetContainer: {
+    color: '#e5e8ea',
+    flex: 1,
+    padding: 16,
+  },
+  bottomSheetHeader: {
+    align: 'left',
+    fontSize: 20,
+    fontFamily: 'Montserrat-Bold',
   }
 });

@@ -1,11 +1,11 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
-// import { BottomSheet } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 
 const locationData = [
   {
@@ -101,19 +101,24 @@ export default function Page() {
       },
     });
   };
+  const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
+
+  const bottomSheetRef = useRef(null);
+
 
   return (
     <>
       <BluetoothClient />
       <View style={styles.map_container}>
+        
         <MapView
           ref={mapRef}
           style={styles.map}
           initialRegion={{
             latitude: 42.35012,
             longitude: -71.10472,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: -25,
+            longitudeDelta: -25,
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
@@ -122,7 +127,31 @@ export default function Page() {
          {renderMarkers()}
          </MapView> 
          <LocationButton />
+         <BottomSheet 
+         snapPoints={snapPoints} 
+         backgroundStyle={localStyles.bottomSheetContainer} 
+         style={localStyles.bottomSheetContainer} 
+         index={1} 
+         ref={bottomSheetRef}>
+          <View>
+            <Text style={localStyles.bottomSheetHeader}>Nearby Beacons</Text>
+            
+          </View>
+          </BottomSheet>
       </View>
     </>
   );
 }
+
+const localStyles = StyleSheet.create({
+  bottomSheetContainer: {
+    backgroundColor: "#ecedf2",
+    flex: 1,
+    padding: 10,
+  },
+  bottomSheetHeader: {
+    fontSize: 20,
+    fontFamily: 'Montserrat-Bold',
+    marginLeft: 20,
+  }
+});
