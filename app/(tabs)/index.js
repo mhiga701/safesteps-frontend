@@ -1,39 +1,60 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
-import MapView, {Marker} from "react-native-maps";
+import { View, TouchableOpacity } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
 // import { BottomSheet } from '@gorhom/bottom-sheet';
 
+const locationData = [
+  {
+    title: 'BU Bridge',
+    location: {
+      latitude: 42.35074, 
+      longitude: 71.11078, 
+    },
+    description: 'Cars drive fast here!',
+  },
+  {
+    title: 'Marsh Plaza',
+    location: {
+      latitude: 42.35021, 
+      longitude: 71.10653, 
+    },
+    description: 'Lots of pedestrians here!',
+  },
+  {
+    title: 'CCDS',
+    location: {
+      latitude: 42.34986, 
+      longitude: 71.10360, 
+    },
+    description: 'Lots of pedestrians here!',
+  },
+];
+
+
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
   // const background = BluetoothClient();
-  const mapRef = React.createRef();
+  const mapRef = useRef();
 
   const [location, setLocation] = useState(null);
 
-  const locationData = [
-    {
-      latitude: 42.35074, 
-      longitude: 71.11078, 
-      title: 'BU Bridge'
-    },
-    {
-      latitude: 42.35021,
-      longitude: 71.10653,
-      title: 'Marsh Plaza'
-    },
-    {
-      latitude: 42.34986,
-      longitude: 71.10360,
-      title: 'CCDS'
-       
-    }
-  ];
-
+  const renderMarkers = () => {
+    return locationData.map((marker, index) => {
+      return (
+        <Marker
+          key={index}
+          coordinate={marker.location}
+          title={marker.title}
+          description={marker.description}
+        />
+      );
+    })
+  }
+  
   useEffect(() => {
     let locationWatcher = null;
 
@@ -96,9 +117,9 @@ export default function Page() {
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
+          // followsUserLocation={true}
         >
-         
-          
+         {renderMarkers()}
          </MapView> 
          <LocationButton />
       </View>
