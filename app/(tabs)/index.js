@@ -1,7 +1,5 @@
-import { Text, View, TouchableOpacity } from "react-native";
-import { Link } from "expo-router";
-import MapView from "react-native-maps";
-import Marker from "react-native-maps";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
 import React, {
@@ -13,24 +11,56 @@ import React, {
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { BottomSheet } from "@gorhom/bottom-sheet";
-import BackgroundLocation from "../../components/BackgroundLocation";
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+
+const locationData = [
+  {
+    title: 'BU Bridge',
+    location: {
+      latitude: 42.35074, 
+      longitude: 71.11078, 
+    },
+    description: 'Cars drive fast here!',
+  },
+  {
+    title: 'Marsh Plaza',
+    location: {
+      latitude: 42.35021, 
+      longitude: 71.10653, 
+    },
+    description: 'Lots of pedestrians here!',
+  },
+  {
+    title: 'CCDS',
+    location: {
+      latitude: 42.34986, 
+      longitude: 71.10360, 
+    },
+    description: 'Lots of pedestrians here!',
+  },
+];
+
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
   // const background = BluetoothClient();
-  const mapRef = React.createRef();
+  const mapRef = useRef();
 
   const [location, setLocation] = useState(null);
 
-  const bottomSheetRef = useRef < BottomSheet > null;
-
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
-
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
+  const renderMarkers = () => {
+    return locationData.map((marker, index) => {
+      return (
+        <Marker
+          key={index}
+          coordinate={marker.location}
+          title={marker.title}
+          description={marker.description}
+        />
+      );
+    })
+  }
+  
   useEffect(() => {
     let locationWatcher = null;
 
@@ -77,26 +107,44 @@ export default function Page() {
       },
     });
   };
+  const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
+
+  const bottomSheetRef = useRef(null);
+
 
   return (
     <>
       <BackgroundLocation />
       <BluetoothClient />
       <View style={styles.map_container}>
+        
         <MapView
           ref={mapRef}
           style={styles.map}
           initialRegion={{
             latitude: 42.35012,
             longitude: -71.10472,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: -25,
+            longitudeDelta: -25,
           }}
           showsUserLocation={true}
           showsMyLocationButton={true}
           // followsUserLocation={true}
-        />
-        <LocationButton />
+        >
+         {renderMarkers()}
+         </MapView> 
+         <LocationButton />
+         <BottomSheet 
+         snapPoints={snapPoints} 
+         backgroundStyle={localStyles.bottomSheetContainer} 
+         style={localStyles.bottomSheetContainer} 
+         index={1} 
+         ref={bottomSheetRef}>
+          <View>
+            <Text style={localStyles.bottomSheetHeader}>Nearby Beacons</Text>
+            
+          </View>
+          </BottomSheet>
       </View>
       {/* <BottomSheet
         ref={bottomSheetRef}
@@ -111,3 +159,16 @@ export default function Page() {
     </>
   );
 }
+
+const localStyles = StyleSheet.create({
+  bottomSheetContainer: {
+    backgroundColor: "#ecedf2",
+    flex: 1,
+    padding: 10,
+  },
+  bottomSheetHeader: {
+    fontSize: 20,
+    fontFamily: 'Montserrat-Bold',
+    marginLeft: 20,
+  }
+});
