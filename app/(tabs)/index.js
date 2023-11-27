@@ -4,10 +4,17 @@ import MapView from "react-native-maps";
 import Marker from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
-// import { BottomSheet } from '@gorhom/bottom-sheet';
+import { BottomSheet } from "@gorhom/bottom-sheet";
+import BackgroundLocation from "../../components/BackgroundLocation";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -15,6 +22,14 @@ export default function Page() {
   const mapRef = React.createRef();
 
   const [location, setLocation] = useState(null);
+
+  const bottomSheetRef = useRef < BottomSheet > null;
+
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
 
   useEffect(() => {
     let locationWatcher = null;
@@ -65,6 +80,7 @@ export default function Page() {
 
   return (
     <>
+      <BackgroundLocation />
       <BluetoothClient />
       <View style={styles.map_container}>
         <MapView
@@ -82,6 +98,16 @@ export default function Page() {
         />
         <LocationButton />
       </View>
+      {/* <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <View style={styles.container}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet> */}
     </>
   );
 }

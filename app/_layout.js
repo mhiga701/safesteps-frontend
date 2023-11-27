@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { styles } from "../components/styles";
 import Splash from "../assets/splash.svg";
+import { RootSiblingParent } from "react-native-root-siblings";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -70,7 +72,11 @@ export default function RootLayout() {
     } else {
       return (
         <>
-          <RootLayoutNav />
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <RootSiblingParent>
+              <RootLayoutNav />
+            </RootSiblingParent>
+          </GestureHandlerRootView>
         </>
       );
     }
