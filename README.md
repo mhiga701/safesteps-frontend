@@ -1,12 +1,17 @@
 # safesteps-frontend
 
-### We now have a working build........ ueah.
+### We now have a working build........ yeah.
 
-## To build the app:
+## To run the app locally:
 
-```
-# install dependencies
+
+## Install Dependencies
+
+```shell
 ./setup.sh
-# start the app
+```
+## Start the App
+
+```shell
 npx expo start
 ```
