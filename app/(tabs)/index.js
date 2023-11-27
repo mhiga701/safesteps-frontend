@@ -50,18 +50,16 @@ export default function Page() {
 
   const [location, setLocation] = useState(null);
 
-  const renderMarkers = () => {
-    return locationData.map((marker, index) => {
-      return (
-        <Marker
-          key={index}
-          coordinate={marker.location}
-          title={marker.title}
-          description={marker.description}
-        />
-      );
-    })
-  }
+  // const renderMarkers = () => {
+  //   return locationData.map((marker, index) => {
+  //       <Marker
+  //         key={index}
+  //         coordinate={marker.location}
+  //         title={marker.title}
+  //         description={marker.description}
+  //       />
+  //   })
+  // }
   
   useEffect(() => {
     let locationWatcher = null;
@@ -133,7 +131,14 @@ export default function Page() {
           showsMyLocationButton={true}
           // followsUserLocation={true}
         >
-         {renderMarkers()}
+         {locationData.map((marker, index) => {
+        <Marker
+          key={index}
+          coordinate={marker.location}
+          title={marker.title}
+          description={marker.description}
+        />
+    })}
          </MapView> 
          <LocationButton />
          <BottomSheet 
