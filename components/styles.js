@@ -12,16 +12,17 @@ export const styles = StyleSheet.create({
   },
   locationButton: {
     position: "absolute",
+    top: 50,
     right: 20,
-    bottom: 90,
+    // bottom: 90,
     padding: 6,
     backgroundColor: "white",
     borderRadius: 300,
     elevation: 10, // for Android
     shadowColor: "#000000", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
-    shadowOpacity: 0.8, // for iOS
-    shadowRadius: 3, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
   },
   map: {
     width: "100%",
