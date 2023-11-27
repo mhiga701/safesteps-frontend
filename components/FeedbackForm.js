@@ -3,6 +3,7 @@ import { styles } from "./styles";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
 import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import Toast from "react-native-root-toast";
 
 export default function FeedbackForm() {
   const [name, setName] = useState("");
@@ -12,6 +13,18 @@ export default function FeedbackForm() {
     // don't submit if name or message is empty
     if (name === "" || message === "") {
       console.log("Name or message is empty. Returning...");
+      let etoast = Toast.show("Error: Name or message is empty.", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+
+      setTimeout(function hideToast() {
+        Toast.hide(etoast);
+      }, 3000);
       return;
     }
 
@@ -28,6 +41,7 @@ export default function FeedbackForm() {
     // }
 
     // Post name and message to Firebase with custom doc name
+
     try {
       await setDoc(doc(db, "Feedback", name), {
         name: name,
@@ -37,10 +51,39 @@ export default function FeedbackForm() {
       console.log(`Name: ${name}, Message: ${message}`);
     } catch (e) {
       console.error("Error adding document: ", e);
+
+      let etoast = Toast.show(
+        "Error submitting feedback: please try again later.",
+        {
+          duration: Toast.durations.LONG,
+          position: Toast.positions.BOTTOM,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          delay: 0,
+        }
+      );
+
+      setTimeout(function hideToast() {
+        Toast.hide(etoast);
+      }, 3000);
     }
 
     setName("");
     setMessage("");
+
+    let toast = Toast.show("Thanks for your feedback!", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
+
+    setTimeout(function hideToast() {
+      Toast.hide(toast);
+    }, 3000);
   };
 
   return (
@@ -63,7 +106,6 @@ export default function FeedbackForm() {
             />
           </View>
 
-        
           <View style={styles.rowContainer}>
             <Text style={styles.toggleText}>Message</Text>
             <TextInput

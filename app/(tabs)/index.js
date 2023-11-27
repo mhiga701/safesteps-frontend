@@ -2,7 +2,13 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
@@ -108,6 +114,7 @@ export default function Page() {
 
   return (
     <>
+      <BackgroundLocation />
       <BluetoothClient />
       <View style={styles.map_container}>
         
@@ -139,6 +146,16 @@ export default function Page() {
           </View>
           </BottomSheet>
       </View>
+      {/* <BottomSheet
+        ref={bottomSheetRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <View style={styles.container}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet> */}
     </>
   );
 }

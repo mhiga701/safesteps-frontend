@@ -9,6 +9,7 @@ import AudioAlert from "../../components/AudioAlert";
 export default function Profile() {
   const manager = new BleManager();
   // const [sound, setSound] = useState(new Audio.Sound());
+
   return (
     <>
       <ScrollView
