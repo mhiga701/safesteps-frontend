@@ -10,7 +10,7 @@ import React, {
   useMemo,
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
-import Icon from "react-native-vector-icons/FontAwesome";
+import  Icon  from "react-native-vector-icons/FontAwesome";
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import BackgroundLocation from "../../components/BackgroundLocation";
 
@@ -95,7 +95,7 @@ export default function Page() {
 
   const LocationButton = () => (
     <TouchableOpacity style={styles.locationButton} onPress={goToMyLocation}>
-      <Icon name="crosshairs" size={30} color="#000000" />
+      <Icon name="crosshairs" size={25} color="#066ee6" />
     </TouchableOpacity>
   );
 
@@ -109,18 +109,6 @@ export default function Page() {
       },
     });
   };
-  const currentLocation = () => {
-    if (location) {
-      return {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      };
-    }
-    return {
-      latitude: 42.35074,
-      longitude: -71.11078,
-    };
-  }
   const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
 
   const bottomSheetRef = useRef(null);
@@ -136,8 +124,8 @@ export default function Page() {
           ref={mapRef}
           style={styles.map}
           initialRegion={{
-            latitude: 42.35074,
-            longitude:  -71.11078,
+            latitude: 42.35021,
+            longitude:  71.10653,
             latitudeDelta: 0.003,
             longitudeDelta: 0.003,
           }}
