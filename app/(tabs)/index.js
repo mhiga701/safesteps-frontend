@@ -50,16 +50,7 @@ export default function Page() {
 
   const [location, setLocation] = useState(null);
 
-  // const renderMarkers = () => {
-  //   return locationData.map((marker, index) => {
-  //       <Marker
-  //         key={index}
-  //         coordinate={marker.location}
-  //         title={marker.title}
-  //         description={marker.description}
-  //       />
-  //   })
-  // }
+ 
   
   useEffect(() => {
     let locationWatcher = null;
@@ -110,13 +101,23 @@ export default function Page() {
   const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
 
   const bottomSheetRef = useRef(null);
-
+  
+  const renderMarkers = () => {
+    return locationData.map((marker, index) => {
+        <Marker
+          key={index}
+          coordinate={marker.location}
+          title={marker.title}
+          description={marker.description}
+        />
+    })
+  }
 
   return (
     <>
       <BackgroundLocation />
       <BluetoothClient />
-      <View style={styles.map_container}>
+      <View >
         
         <MapView
           ref={mapRef}
@@ -131,14 +132,7 @@ export default function Page() {
           showsMyLocationButton={true}
           // followsUserLocation={true}
         >
-         {locationData.map((marker, index) => {
-        <Marker
-          key={index}
-          coordinate={marker.location}
-          title={marker.title}
-          description={marker.description}
-        />
-    })}
+          {renderMarkers()}
          </MapView> 
          <LocationButton />
          <BottomSheet 

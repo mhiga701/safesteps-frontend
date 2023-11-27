@@ -10,7 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { styles } from "../components/styles";
-import Splash from "../assets/splash.svg";
+import Splash1 from "../assets/Logo.svg"
+import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -47,17 +48,14 @@ export default function RootLayout() {
 
   if (!fontLoaded) {
     return (
-      <Image
-        source={require("../assets/splash.png")}
-        style={styles.backgroundImage}
-      />
+      <Splash1 />
     );
   } else {
     if (splash) {
       return (
         <Modal visible={splash} animationType="fade">
           <View style={styles.modalContainer}>
-            <Splash style={styles.backgroundImage} />
+            <Splash2 style={styles.backgroundImage} />
             <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}

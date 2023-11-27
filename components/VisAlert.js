@@ -9,6 +9,7 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./styles";
+import Alert from '../assets/alert.svg';
 
 export default function VisAlert() {
   const [alert1, setAlert1] = useState(false);
@@ -23,7 +24,7 @@ export default function VisAlert() {
           <Switch
             value={visualAlertEnabled}
             onValueChange={() => setVisualAlertEnabled(!visualAlertEnabled)}
-            trackColor={{ false: "#e8e5ea", true: "#7e678f" }}
+            trackColor={{ false: "#e9e9ea", true: "#B164E8" }}
           />
         </View>
 
@@ -73,10 +74,7 @@ export default function VisAlert() {
         <View style={styles.alert2Container}>
           <Text style={styles.alert2Text}>Approaching</Text>
           <Text style={styles.alert2Text}>Intersection</Text>
-          <Image
-            source={require("../assets/alert.png")}
-            style={styles.alert2Image}
-          />
+          <Alert style={{marginVertical: 50}}/>
           <Text style={styles.alert2Text}>Look Up!</Text>
           <TouchableOpacity
             style={styles.button1}

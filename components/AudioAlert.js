@@ -93,7 +93,7 @@ export default function AudioAlert() {
           <Switch
             value={audioAlertEnabled}
             onValueChange={() => setAudioAlertEnabled(!audioAlertEnabled)}
-            trackColor={{ false: "#e8e5ea", true: "#7e678f" }}
+            trackColor={{ false: "#e9e9ea", true: "#B164E8" }}
           />
         </View>
 

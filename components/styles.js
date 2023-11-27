@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e8e5ea",
+    backgroundColor: "#ecedf2",
     padding: 20,
     textAlign: "left",
   },
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#e8e5ea",
+    backgroundColor: "#ecedf2",
   },
   backgroundImage: {
     position: "absolute",
@@ -142,14 +142,14 @@ export const styles = StyleSheet.create({
     marginTop: 50, // Add spacing
   },
   button: {
-    backgroundColor: "#7e678f",
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginBottom: 10,
   },
   buttonHomeScreen: {
-    backgroundColor: "#7e678f",
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -242,13 +242,13 @@ export const styles = StyleSheet.create({
   },
   audioButtonText: {
     textAlign: "center",
-    color: "#7e678f",
+    color: "#B164E8",
     fontSize: 14,
     fontFamily: "Montserrat-Regular",
   },
   ackButtonText: {
     textAlign: "center",
-    color: "#ad5459",
+    color: "#FE2D01",
     fontSize: 14,
     fontFamily: "Montserrat-Regular",
   },
@@ -271,7 +271,7 @@ export const styles = StyleSheet.create({
     color: "black",
   },
   alert2Container: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
@@ -300,7 +300,7 @@ export const styles = StyleSheet.create({
     marginTop: 50,
   },
   button2: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -319,11 +319,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
-    borderColor: "#ad5459",
+    borderColor: "#FE2D01",
     borderWidth: 1,
   },
   changeAudioConfirm: {
-    backgroundColor: "#7e678f",
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -335,11 +335,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
-    borderColor: "#7e678f",
+    borderColor: "#B164E8",
     borderWidth: 1,
   },
   audiobutton2: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -348,7 +348,7 @@ export const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#e8e5ea",
+    backgroundColor: "#ecedf2",
     padding: 20,
     textAlign: "left",
   },
@@ -427,7 +427,7 @@ export const styles = StyleSheet.create({
     marginTop: 50, // Add spacing
   },
   button: {
-    backgroundColor: "#7e678f",
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -441,13 +441,13 @@ export const styles = StyleSheet.create({
   },
   audioButtonText: {
     textAlign: "center",
-    color: "#7e678f",
+    color: "#B164E8",
     fontSize: 14,
     fontFamily: "Montserrat-Regular",
   },
   ackButtonText: {
     textAlign: "center",
-    color: "#ad5459",
+    color: "#FE2D01",
     fontSize: 14,
     fontFamily: "Montserrat-Regular",
   },
@@ -470,7 +470,7 @@ export const styles = StyleSheet.create({
     color: "black",
   },
   alert2Container: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
@@ -499,7 +499,7 @@ export const styles = StyleSheet.create({
     marginTop: 50,
   },
   button2: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -511,11 +511,11 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
-    borderColor: "#ad5459",
+    borderColor: "#FE2D01",
     borderWidth: 1,
   },
   changeAudioConfirm: {
-    backgroundColor: "#7e678f",
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -531,7 +531,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   audiobutton2: {
-    backgroundColor: "#ad5459",
+    backgroundColor: "#FE2D01",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 24,
@@ -610,7 +610,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row', // Arrange items horizontally
   },
   SubmitButton:{
-    backgroundColor: '#7E678F',
+    backgroundColor: "#B164E8",
     borderRadius: 50,
     width:'45%',
     paddingVertical: 10,
@@ -625,7 +625,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 7,
     borderRadius: 40,
     borderWidth: 1,
-    borderColor: '#7E678F',
+    borderColor: "#B164E8",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
@@ -645,13 +645,13 @@ export const styles = StyleSheet.create({
     paddingBottom: 7,
     borderRadius: 40,
     borderWidth: 1,
-    borderColor: '#7E678F',
+    borderColor: "#B164E8",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
 
   },emergencyButton:{
-    backgroundColor:'#AD5459',
+    backgroundColor:'#FE2D01',
     borderRadius: 50,
     width:'105%',
     paddingVertical: 10,
@@ -666,7 +666,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 7,
     borderRadius: 40,
     borderWidth: 1,
-    borderColor: '#7E678F',
+    borderColor: "#B164E8",
     justifyContent: 'center',
     alignItems: 'center',
   },
