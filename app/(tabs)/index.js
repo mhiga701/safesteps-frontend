@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import  Icon  from "react-native-vector-icons/FontAwesome";
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import BackgroundLocation from "../../components/BackgroundLocation";
 
 
@@ -125,8 +125,8 @@ export default function Page() {
           initialRegion={{
             latitude: 42.35021,
             longitude:  71.10653,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
           }}
           showsUserLocation={true}
           // showsMyLocationButton={true}
