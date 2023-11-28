@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import Alert from '../assets/alert.svg';
+import AlertHeader from '../assets/AlertTypes2.svg'
 
 export default function VisAlert() {
   const [alert1, setAlert1] = useState(false);
@@ -18,6 +19,18 @@ export default function VisAlert() {
 
   return (
     <>
+    <View style={styles.headerContainer}>
+      <AlertHeader style={styles.alertHeader}/>
+      <View style={styles.headerTextContainer}>
+       
+       
+      </View>
+    </View>
+    <View> 
+        <Text style={styles.mainHeadingText}>Alert Types</Text>
+        <Text style={styles.subheadingText}>VISUAL ALERT</Text>
+    </View>
+    
       <View style={styles.settingsContainer}>
         <View style={styles.rowContainer}>
           <Text style={styles.toggleText}>Enable Visual Alerts</Text>

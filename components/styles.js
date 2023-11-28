@@ -51,12 +51,13 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   mainHeadingText: {
-    color: "black",
+    color: "white",
     fontSize: 30,
     fontWeight: "700",
     marginBottom: 20,
-    marginTop: 35,
     fontFamily: "Montserrat-Bold",
+    position: "absolute",
+    alignSelf: "left",
   },
   subheadingText: {
     color: "#52525a",
@@ -64,6 +65,7 @@ export const styles = StyleSheet.create({
     fontWeight: "500",
     marginBottom: 15,
     fontFamily: "Montserrat-Regular",
+    position: "absolute",
   },
   centerheadingText:{
     // Report
@@ -670,14 +672,17 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  bottomSheetContainer: {
-    color: '#e5e8ea',
-    flex: 1,
-    padding: 16,
+  alertHeader: {
+    marginRight: 20,
+    position: 'absolute',
   },
-  bottomSheetHeader: {
-    align: 'left',
-    fontSize: 20,
-    fontFamily: 'Montserrat-Bold',
+  headerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 60,
+    marginBottom: 10, // Adjust as needed to create space between the header and the content below
+  },
+  headerTextContainer: {
+    alignItems: 'left',
   }
 });

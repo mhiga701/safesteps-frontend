@@ -119,21 +119,21 @@ export default function Page() {
       <BluetoothClient />
       <View >
         
-        <MapView
+         <MapView
           ref={mapRef}
           style={styles.map}
           initialRegion={{
             latitude: 42.35021,
             longitude:  71.10653,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
+            latitudeDelta: 0.05,
+            longitudeDelta: 0.05,
           }}
           showsUserLocation={true}
-          showsMyLocationButton={true}
+          // showsMyLocationButton={true}
           // followsUserLocation={true}
         >
-          {renderMarkers()}
-         </MapView> 
+            {renderMarkers()} 
+         </MapView>   
          <LocationButton />
          <BottomSheet 
          snapPoints={snapPoints} 

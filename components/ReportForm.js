@@ -18,7 +18,9 @@ export default function ReportForm() {
     };
 //   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-
+  const date = new Date();
+  const day = date.toLocaleDateString();
+  const time = date.toLocaleTimeString();
   const handleSubmit = async () => {
     // don't submit if name or message is empty
     if (message === "") {
@@ -51,14 +53,18 @@ export default function ReportForm() {
     // }
 
     // Post name and message to Firebase with custom doc name
-
+    
     try {
+
       await setDoc(doc(db, "Reports", intersection), {
+        
         intersection: intersection,
         message: message,
+        day:day,
+        time:time,
       });
       console.log("Uploaded!");
-      console.log(`Report: ${message} at ${intersection}`);
+      console.log(`Report: ${message} at ${intersection} on ${day}, at ${time}`);
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -97,6 +103,7 @@ export default function ReportForm() {
 
   return (
     <>
+    
       <View>
 
 <Text style={styles.ReportAccident}>Report Traffic Accident</Text>
@@ -110,7 +117,7 @@ export default function ReportForm() {
     save="value"
     placeholder="Choose Intersection"
     inputStyles ={{marginRight:100}}
-    dropdownItemStyles={{marginHorizontal:90}}
+    dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
     />
 </View>
 

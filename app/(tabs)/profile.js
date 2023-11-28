@@ -1,5 +1,5 @@
 import { React } from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, SafeAreaView } from "react-native";
 import { styles } from "../../components/styles";
 import { BleManager } from "react-native-ble-plx";
 import FeedbackForm from "../../components/FeedbackForm";
@@ -15,13 +15,13 @@ export default function Profile() {
       <ScrollView
         style={styles.container}
         automaticallyAdjustKeyboardInsets={true}
+        automaticallyAdjustContentInsets={true}
+        // bounces={false}
         contentContainerStyle={{
           flexGrow: 1,
         }}
       >
-        <Text style={styles.mainHeadingText}>Alert Types</Text>
-        <Text style={styles.subheadingText}>VISUAL ALERT</Text>
-
+        
         <VisAlert />
 
         <Text style={styles.subheadingText}>AUDIO ALERT</Text>

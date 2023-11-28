@@ -10,7 +10,7 @@ export default function AccidentScreen() {
   </svg>`
 
  
-  const router = useRouter();
+  const history = useRouter();
   return (
     <> 
     
@@ -20,7 +20,7 @@ export default function AccidentScreen() {
         contentContainerStyle={{
           flexGrow: 1,
         }}>
-      <TouchableOpacity onPress={() => router.back()} >
+      <TouchableOpacity onPress={() => history.back()} >
           <View style={styles.ArrowSVGContainer}><SvgXml xml={ARROW_SVG}/></View>
       </TouchableOpacity>
 
