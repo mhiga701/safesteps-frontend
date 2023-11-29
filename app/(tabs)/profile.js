@@ -13,7 +13,7 @@ export default function Profile() {
   return (
     <>
       <ScrollView
-        style={styles.container}
+        style={styles.profileContainer}
         automaticallyAdjustKeyboardInsets={true}
         automaticallyAdjustContentInsets={true}
         // bounces={false}

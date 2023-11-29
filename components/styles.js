@@ -7,6 +7,13 @@ export const styles = StyleSheet.create({
     padding: 20,
     textAlign: "left",
   },
+  profileContainer: {
+    flex: 1,
+    backgroundColor: "#ecedf2",
+    padding: 20,
+    textAlign: "left",
+    borderRadius: 16,
+  },
   map_container: {
     flex: 1,
   },
@@ -61,7 +68,7 @@ export const styles = StyleSheet.create({
   },
   subheadingText: {
     color: "#52525a",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "500",
     marginBottom: 15,
     fontFamily: "Montserrat-Regular",
@@ -680,7 +687,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 60,
-    marginBottom: 10, // Adjust as needed to create space between the header and the content below
+    marginBottom: 100, // Adjust as needed to create space between the header and the content below
+    // borderRadius: 16,
+ 
   },
   headerTextContainer: {
     alignItems: 'left',

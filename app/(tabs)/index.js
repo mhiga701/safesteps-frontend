@@ -11,6 +11,7 @@ import React, {
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import  Icon  from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/Octicons";
 import BottomSheet from '@gorhom/bottom-sheet';
 import BackgroundLocation from "../../components/BackgroundLocation";
 
@@ -148,7 +149,7 @@ export default function Page() {
                   <Text style={styles.toggleText}>BU Central</Text>
                 </View>
                   <View style={localStyles.rowContainer3}>
-                    <Icon name="dot-circle-o" size={15} color="#fe2d01" />
+                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
                     <TouchableOpacity onPress={() => {}}>
                       <Text style={styles.toggleText}>2 New Reports Since Yesterday</Text>
                     </TouchableOpacity>
@@ -170,7 +171,7 @@ export default function Page() {
                   <Text style={styles.toggleText}>St. Mary's Street</Text>
                 </View>
                   <View style={localStyles.rowContainer3}>
-                    <Icon name="dot-circle-o" size={15} color="#fe2d01" />
+                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
                     <TouchableOpacity onPress={() => {}}>
                       <Text style={styles.toggleText}>1 New Report Since Yesterday</Text>
                     </TouchableOpacity>
@@ -188,6 +189,9 @@ const localStyles = StyleSheet.create({
     backgroundColor: "#ecedf2",
     flex: 1,
     padding: 10,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: "black",
   },
   bottomSheetHeader: {
     fontSize: 20,
