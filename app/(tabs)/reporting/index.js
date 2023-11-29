@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity} from "react-native";
 import { SvgXml } from "react-native-svg";
 import { Link, useRouter } from "expo-router";
 import { styles } from "../../../components/styles";
-
+import ReportHeader from '../../../assets/ReportHeader.svg';
 
 
 export default function RPage() {
@@ -16,8 +16,19 @@ export default function RPage() {
     const router = useRouter();
     return(
         <>
-        <View style={styles.container}>
-        <Text style={styles.ReportAccident}>Report Traffic Accident</Text>
+         
+         <View style={styles.reportHeaderContainer}>
+      <ReportHeader style={styles.alertHeader}/>
+        </View>
+        
+        <Text style={{color: '#f2f2f2', fontSize: 24,
+    fontWeight: "700",
+    marginTop: 100,
+    marginLeft: 20,
+    fontFamily: "Montserrat-Bold",
+    position: "absolute"}}>Report</Text>
+       <View style={styles.reportingContainer}>
+   
         <View style={[styles.ReportContainer,{top:70,height:170},]}>
             <View style={{top:-120}}>
                 <Text style={[styles.Present,{textAlign:'center',marginTop:0}]}>Are You In Immediate Danger?</Text>
@@ -38,9 +49,10 @@ export default function RPage() {
 
         
     </View>
-        </View>
-        {/* <TouchableOpacity><View style={styles.ArrowSVGContainer}><SvgXml xml={ARROW_SVG}/></View></TouchableOpacity> */}
        
+        {/* <TouchableOpacity><View style={styles.ArrowSVGContainer}><SvgXml xml={ARROW_SVG}/></View></TouchableOpacity> */}
+       </View>
+
         </>
     );
 }

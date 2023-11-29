@@ -8,11 +8,22 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   profileContainer: {
-    flex: 1,
+    flex: 3,
     backgroundColor: "#ecedf2",
     padding: 20,
     textAlign: "left",
     borderRadius: 16,
+    paddingBottom: 10
+  },
+  reportingContainer: {
+    flex: 3,
+    backgroundColor: "#ecedf2",
+    padding: 20,
+    textAlign: "left",
+    borderRadius: 16,
+    //marginTop: 35,
+    //position: "absolute",
+    //marginRight: -20,
   },
   map_container: {
     flex: 1,
@@ -686,12 +697,24 @@ export const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 60,
-    marginBottom: 100, // Adjust as needed to create space between the header and the content below
+    marginTop: 84,
+    marginBottom: 85, // Adjust as needed to create space between the header and the content below
     // borderRadius: 16,
  
   },
   headerTextContainer: {
     alignItems: 'left',
+  },
+  reportHeaderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 110,
+    marginBottom: 60, // Adjust as needed to create space between the header and the content below
+    // borderRadius: 16,
+ 
+  },
+  gifStyle: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
   }
 });

@@ -19,17 +19,6 @@ export default function VisAlert() {
 
   return (
     <>
-    <View style={styles.headerContainer}>
-      <AlertHeader style={styles.alertHeader}/>
-    </View>
-
-        <Text style={{color: '#f2f2f2', fontSize: 24,
-    fontWeight: "700",
-    marginTop: 100,
-    fontFamily: "Montserrat-Bold",
-    position: "absolute",}}>Alert Types</Text>
-      
-
     <Text style={styles.subheadingText}>VISUAL ALERT</Text>
       <View style={styles.settingsContainer}>
         <View style={styles.rowContainer}>
@@ -88,6 +77,7 @@ export default function VisAlert() {
           <Text style={styles.alert2Text}>Approaching</Text>
           <Text style={styles.alert2Text}>Intersection</Text>
           <Alert style={{marginVertical: 50}}/>
+          <Image source={require('../assets/ripple.gif')} style={styles.gifStyle}/>
           <Text style={styles.alert2Text}>Look Up!</Text>
           <TouchableOpacity
             style={styles.button1}
