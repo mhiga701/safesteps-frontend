@@ -95,6 +95,7 @@ export const styles = StyleSheet.create({
     lineHeight: 50,
     letterSpacing: 0.4,
     marginTop: 45,
+
     textAlign: "center",
   },
   ReportText: {
@@ -112,6 +113,24 @@ export const styles = StyleSheet.create({
     width: "100%",
     height: "15%",
     backgroundColor: "white",
+    textAlign:'center',
+  },
+  ReportText:{
+   color: '#52525A',
+   fontSize: 15,
+   fontFamily: 'Bitter',
+   fontWeight: '400',
+   lineHeight: 22.5,
+   letterSpacing: 0.4,
+   textAlign: 'center',
+  },
+  ReportContainer:{
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '15%',
+
     borderRadius: 16,
     marginVertical: 10,
 
@@ -707,7 +726,26 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 110,
     marginBottom: 60, // Adjust as needed to create space between the header and the content below
-    // borderRadius: 16,
+    // borderRadius: 1
+
+  },
+  reportContainerText:{
+    fontFamily: "Montserrat-SemiBold", 
+    color: '#000000',  
+    fontSize: 15,
+    marginTop: 20,
+    marginBottom: 15,
+  },
+  reportSubText: {
+    fontFamily: "Montserrat-Regular",
+    color: "#000000",
+    fontSize: 13,
+  },
+  trafficText: {
+    fontFamily: "Bitter-Regular",
+    color: "#52525a",
+    fontSize: 14,
+
   },
   gifStyle: {
     backgroundColor: "transparent",
@@ -747,8 +785,17 @@ export const styles = StyleSheet.create({
     shadowColor: "#52525a", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
     shadowOpacity: 0.5, // for iOS
-    shadowRadius: 2, // for iOS
-    top: 80,
-    right: -75,
+
+    top: 100,
+    right: -75
+  },
+  contactButtonContainer:
+  {
+    top: 20,
+    backgroundColor: '#ecedf2',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'right',
+    height: 40,
   },
 });
