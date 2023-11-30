@@ -4,7 +4,8 @@ import { Link, useRouter } from "expo-router";
 import { styles } from "../../../components/styles";
 import ReportHeader from '../../../assets/ReportHeader.svg';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Ion from 'react-native-vector-icons/Ionicons';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import Octicon from 'react-native-vector-icons/Octicons';
 
 
 export default function RPage() {
@@ -42,7 +43,7 @@ export default function RPage() {
        <View style={styles.reportingContainer}>
         <View style={styles.callButtonContainer}>
         <TouchableOpacity style={styles.callButton}>
-            <Ion name="ios-chatbox-ellipses" size={25} color="#5787f5" />
+            <Ionicon name="ios-chatbox-ellipses" size={25} color="#5787f5" />
             <Text style={styles.callButtonText}>BOS:311</Text>
         </TouchableOpacity>
 
@@ -56,7 +57,7 @@ export default function RPage() {
        <Text style={styles.reportSubText}>Dial 9-1-1 for emergencies. The reporting forms are only for non-emergencies.</Text>
 
         <View style={[styles.ReportContainer,{top:15,height:120},]}>
-             <Ion name='car-sport' size={30} color="#5787f5" />
+             <Ionicon name='car-sport' size={30} color="#5787f5" />
             <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
                 <Text style={styles.callButtonText}>Traffic Accident</Text>
                 <Text style={styles.trafficText}>Notify other users about an accident</Text>
@@ -64,7 +65,7 @@ export default function RPage() {
         </View>
         
         <View style={[styles.ReportContainer,{bottom:-25, height:120}]}> 
-            <Ion name='ios-shield' size={30} color="#5787f5" />
+            <Octicon name='shield' size={30} color="#5787f5" />
         <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
             <Text style={styles.callButtonText}>File a Report</Text> 
             <Text style={styles.trafficText}>Help Keep Other Users Notified</Text>
@@ -72,7 +73,7 @@ export default function RPage() {
         </View>
         <View style={styles.contactButtonContainer}>
             <TouchableOpacity style={styles.contactButton}>
-                <Ion name="ios-chatbubbles" size={25} color="#5787f5" />
+                <Ionicon name="ios-chatbubbles" size={25} color="#5787f5" />
                 <Text style={styles.callButtonText}>Contact Us</Text>
             </TouchableOpacity>
         </View>
