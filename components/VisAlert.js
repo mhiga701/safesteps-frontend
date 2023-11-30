@@ -76,8 +76,8 @@ export default function VisAlert() {
         <View style={styles.alert2Container}>
           <Text style={styles.alert2Text}>Approaching</Text>
           <Text style={styles.alert2Text}>Intersection</Text>
-          <Alert style={{marginVertical: 50}}/>
-          <Image source={require('../assets/ripple.gif')} style={styles.gifStyle}/>
+          <Image source={require('../assets/ripple.gif')}/>
+          <Alert style={{marginVertical: 50, position: 'absolute'}}/>
           <Text style={styles.alert2Text}>Look Up!</Text>
           <TouchableOpacity
             style={styles.button1}

@@ -107,6 +107,7 @@ export const styles = StyleSheet.create({
    textAlign: 'center',
   },
   ReportContainer:{
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
@@ -712,7 +713,23 @@ export const styles = StyleSheet.create({
     marginTop: 110,
     marginBottom: 60, // Adjust as needed to create space between the header and the content below
     // borderRadius: 16,
- 
+  },
+  reportContainerText:{
+    fontFamily: "Montserrat-SemiBold", 
+    color: '#000000',  
+    fontSize: 15,
+    marginTop: 20,
+    marginBottom: 15,
+  },
+  reportSubText: {
+    fontFamily: "Montserrat-Regular",
+    color: "#000000",
+    fontSize: 13,
+  },
+  trafficText: {
+    fontFamily: "Bitter-Regular",
+    color: "#52525a",
+    fontSize: 14,
   },
   gifStyle: {
     backgroundColor: 'transparent',
@@ -754,7 +771,16 @@ export const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 }, // for iOS
     shadowOpacity: 0.5, // for iOS
     shadowRadius: 2, // for iOS
-    top: 80,
+    top: 100,
     right: -75
+  },
+  contactButtonContainer:
+  {
+    top: 20,
+    backgroundColor: '#ecedf2',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'right',
+    height: 40,
   },
 });

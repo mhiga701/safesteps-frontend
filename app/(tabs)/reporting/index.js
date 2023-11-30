@@ -25,14 +25,14 @@ export default function RPage() {
         
         <Text style={{color: '#f2f2f2', fontSize: 20,
     fontWeight: "700",
-    marginTop: 90,
+    marginTop: 80,
     marginLeft: 20,
     marginBottom: 20,
     fontFamily: "Montserrat-Bold",
     position: "absolute"}}>Report</Text>
 
     <Text 
-    style={{fontFamily: "Bitter-Regular",  marginTop: 120, marginLeft: 20, color: '#f2f2f2', position: 'absolute', fontSize: 15}}>
+    style={{fontFamily: "Bitter-Regular",  marginTop: 120, marginLeft: 20, marginBottom: 10,color: '#f2f2f2', position: 'absolute', fontSize: 15}}>
         Help alert other users by reporting 
     </Text>
     <Text 
@@ -52,35 +52,31 @@ export default function RPage() {
         </TouchableOpacity>
         </View>
        
-       <Text style={{fontFamily: "Montserrat-Bold.otf", marginTop: 90, marginLeft: 20, color: '#000000', position: 'absolute', fontSize: 15}}>FILE A REPORT</Text>
-       <Text>Dial 9-1-1 for emergencies. The reporting forms are only for non-emergencies.</Text>
+       <Text style={styles.reportContainerText}>FILE A REPORT</Text>
+       <Text style={styles.reportSubText}>Dial 9-1-1 for emergencies. The reporting forms are only for non-emergencies.</Text>
 
-        <View style={[styles.ReportContainer,{top:70,height:120},]}>
-            <View style={{top:-120}}>
-        <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
-                <Text style={[styles.Present,{textAlign:'center',marginTop:10}]}>Traffic Accident</Text>
-                <Text style={[styles.Options,{top:140}]}>Notify other users about an accident</Text>
-       </TouchableOpacity>
-            </View>
+        <View style={[styles.ReportContainer,{top:15,height:120},]}>
+             <Ion name='car-sport' size={30} color="#5787f5" />
+            <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
+                <Text style={styles.callButtonText}>Traffic Accident</Text>
+                <Text style={styles.trafficText}>Notify other users about an accident</Text>
+            </TouchableOpacity>
         </View>
         
-        <View style={[styles.ReportContainer,{bottom:-90,height:120}]}> 
-
+        <View style={[styles.ReportContainer,{bottom:-25, height:120}]}> 
+            <Ion name='ios-shield' size={30} color="#5787f5" />
         <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
-        <Text style={styles.obstacleText}>File a Report</Text> 
-        <View style={styles.ObstacleSVGcontainer}>
-            <SvgXml xml={REPORT_SVG} />
-        </View>
-        <View style={styles.ObstacleSubText}><Text>Help Keep Other Users Notified</Text></View>
+            <Text style={styles.callButtonText}>File a Report</Text> 
+            <Text style={styles.trafficText}>Help Keep Other Users Notified</Text>
         </TouchableOpacity> 
-        <TouchableOpacity style={styles.contactButton}>
-        <Ion name="ios-chatbubbles" size={25} color="#5787f5" />
-            <Text style={styles.callButtonText}>Contact Us</Text>
-        </TouchableOpacity>
-        
-    </View>
+        </View>
+        <View style={styles.contactButtonContainer}>
+            <TouchableOpacity style={styles.contactButton}>
+                <Ion name="ios-chatbubbles" size={25} color="#5787f5" />
+                <Text style={styles.callButtonText}>Contact Us</Text>
+            </TouchableOpacity>
+        </View>
        
-        {/* <TouchableOpacity><View style={styles.ArrowSVGContainer}><SvgXml xml={ARROW_SVG}/></View></TouchableOpacity> */}
        </View>
 
         </>
