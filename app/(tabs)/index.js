@@ -74,6 +74,20 @@ export default function Page() {
       // useNativeDriver: true,
     });
   };
+  const goToMarkerLocation = async (marker) => {
+    mapRef.current.animateCamera({
+      center: {
+        latitude: marker.location.latitude,
+        longitude: marker.location.longitude,
+      },
+      // zoom: 17, // Android, needs to be adjusted after testing on Android
+      altitude: 2000,
+      pitch: 0,
+      angle: 0,
+      heading: 0,
+      // useNativeDriver: true,
+    });
+  };
   const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
 
   const bottomSheetRef = useRef(null);
@@ -86,6 +100,10 @@ export default function Page() {
           coordinate={marker.location}
           title={marker.title}
           description={marker.description}
+          onPress={() => {
+            //bottomSheetRef.current.expand();
+            goToMarkerLocation(marker);
+          }}
         >
           {/* <Image source={require("../../assets/Mapmarker.svg")} />
            */}
