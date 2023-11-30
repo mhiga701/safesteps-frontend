@@ -12,8 +12,9 @@ export const styles = StyleSheet.create({
     backgroundColor: "#ecedf2",
     padding: 20,
     textAlign: "left",
-    borderRadius: 16,
-    paddingBottom: 10
+    borderRadius: 10,
+    //marginTop: 35,
+   // paddingBottom: 10
   },
   reportingContainer: {
     flex: 3,
@@ -698,7 +699,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 84,
-    marginBottom: 85, // Adjust as needed to create space between the header and the content below
+    marginBottom: 77, // Adjust as needed to create space between the header and the content below
     // borderRadius: 16,
  
   },
@@ -716,5 +717,44 @@ export const styles = StyleSheet.create({
   gifStyle: {
     backgroundColor: 'transparent',
     position: 'absolute',
-  }
+  },
+  callButtonText:{
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 15,
+    color: '#52525A',
+    padding: 10,
+  },
+  callButton: {
+    backgroundColor: '#fcfcfc',
+    alignItems: 'center',
+    borderRadius: 10,
+    flexDirection: 'row',
+    paddingHorizontal: 35,
+    marginHorizontal: 10,
+    shadowColor: "#52525a", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
+  },
+  callButtonContainer:
+  {
+    backgroundColor: '#ecedf2',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contactButton: {
+    backgroundColor: '#fcfcfc',
+    alignItems: 'center',
+    borderRadius: 10,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    shadowColor: "#52525a", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
+    top: 80,
+    right: -75
+  },
 });

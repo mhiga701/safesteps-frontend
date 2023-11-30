@@ -3,6 +3,8 @@ import { SvgXml } from "react-native-svg";
 import { Link, useRouter } from "expo-router";
 import { styles } from "../../../components/styles";
 import ReportHeader from '../../../assets/ReportHeader.svg';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ion from 'react-native-vector-icons/Ionicons';
 
 
 export default function RPage() {
@@ -21,19 +23,44 @@ export default function RPage() {
       <ReportHeader style={styles.alertHeader}/>
         </View>
         
-        <Text style={{color: '#f2f2f2', fontSize: 24,
+        <Text style={{color: '#f2f2f2', fontSize: 20,
     fontWeight: "700",
-    marginTop: 100,
+    marginTop: 90,
     marginLeft: 20,
+    marginBottom: 20,
     fontFamily: "Montserrat-Bold",
     position: "absolute"}}>Report</Text>
+
+    <Text 
+    style={{fontFamily: "Bitter-Regular",  marginTop: 120, marginLeft: 20, color: '#f2f2f2', position: 'absolute', fontSize: 15}}>
+        Help alert other users by reporting 
+    </Text>
+    <Text 
+    style={{fontFamily: "Bitter-Regular",  marginTop: 135, marginLeft: 20, color: '#f2f2f2', position: 'absolute', fontSize: 15}}>
+       a traffic accident or road obstacle
+    </Text>
        <View style={styles.reportingContainer}>
-   
-        <View style={[styles.ReportContainer,{top:70,height:170},]}>
+        <View style={styles.callButtonContainer}>
+        <TouchableOpacity style={styles.callButton}>
+            <Ion name="ios-chatbox-ellipses" size={25} color="#5787f5" />
+            <Text style={styles.callButtonText}>BOS:311</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.callButton}>
+        <Icon name="phone" size={25} color="#5787f5" />
+            <Text style={styles.callButtonText}>Call 911</Text>
+        </TouchableOpacity>
+        </View>
+       
+       <Text style={{fontFamily: "Montserrat-Bold.otf", marginTop: 90, marginLeft: 20, color: '#000000', position: 'absolute', fontSize: 15}}>FILE A REPORT</Text>
+       <Text>Dial 9-1-1 for emergencies. The reporting forms are only for non-emergencies.</Text>
+
+        <View style={[styles.ReportContainer,{top:70,height:120},]}>
             <View style={{top:-120}}>
-                <Text style={[styles.Present,{textAlign:'center',marginTop:0}]}>Are You In Immediate Danger?</Text>
-                <Text style={[styles.Options,{top:140}]}>We strongly advise you to call 911 if the issue has not been addressed head-on yet.</Text>
-                <TouchableOpacity style={[styles.emergencyButton,{bottom:-100, right:-70,width:150}]}><Text style={[styles.ReportText,{color:'white'}]}>Call 911</Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
+                <Text style={[styles.Present,{textAlign:'center',marginTop:10}]}>Traffic Accident</Text>
+                <Text style={[styles.Options,{top:140}]}>Notify other users about an accident</Text>
+       </TouchableOpacity>
             </View>
         </View>
         
@@ -46,7 +73,10 @@ export default function RPage() {
         </View>
         <View style={styles.ObstacleSubText}><Text>Help Keep Other Users Notified</Text></View>
         </TouchableOpacity> 
-
+        <TouchableOpacity style={styles.contactButton}>
+        <Ion name="ios-chatbubbles" size={25} color="#5787f5" />
+            <Text style={styles.callButtonText}>Contact Us</Text>
+        </TouchableOpacity>
         
     </View>
        

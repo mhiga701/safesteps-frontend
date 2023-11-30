@@ -41,6 +41,7 @@ export default function RootLayout() {
       "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.otf"),
       "Montserrat-Bold": require("../assets/fonts/Montserrat-Bold.otf"),
       "Bitter-Regular": require("../assets/fonts/Bitter-Regular.otf"),
+      "Montserrat-SemiBold": require("../assets/fonts/Montserrat-SemiBold.otf"),
     });
     setFontLoaded(true);
   }

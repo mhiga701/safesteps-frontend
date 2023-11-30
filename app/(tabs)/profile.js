@@ -23,8 +23,11 @@ export default function Profile() {
     marginLeft: 20,
     fontFamily: "Montserrat-Bold",
     position: "absolute",}}>Alert Types</Text>
+    <View style={styles.profileContainer}>
+
+   
       <ScrollView
-        style={styles.profileContainer}
+        
         automaticallyAdjustKeyboardInsets={true}
         automaticallyAdjustContentInsets={true}
         // bounces={false}
@@ -43,6 +46,7 @@ export default function Profile() {
 
         <FeedbackForm />
       </ScrollView>
+      </View>
     </>
   );
 }
