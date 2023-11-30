@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     borderRadius: 10,
     //marginTop: 35,
-   // paddingBottom: 10
+    // paddingBottom: 10
   },
   reportingContainer: {
     flex: 3,
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   locationButton: {
     position: "absolute",
     top: 50,
-    right: 20,
+    right: 10,
     // bottom: 90,
     padding: 6,
     backgroundColor: "white",
@@ -86,15 +86,33 @@ export const styles = StyleSheet.create({
     fontFamily: "Montserrat-Regular",
     position: "absolute",
   },
-  centerheadingText:{
+  centerheadingText: {
     // Report
-    color: 'black',
+    color: "black",
     fontSize: 20,
-    fontFamily: 'Montserrat',
-    fontWeight: '700',
+    fontFamily: "Montserrat",
+    fontWeight: "700",
     lineHeight: 50,
-    letterSpacing: 0.40,
+    letterSpacing: 0.4,
     marginTop: 45,
+
+    textAlign: "center",
+  },
+  ReportText: {
+    color: "#52525A",
+    fontSize: 15,
+    fontFamily: "Bitter",
+    fontWeight: "400",
+    lineHeight: 22.5,
+    letterSpacing: 0.4,
+    textAlign: "center",
+  },
+  ReportContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "15%",
+    backgroundColor: "white",
     textAlign:'center',
   },
   ReportText:{
@@ -112,15 +130,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     height: '15%',
-    backgroundColor: 'white',
+
     borderRadius: 16,
     marginVertical: 10,
-    
+
     paddingHorizontal: 20, // Adjust this value for horizontal padding
     paddingVertical: 30, // Adjust this value for vertical padding
     // Shadow/elevation for iOS and Android respectively
-    shadowColor: '#000',
-    
+    shadowColor: "#000",
+
     shadowOffset: {
       width: 0,
       height: 1,
@@ -129,7 +147,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  
+
   settingsContainer: {
     backgroundColor: "white",
     borderRadius: 16,
@@ -177,84 +195,81 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     bottom: "-800%", // Adjust this value as needed
   },
-  CarSVGcontainer:{
-    top:-10,
+  CarSVGcontainer: {
+    top: -10,
     left: -40,
   },
-  CarSubText:{
-    color: '#52525A',
+  CarSubText: {
+    color: "#52525A",
     fontSize: 13,
-    fontFamily: 'Montserrat',
-    fontWeight: '400',
+    fontFamily: "Montserrat",
+    fontWeight: "400",
     lineHeight: 20,
-    letterSpacing: 0.40,
-    right:-16,
-    top:-20,
-
+    letterSpacing: 0.4,
+    right: -16,
+    top: -20,
   },
-  ObstacleSVGcontainer:{
-    top:5,
+  ObstacleSVGcontainer: {
+    top: 5,
     left: -40,
   },
-  ObstacleSubText:{
-    left:20,
-    top:-20,
+  ObstacleSubText: {
+    left: 20,
+    top: -20,
   },
-  ArrowSVGContainer:{
+  ArrowSVGContainer: {
     bottom: -30,
-    left: 0
+    left: 0,
   },
-  MessageContainer:{
-    top:50,
-    width: '100%',
-    height: '20%',
-    background: 'white', 
+  MessageContainer: {
+    top: 50,
+    width: "100%",
+    height: "20%",
+    background: "white",
     borderRadius: 10,
     backgroundColor: "white",
     borderRadius: 16,
     elevation: 5,
     marginBottom: 15,
     paddingHorizontal: 15, // Add padding to separate elements
-
   },
-  ReportAccident:{
-    color: 'black',
+  ReportAccident: {
+    color: "black",
     fontSize: 20,
-    fontFamily: 'Montserrat',
-    fontWeight: '700',
+    fontFamily: "Montserrat",
+    fontWeight: "700",
     lineHeight: 20,
-    letterSpacing: 0.40,
+    letterSpacing: 0.4,
     bottom: -60,
-    left:5,
+    left: 5,
   },
-  Intersection:{
-    color: '#52525A',
+  Intersection: {
+    color: "#52525A",
     fontSize: 17,
-    fontFamily: 'Montserrat',
-    fontWeight: '600',
+    fontFamily: "Montserrat",
+    fontWeight: "600",
     lineHeight: 25,
     bottom: -90,
-    left:5,
-
+    left: 5,
   },
-  Present:{
-    color: '#52525A',
+  Present: {
+    color: "#52525A",
     fontSize: 17,
-    fontFamily: 'Montserrat',
-    fontWeight: '600',
+    fontFamily: "Montserrat",
+    fontWeight: "600",
     lineHeight: 25,
     bottom: -130,
-    left:5,
+    left: 5,
   },
-  Options:{
-    color: '#52525A',
+  Options: {
+    color: "#52525A",
     fontSize: 14,
-    fontFamily: 'Montserrat',
-    fontWeight: '400',
+    fontFamily: "Montserrat",
+    fontWeight: "400",
     lineHeight: 20,
-    letterSpacing: 0.40,
+    letterSpacing: 0.4,
     bottom: -150,
-    left:5,
+    left: 5,
   },
   buttonText: {
     textAlign: "center",
@@ -382,25 +397,25 @@ export const styles = StyleSheet.create({
     marginTop: 35,
     fontFamily: "Montserrat-Bold",
   },
-  carText:{
-    color: '#52525A',
+  carText: {
+    color: "#52525A",
     fontSize: 15,
-    fontFamily: 'Montserrat',
-    fontWeight: '700',
+    fontFamily: "Montserrat",
+    fontWeight: "700",
     lineHeight: 20,
     letterSpacing: 0.4,
-    left: 15, 
-    top: 5
+    left: 15,
+    top: 5,
   },
-  obstacleText:{
-    color: '#52525A',
+  obstacleText: {
+    color: "#52525A",
     fontSize: 15,
-    fontFamily: 'Montserrat',
-    fontWeight: '700',
+    fontFamily: "Montserrat",
+    fontWeight: "700",
     lineHeight: 20,
     letterSpacing: 0.4,
-    left: 20, 
-    top: 15
+    left: 20,
+    top: 15,
   },
   input: {
     flex: 1,
@@ -561,85 +576,85 @@ export const styles = StyleSheet.create({
   },
   Collisionbutton: {
     backgroundColor: "#808080",
-    color:'white',
+    color: "white",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:140,
+    width: 140,
     marginBottom: 10,
-    top:159
+    top: 159,
   },
-  Rolloverbutton:{
+  Rolloverbutton: {
     backgroundColor: "#808080",
-    color:'white',
+    color: "white",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:140,
+    width: 140,
     marginBottom: 10,
-    right:-150,
-    top:115
+    right: -150,
+    top: 115,
   },
-  Subwaybutton:{
+  Subwaybutton: {
     backgroundColor: "#808080",
-    color:'white',
+    color: "white",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:140,
+    width: 140,
     marginBottom: 10,
-    top:120
+    top: 120,
   },
-  Pedestrianbutton:{
+  Pedestrianbutton: {
     backgroundColor: "#808080",
-    color:'white',
+    color: "white",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:170,
+    width: 170,
     marginBottom: 10,
-    right:-150,
-    top:75
-  },SingleCar:{
-    backgroundColor: "#808080",
-    color:'white',
-    borderRadius: 50,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    width:160,
-    marginBottom: 10,
-    top:80
+    right: -150,
+    top: 75,
   },
-  Other:{
+  SingleCar: {
     backgroundColor: "#808080",
-    color:'white',
+    color: "white",
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:75,
+    width: 160,
     marginBottom: 10,
-    right:-170,
-    top: 35
-
+    top: 80,
   },
-  AccidentOptions:{
-    color: 'white',
+  Other: {
+    backgroundColor: "#808080",
+    color: "white",
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    width: 75,
+    marginBottom: 10,
+    right: -170,
+    top: 35,
+  },
+  AccidentOptions: {
+    color: "white",
     fontSize: 12,
-    fontFamily: 'Montserrat',
-    textAlign: 'center',
+    fontFamily: "Montserrat",
+    textAlign: "center",
   },
   buttonsContainer: {
-    flexDirection: 'row', // Arrange items horizontally
+    flexDirection: "row", // Arrange items horizontally
   },
-  SubmitButton:{
+  SubmitButton: {
     backgroundColor: "#B164E8",
     borderRadius: 50,
-    width:'45%',
+    width: "45%",
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
     marginTop: 50,
-    marginRight:30,
+    marginRight: 30,
     height: 44,
     paddingLeft: 14,
     paddingRight: 14,
@@ -648,18 +663,18 @@ export const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 1,
     borderColor: "#B164E8",
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-
-  },cancelButton:{
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  cancelButton: {
     borderRadius: 50,
-    width:'45%',
+    width: "45%",
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
     marginTop: 50,
-    marginRight:30,
+    marginRight: 30,
     height: 44,
     paddingLeft: 14,
     paddingRight: 14,
@@ -668,19 +683,19 @@ export const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 1,
     borderColor: "#B164E8",
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-
-  },emergencyButton:{
-    backgroundColor:'#FE2D01',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  emergencyButton: {
+    backgroundColor: "#FE2D01",
     borderRadius: 50,
-    width:'105%',
+    width: "105%",
     paddingVertical: 10,
     paddingHorizontal: 24,
     marginBottom: 10,
     marginTop: 50,
-    marginRight:30,
+    marginRight: 30,
     height: 44,
     paddingLeft: 14,
     paddingRight: 14,
@@ -689,30 +704,30 @@ export const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 1,
     borderColor: "#B164E8",
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   alertHeader: {
     marginRight: 20,
-    position: 'absolute',
+    position: "absolute",
   },
   headerContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 84,
     marginBottom: 77, // Adjust as needed to create space between the header and the content below
     // borderRadius: 16,
- 
   },
   headerTextContainer: {
-    alignItems: 'left',
+    alignItems: "left",
   },
   reportHeaderContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 110,
     marginBottom: 60, // Adjust as needed to create space between the header and the content below
-    // borderRadius: 16,
+    // borderRadius: 1
+
   },
   reportContainerText:{
     fontFamily: "Montserrat-SemiBold", 
@@ -730,22 +745,23 @@ export const styles = StyleSheet.create({
     fontFamily: "Bitter-Regular",
     color: "#52525a",
     fontSize: 14,
+
   },
   gifStyle: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
+    backgroundColor: "transparent",
+    position: "absolute",
   },
-  callButtonText:{
-    fontFamily: 'Montserrat-Bold',
+  callButtonText: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 15,
-    color: '#52525A',
+    color: "#52525A",
     padding: 10,
   },
   callButton: {
-    backgroundColor: '#fcfcfc',
-    alignItems: 'center',
+    backgroundColor: "#fcfcfc",
+    alignItems: "center",
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 35,
     marginHorizontal: 10,
     shadowColor: "#52525a", // for iOS
@@ -753,24 +769,23 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.5, // for iOS
     shadowRadius: 2, // for iOS
   },
-  callButtonContainer:
-  {
-    backgroundColor: '#ecedf2',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+  callButtonContainer: {
+    backgroundColor: "#ecedf2",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   contactButton: {
-    backgroundColor: '#fcfcfc',
-    alignItems: 'center',
+    backgroundColor: "#fcfcfc",
+    alignItems: "center",
     borderRadius: 10,
-    flexDirection: 'row',
+    flexDirection: "row",
     paddingHorizontal: 20,
     marginHorizontal: 10,
     shadowColor: "#52525a", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
     shadowOpacity: 0.5, // for iOS
-    shadowRadius: 2, // for iOS
+
     top: 100,
     right: -75
   },
