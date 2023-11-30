@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
@@ -10,39 +10,12 @@ import React, {
   useMemo,
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
-import  Icon  from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/Octicons";
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet from "@gorhom/bottom-sheet";
 import BackgroundLocation from "../../components/BackgroundLocation";
-
-
-const locationData = [
-  {
-    title: 'BU Bridge',
-    location: {
-      latitude: 42.35074, 
-      longitude: 71.11078, 
-    },
-    description: 'Cars drive fast here!',
-  },
-  {
-    title: 'Marsh Plaza',
-    location: {
-      latitude: 42.35021, 
-      longitude: 71.10653, 
-    },
-    description: 'Lots of pedestrians here!',
-  },
-  {
-    title: 'CCDS',
-    location: {
-      latitude: 42.34986, 
-      longitude: 71.10360, 
-    },
-    description: 'Lots of pedestrians here!',
-  },
-];
-
+import Mapmarker from "../../assets/Mapmarker.svg";
+import { locationData } from "../../components/Beacons";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -51,8 +24,6 @@ export default function Page() {
 
   const [location, setLocation] = useState(null);
 
- 
-  
   useEffect(() => {
     let locationWatcher = null;
 
@@ -94,91 +65,113 @@ export default function Page() {
       center: {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
       },
+      // zoom: 17, // Android, needs to be adjusted after testing on Android
+      altitude: 2000,
+      pitch: 0,
+      angle: 0,
+      heading: 0,
+      // useNativeDriver: true,
     });
   };
-  const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
+  const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
 
   const bottomSheetRef = useRef(null);
-  
+
   const renderMarkers = () => {
     return locationData.map((marker, index) => {
+      return (
         <Marker
           key={index}
           coordinate={marker.location}
           title={marker.title}
           description={marker.description}
-        />
-    })
-  }
+        >
+          {/* <Image source={require("../../assets/Mapmarker.svg")} />
+           */}
+          <Mapmarker />
+        </Marker>
+      );
+    });
+  };
 
   return (
     <>
       <BackgroundLocation />
       <BluetoothClient />
-      <View >
-        
-         <MapView
+      <View style={styles.map_container}>
+        <MapView
+          // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md
           ref={mapRef}
           style={styles.map}
           initialRegion={{
             latitude: 42.35021,
-            longitude:  71.10653,
-            latitudeDelta: 0.005,
-            longitudeDelta: 0.005,
+            longitude: -71.10653,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.015,
           }}
           showsUserLocation={true}
-          // showsMyLocationButton={true}
+          showsCompass={false}
+          showsPointsOfInterest={false}
+          showsTraffic={true}
+          showsIndoors={true}
+          showsMyLocationButton={true}
           // followsUserLocation={true}
         >
-            {renderMarkers()} 
-         </MapView>   
-         <LocationButton />
-         <BottomSheet 
-         snapPoints={snapPoints} 
-         backgroundStyle={localStyles.bottomSheetContainer} 
-         style={localStyles.bottomSheetContainer} 
-         index={1} 
-         ref={bottomSheetRef}>
+          {/* <RenderMarkers /> */}
+          {renderMarkers()}
+        </MapView>
+        <LocationButton />
+        <BottomSheet
+          snapPoints={snapPoints}
+          backgroundStyle={localStyles.bottomSheetContainer}
+          style={localStyles.bottomSheetContainer}
+          index={0}
+          ref={bottomSheetRef}
+        >
           <View>
             <Text style={localStyles.bottomSheetHeader}>Nearby Beacons</Text>
-              <View style={localStyles.settingsContainer}>
-                <View style={localStyles.rowContainer}>
-                  <Text style={styles.toggleText}>BU Central</Text>
-                </View>
-                  <View style={localStyles.rowContainer3}>
-                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
-                    <TouchableOpacity onPress={() => {}}>
-                      <Text style={styles.toggleText}>2 New Reports Since Yesterday</Text>
-                    </TouchableOpacity>
-                </View>
+            <View style={localStyles.settingsContainer}>
+              <View style={localStyles.rowContainer}>
+                <Text style={styles.toggleText}>BU Central</Text>
               </View>
-              <View style={localStyles.settingsContainer}>
-                <View style={localStyles.rowContainer}>
-                  <Text style={styles.toggleText}>BU East</Text>
-                </View>
-                  <View style={localStyles.rowContainer3}>
-                    {/* <Icon name="dot-circle-o" size={15} color="#fe2d01" /> */}
-                    <TouchableOpacity onPress={() => {}}>
-                      <Text style={styles.toggleText}>No New Reports Since Yesterday</Text>
-                    </TouchableOpacity>
-                </View>
+              <View style={localStyles.rowContainer3}>
+                <Icon2 name="dot-fill" size={20} color="#fe2d01" />
+                <TouchableOpacity onPress={() => {}}>
+                  <Text style={styles.toggleText}>
+                    2 New Reports Since Yesterday
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <View style={localStyles.settingsContainer}>
-                <View style={localStyles.rowContainer}>
-                  <Text style={styles.toggleText}>St. Mary's Street</Text>
-                </View>
-                  <View style={localStyles.rowContainer3}>
-                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
-                    <TouchableOpacity onPress={() => {}}>
-                      <Text style={styles.toggleText}>1 New Report Since Yesterday</Text>
-                    </TouchableOpacity>
-                </View>
+            </View>
+            <View style={localStyles.settingsContainer}>
+              <View style={localStyles.rowContainer}>
+                <Text style={styles.toggleText}>BU East</Text>
               </View>
+              <View style={localStyles.rowContainer3}>
+                {/* <Icon name="dot-circle-o" size={15} color="#fe2d01" /> */}
+                <TouchableOpacity onPress={() => {}}>
+                  <Text style={styles.toggleText}>
+                    No New Reports Since Yesterday
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={localStyles.settingsContainer}>
+              <View style={localStyles.rowContainer}>
+                <Text style={styles.toggleText}>St. Mary's Street</Text>
+              </View>
+              <View style={localStyles.rowContainer3}>
+                <Icon2 name="dot-fill" size={20} color="#fe2d01" />
+                <TouchableOpacity onPress={() => {}}>
+                  <Text style={styles.toggleText}>
+                    1 New Report Since Yesterday
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-          </BottomSheet>
+        </BottomSheet>
       </View>
     </>
   );
@@ -195,7 +188,7 @@ const localStyles = StyleSheet.create({
   },
   bottomSheetHeader: {
     fontSize: 20,
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: "Montserrat-Bold",
     marginLeft: 20,
   },
   rowContainer: {
@@ -213,7 +206,7 @@ const localStyles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 15,
-    paddingRight:50,
+    paddingRight: 50,
   },
   settingsContainer: {
     backgroundColor: "white",

@@ -14,7 +14,7 @@ export default function TabLayout() {
         tabBarShowLabel: true,
         headerShown: false,
         tabBarActiveTintColor: "#B164E8",
-        tabBarActiveBackgroundColor: "#efe0fb",
+        // tabBarActiveBackgroundColor: "#efe0fb",
         tabBarInactiveTintColor: "#B9B9BC",
         tabBarStyle: {
           backgroundColor: "#FFFFFF",
@@ -22,8 +22,7 @@ export default function TabLayout() {
           position: "absolute", // Ensure the tabs float over the rest of the screen
           bottom: -10, // Adjust the position as needed
         },
-        
-        
+
         tabBarLabelStyle: {
           fontFamily: "Montserrat-Regular",
           fontSize: 12,
@@ -54,7 +53,6 @@ export default function TabLayout() {
           display: "flex",
           tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
         }}
-    
       />
     </Tabs>
   );
