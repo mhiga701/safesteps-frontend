@@ -11,7 +11,8 @@ import React, {
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import  Icon  from "react-native-vector-icons/FontAwesome";
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import Icon2 from "react-native-vector-icons/Octicons";
+import BottomSheet from '@gorhom/bottom-sheet';
 import BackgroundLocation from "../../components/BackgroundLocation";
 
 
@@ -50,18 +51,7 @@ export default function Page() {
 
   const [location, setLocation] = useState(null);
 
-  const renderMarkers = () => {
-    return locationData.map((marker, index) => {
-      return (
-        <Marker
-          key={index}
-          coordinate={marker.location}
-          title={marker.title}
-          description={marker.description}
-        />
-      );
-    })
-  }
+ 
   
   useEffect(() => {
     let locationWatcher = null;
@@ -112,29 +102,39 @@ export default function Page() {
   const snapPoints = useMemo(() => ['25%', '40%', '90%'], []);
 
   const bottomSheetRef = useRef(null);
-
+  
+  const renderMarkers = () => {
+    return locationData.map((marker, index) => {
+        <Marker
+          key={index}
+          coordinate={marker.location}
+          title={marker.title}
+          description={marker.description}
+        />
+    })
+  }
 
   return (
     <>
       <BackgroundLocation />
       <BluetoothClient />
-      <View style={styles.map_container}>
+      <View >
         
-        <MapView
+         <MapView
           ref={mapRef}
           style={styles.map}
           initialRegion={{
             latitude: 42.35021,
             longitude:  71.10653,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
           }}
           showsUserLocation={true}
-          showsMyLocationButton={true}
+          // showsMyLocationButton={true}
           // followsUserLocation={true}
         >
-         {renderMarkers()}
-         </MapView> 
+            {renderMarkers()} 
+         </MapView>   
          <LocationButton />
          <BottomSheet 
          snapPoints={snapPoints} 
@@ -149,7 +149,7 @@ export default function Page() {
                   <Text style={styles.toggleText}>BU Central</Text>
                 </View>
                   <View style={localStyles.rowContainer3}>
-                    <Icon name="dot-circle-o" size={15} color="#fe2d01" />
+                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
                     <TouchableOpacity onPress={() => {}}>
                       <Text style={styles.toggleText}>2 New Reports Since Yesterday</Text>
                     </TouchableOpacity>
@@ -171,7 +171,7 @@ export default function Page() {
                   <Text style={styles.toggleText}>St. Mary's Street</Text>
                 </View>
                   <View style={localStyles.rowContainer3}>
-                    <Icon name="dot-circle-o" size={15} color="#fe2d01" />
+                    <Icon2 name="dot-fill" size={20} color="#fe2d01" />
                     <TouchableOpacity onPress={() => {}}>
                       <Text style={styles.toggleText}>1 New Report Since Yesterday</Text>
                     </TouchableOpacity>
@@ -189,6 +189,9 @@ const localStyles = StyleSheet.create({
     backgroundColor: "#ecedf2",
     flex: 1,
     padding: 10,
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: "black",
   },
   bottomSheetHeader: {
     fontSize: 20,

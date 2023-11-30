@@ -1,10 +1,11 @@
 import { React } from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, View } from "react-native";
 import { styles } from "../../components/styles";
 import { BleManager } from "react-native-ble-plx";
 import FeedbackForm from "../../components/FeedbackForm";
 import VisAlert from "../../components/VisAlert";
 import AudioAlert from "../../components/AudioAlert";
+import AlertHeader from "../../assets/AlertTypes3.svg";
 
 export default function Profile() {
   const manager = new BleManager();
@@ -12,16 +13,29 @@ export default function Profile() {
 
   return (
     <>
-      <ScrollView
-        style={styles.container}
-        automaticallyAdjustKeyboardInsets={true}
-        contentContainerStyle={{
-          flexGrow: 1,
-        }}
-      >
-        <Text style={styles.mainHeadingText}>Alert Types</Text>
-        <Text style={styles.subheadingText}>VISUAL ALERT</Text>
+    <View style={styles.headerContainer}>
+      <AlertHeader style={styles.alertHeader}/>
+    </View>
 
+        <Text style={{color: '#f2f2f2', fontSize: 24,
+    fontWeight: "700",
+    marginTop: 100,
+    marginLeft: 20,
+    fontFamily: "Montserrat-Bold",
+    position: "absolute",}}>Alert Types</Text>
+    <View style={styles.profileContainer}>
+
+   
+      <ScrollView
+        
+        automaticallyAdjustKeyboardInsets={true}
+        automaticallyAdjustContentInsets={true}
+        // bounces={false}
+        // contentContainerStyle={{
+        //   flexGrow: 1,
+        // }}
+      >
+        
         <VisAlert />
 
         <Text style={styles.subheadingText}>AUDIO ALERT</Text>
@@ -32,6 +46,7 @@ export default function Profile() {
 
         <FeedbackForm />
       </ScrollView>
+      </View>
     </>
   );
 }

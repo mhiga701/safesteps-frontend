@@ -14,6 +14,9 @@ export default function AccidentScreen() {
     {key:'2',value:"St Mary's Street"},
     {key:'3',value:'BU East'},
   ]
+  const handleDropdownSelect = (value) => {
+    setSelectedIntersection(value);
+  };
   
   return (
     <> 
@@ -23,7 +26,7 @@ export default function AccidentScreen() {
     <Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
     <View style={{top:110}}>
       <SelectList
-        setSelected={(val) => setSelected(val)}
+        setSelected={handleDropdownSelect}
         fontFamily='Montserrat'
         data={Data}
         search={false}
