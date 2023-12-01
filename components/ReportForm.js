@@ -7,7 +7,8 @@ import Toast from "react-native-root-toast";
 import { SelectList } from "react-native-dropdown-select-list";
 
 export default function ReportForm() {
-    const [intersection, setSelectedIntersection] = useState("");
+    const [intersection, setSelectedIntersection] = useState("Choose an intersection");
+    const [report, setReport] = useState([]);
     const Data = [
       {key:'1',value:'BU Central'},
       {key:'2',value:"St Mary's Street"},
@@ -23,9 +24,9 @@ export default function ReportForm() {
   const time = date.toLocaleTimeString();
   const handleSubmit = async () => {
     // don't submit if name or message is empty
-    if (message === "") {
+    if (intersection === "") {
       console.log("Name or message is empty. Returning...");
-      let etoast = Toast.show("Error: Name or message is empty.", {
+      let etoast = Toast.show("Error: Please enter a location.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
         shadow: true,
@@ -59,14 +60,14 @@ export default function ReportForm() {
     try {
 
       await setDoc(doc(db, "Reports", intersection), {
-        
+        report: report,
         intersection: intersection,
         message: message,
         day:day,
         time:time,
       });
       console.log("Uploaded!");
-      console.log(`Report: ${message} at ${intersection} on ${day}, at ${time}`);
+      console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -87,7 +88,7 @@ export default function ReportForm() {
       }, 3000);
     }
 
-    setMessage("");
+    resetForm();
 
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
@@ -109,27 +110,55 @@ export default function ReportForm() {
   const [pedestrianPressed, setPedestrianPressed] = useState(true);
   const [singlePressed, setSinglePressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
+  const resetForm = () => {
+    setCollisionPressed(true);
+    setRolloverPressed(true);
+    setSubwayPressed(true);
+    setPedestrianPressed(true);
+    setSinglePressed(true);
+    setOtherPressed(true);
+    setMessage("");
+    setSelectedIntersection("");
+  }
   const handlePress = () => {
     setCollisionPressed(!collisionPressed);
+    setReport(
+      [...report, 'Vehicle Collision']
+    );
   };
 
   const handleRolloverPress = () => {
     setRolloverPressed(!rolloverPressed);
+    setReport(
+      [...report, 'Vehicle Rollover']
+    );
   };
 
   const handleSubwayPress = () =>{
     setSubwayPressed(!subwayPressed);
+    setReport(
+      [...report, 'Subway Related']
+    );
   };
   const handlePedestrianPress = () => {
     setPedestrianPressed(!pedestrianPressed);
+    setReport(
+      [...report, 'Pedestrian and Vehicle']
+    );
   };
 
   const handleSinglePress = () => {
     setSinglePressed(!singlePressed);
+    setReport(
+      [...report, 'Single Car Accident']
+    );
   };
 
   const handleOtherPress = () =>{
     setOtherPressed(!otherPressed);
+    setReport(
+      [...report, 'Other']
+    );
   };
   const collisionButtonColor = collisionPressed ? '#808080' : '#5787F5';
   const rolloverButtonColor = rolloverPressed ? '#808080' : '#5787F5';
@@ -153,7 +182,7 @@ export default function ReportForm() {
     data={Data}
     search={false}
     save="value"
-    placeholder="Choose Intersection"
+    value={intersection}
     inputStyles ={{marginRight:100}}
     dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
     />
