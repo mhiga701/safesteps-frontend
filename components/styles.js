@@ -194,7 +194,7 @@ export const styles = StyleSheet.create({
   },
   ObstacleSVGcontainer:{
     top:5,
-    left: -40,
+    left: 10,
   },
   ObstacleSubText:{
     left:20,

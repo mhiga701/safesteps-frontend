@@ -60,14 +60,17 @@ export default function RPage() {
              <Ionicon name='car-sport' size={30} color="#5787f5" />
             <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
                 <Text style={styles.callButtonText}>Traffic Accident</Text>
-                <Text style={styles.trafficText}>Notify other users about an accident</Text>
+                <Text style={[styles.trafficText,{right:-12}]}>Notify other users about an accident</Text>
             </TouchableOpacity>
         </View>
         
         <View style={[styles.ReportContainer,{bottom:-25, height:120}]}> 
-            <Octicon name='shield' size={30} color="#5787f5" />
+            <View style={{left:-12}}>
+                <Octicon name='shield' size={30} color="#5787f5" />
+            </View>
+            
         <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
-            <Text style={styles.callButtonText}>File a Report</Text> 
+            <Text style={[styles.callButtonText, {left:-10}]}>File a Report</Text> 
             <Text style={styles.trafficText}>Help Keep Other Users Notified</Text>
         </TouchableOpacity> 
         </View>

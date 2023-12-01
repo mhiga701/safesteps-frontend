@@ -101,6 +101,40 @@ export default function ReportForm() {
     }, 3000);
   };
 
+  const [collisionPressed, setCollisionPressed] = useState(true);
+  const [rolloverPressed, setRolloverPressed] = useState(true);
+  const [subwayPressed, setSubwayPressed] = useState(true);
+  const [pedestrianPressed, setPedestrianPressed] = useState(true);
+  const [singlePressed, setSinglePressed] = useState(true);
+  const [otherPressed, setOtherPressed] = useState(true);
+  const handlePress = () => {
+    setCollisionPressed(!collisionPressed);
+  };
+
+  const handleRolloverPress = () => {
+    setRolloverPressed(!rolloverPressed);
+  };
+
+  const handleSubwayPress = () =>{
+    setSubwayPressed(!subwayPressed);
+  };
+  const handlePedestrianPress = () => {
+    setPedestrianPressed(!pedestrianPressed);
+  };
+
+  const handleSinglePress = () => {
+    setSinglePressed(!singlePressed);
+  };
+
+  const handleOtherPress = () =>{
+    setOtherPressed(!otherPressed);
+  };
+  const collisionButtonColor = collisionPressed ? '#808080' : '#5787F5';
+  const rolloverButtonColor = rolloverPressed ? '#808080' : '#5787F5';
+  const subwayButtonColor = subwayPressed ? '#808080' : '#5787F5';
+  const pedestrianButtonColor = pedestrianPressed ? '#808080' : '#5787F5';
+  const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
+  const otherButtonColor = otherPressed ? '#808080' : '#5787F5';
   return (
     <>
     
@@ -124,22 +158,22 @@ export default function ReportForm() {
 <View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
 <Text style={styles.Options}>Add any relevant options</Text>
 
-  <TouchableOpacity style={styles.Collisionbutton}>
+  <TouchableOpacity onPress={handlePress} style={[styles.Collisionbutton,{ backgroundColor: collisionButtonColor }]}>
     <Text style={styles.AccidentOptions}>Vehicle Collision</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.Rolloverbutton}>
+  <TouchableOpacity onPress={handleRolloverPress} style={[styles.Rolloverbutton,,{ backgroundColor: rolloverButtonColor}]}>
     <Text style={styles.AccidentOptions}>Vehicle Rollover</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.Subwaybutton}>
+  <TouchableOpacity onPress={handleSubwayPress} style={[styles.Subwaybutton,{backgroundColor:subwayButtonColor}]}>
     <Text style={styles.AccidentOptions}>Subway Related</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.Pedestrianbutton}>
+  <TouchableOpacity onPress={handlePedestrianPress} style={[styles.Pedestrianbutton,{backgroundColor:pedestrianButtonColor}]}>
     <Text style={styles.AccidentOptions}>Pedestrian and Vehicle</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.SingleCar}>
+  <TouchableOpacity onPress={handleSinglePress} style={[styles.SingleCar,{backgroundColor:singleButtonColor}]}>
     <Text style={styles.AccidentOptions}>Single Car Accident</Text>
   </TouchableOpacity>
-  <TouchableOpacity style={styles.Other}>
+  <TouchableOpacity onPress={handleOtherPress} style={[styles.Other,{backgroundColor:otherButtonColor}]}>
     <Text style={styles.AccidentOptions}>Other</Text>
   </TouchableOpacity>
  
