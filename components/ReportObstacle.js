@@ -8,6 +8,7 @@ import { SelectList } from "react-native-dropdown-select-list";
 
 export default function ReportObstacle() {
     const [intersection, setSelectedIntersection] = useState("");
+    const [reports, setreports] = useState([]);
     const Data = [
       {key:'1',value:'BU Central'},
       {key:'2',value:"St Mary's Street"},
@@ -23,9 +24,9 @@ export default function ReportObstacle() {
   const time = date.toLocaleTimeString();
   const handleSubmit = async () => {
     // don't submit if name or message is empty
-    if (message === "") {
+    if (intersection === "") {
       console.log("Name or message is empty. Returning...");
-      let etoast = Toast.show("Error: Name or message is empty.", {
+      let etoast = Toast.show("Error: Please enter a location.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
         shadow: true,
@@ -57,14 +58,14 @@ export default function ReportObstacle() {
     try {
 
       await setDoc(doc(db, "Reports", intersection), {
-        
+        reports: reports,
         intersection: intersection,
         message: message,
         day:day,
         time:time,
       });
       console.log("Uploaded!");
-      console.log(`Report: ${message} at ${intersection} on ${day}, at ${time}`);
+      console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -84,8 +85,7 @@ export default function ReportObstacle() {
         Toast.hide(etoast);
       }, 3000);
     }
-
-    setMessage("");
+    resetForm();
 
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
@@ -109,30 +109,63 @@ export default function ReportObstacle() {
   const [puddlesPressed, setPuddlesPressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
 
+  const resetForm = () => {
+    setObjectPressed(true);
+    setPotholesPressed(true);
+    setRoadKillPressed(true);
+    setFoodPressed(true);
+    setIcePressed(true);
+    setPuddlesPressed(true);
+    setOtherPressed(true);
+    setMessage("");
+    setSelectedIntersection("");
+  }
+
   const handleObjectPress = () => {
     setObjectPressed(!objectonRoad);
+    setreports(
+      [...reports, "Object on Road"]
+    )
   };
 
   const handlePotHolesPress = () => {
     setPotholesPressed(!potholesPressed);
+    setreports(
+      [...reports, "Road Potholes"]
+    );
   };
 
   const handleRoadKillPress = () =>{
     setRoadKillPressed(!roadKillPressed);
+    setreports(
+      [...reports, "Road Kill"]
+    );
   };
   const handleFoodPress = () => {
     setFoodPressed(!foodPressed);
+    setreports(
+      [...reports, "Spilled Food"]
+    );
   };
 
   const handleIcePress = () => {
     setIcePressed(!icePressed);
+    setreports(
+      [...reports, "Black Ice/Ice"]
+    );
   };
   const handlePuddlePress = () => {
     setPuddlesPressed(!puddlesPressed);
+    setreports(
+      [...reports, "Puddles"]
+    );
   };
 
   const handleOtherPress = () =>{
     setOtherPressed(!otherPressed);
+   setreports(
+      [...reports, "Other"]
+   );
   };
   const objectButtonColor = objectonRoad ? '#808080' : '#5787F5';
   const potholesButtonColor = potholesPressed ? '#808080' : '#5787F5';
@@ -151,6 +184,7 @@ export default function ReportObstacle() {
 <View style={{top:110}}>
   <SelectList
     setSelected={handleDropdownSelect}
+    selected={intersection}
     fontFamily='Montserrat'
     data={Data}
     search={false}
