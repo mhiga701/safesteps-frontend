@@ -6,6 +6,7 @@ import FeedbackForm from "../../components/FeedbackForm";
 import VisAlert from "../../components/VisAlert";
 import AudioAlert from "../../components/AudioAlert";
 import AlertHeader from "../../assets/AlertTypes3.svg";
+import PushNotifications from "../../components/Notifications";
 
 export default function Profile() {
   const manager = new BleManager();
@@ -35,6 +36,7 @@ export default function Profile() {
         //   flexGrow: 1,
         // }}
       >
+        <PushNotifications />
         
         <VisAlert />
 
