@@ -58,7 +58,7 @@ export default function RPage() {
 
         <View style={[styles.ReportContainer,{top:15,height:120},]}>
              <Ionicon name='car-sport' size={30} color="#5787f5" />
-            <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
+            <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
                 <Text style={styles.callButtonText}>Traffic Accident</Text>
                 <Text style={[styles.trafficText,{right:-12}]}>Notify other users about an accident</Text>
             </TouchableOpacity>
@@ -69,16 +69,18 @@ export default function RPage() {
                 <Octicon name='shield' size={30} color="#5787f5" />
             </View>
             
-        <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
+        <TouchableOpacity onPress={() => router.push("/reporting/obstacle")}>
             <Text style={[styles.callButtonText, {left:-10}]}>File a Report</Text> 
             <Text style={styles.trafficText}>Help Keep Other Users Notified</Text>
         </TouchableOpacity> 
         </View>
         <View style={styles.contactButtonContainer}>
+            <View style={{top:-20}}>
             <TouchableOpacity style={styles.contactButton}>
                 <Ionicon name="ios-chatbubbles" size={25} color="#5787f5" />
                 <Text style={styles.callButtonText}>Contact Us</Text>
             </TouchableOpacity>
+            </View>
         </View>
        
        </View>

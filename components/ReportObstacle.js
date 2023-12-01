@@ -6,7 +6,7 @@ import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { SelectList } from "react-native-dropdown-select-list";
 
-export default function ReportForm() {
+export default function ReportObstacle() {
     const [intersection, setSelectedIntersection] = useState("");
     const Data = [
       {key:'1',value:'BU Central'},
@@ -37,8 +37,6 @@ export default function ReportForm() {
       setTimeout(function hideToast() {
         Toast.hide(etoast);
       }, 3000);
-      setSinglePressed(true)
-      const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
       return;
     }
 
@@ -103,48 +101,52 @@ export default function ReportForm() {
     }, 3000);
   };
 
-  const [collisionPressed, setCollisionPressed] = useState(true);
-  const [rolloverPressed, setRolloverPressed] = useState(true);
-  const [subwayPressed, setSubwayPressed] = useState(true);
-  const [pedestrianPressed, setPedestrianPressed] = useState(true);
-  const [singlePressed, setSinglePressed] = useState(true);
+  const [objectonRoad, setObjectPressed] = useState(true);
+  const [potholesPressed, setPotholesPressed] = useState(true);
+  const [roadKillPressed, setRoadKillPressed] = useState(true);
+  const [foodPressed, setFoodPressed] = useState(true);
+  const [icePressed, setIcePressed] = useState(true);
+  const [puddlesPressed, setPuddlesPressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
-  const handlePress = () => {
-    setCollisionPressed(!collisionPressed);
+
+  const handleObjectPress = () => {
+    setObjectPressed(!objectonRoad);
   };
 
-  const handleRolloverPress = () => {
-    setRolloverPressed(!rolloverPressed);
+  const handlePotHolesPress = () => {
+    setPotholesPressed(!potholesPressed);
   };
 
-  const handleSubwayPress = () =>{
-    setSubwayPressed(!subwayPressed);
+  const handleRoadKillPress = () =>{
+    setRoadKillPressed(!roadKillPressed);
   };
-  const handlePedestrianPress = () => {
-    setPedestrianPressed(!pedestrianPressed);
+  const handleFoodPress = () => {
+    setFoodPressed(!foodPressed);
   };
 
-  const handleSinglePress = () => {
-    setSinglePressed(!singlePressed);
+  const handleIcePress = () => {
+    setIcePressed(!icePressed);
+  };
+  const handlePuddlePress = () => {
+    setPuddlesPressed(!puddlesPressed);
   };
 
   const handleOtherPress = () =>{
     setOtherPressed(!otherPressed);
   };
-  const collisionButtonColor = collisionPressed ? '#808080' : '#5787F5';
-  const rolloverButtonColor = rolloverPressed ? '#808080' : '#5787F5';
-  const subwayButtonColor = subwayPressed ? '#808080' : '#5787F5';
-  const pedestrianButtonColor = pedestrianPressed ? '#808080' : '#5787F5';
-  const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
+  const objectButtonColor = objectonRoad ? '#808080' : '#5787F5';
+  const potholesButtonColor = potholesPressed ? '#808080' : '#5787F5';
+  const RoadKillButtonColor = roadKillPressed ? '#808080' : '#5787F5';
+  const FoodButtonColot = foodPressed ? '#808080' : '#5787F5';
+  const IceButtonColor = icePressed ? '#808080' : '#5787F5';
+  const PuddleButtonColor = puddlesPressed ? '#808080' : '#5787F5';
   const otherButtonColor = otherPressed ? '#808080' : '#5787F5';
-
-  
   return (
     <>
     
       <View>
 
-<Text style={styles.ReportAccident}>Report Traffic Accident</Text>
+<Text style={styles.ReportAccident}>Report Obstacle</Text>
 <Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
 <View style={{top:110}}>
   <SelectList
@@ -159,30 +161,34 @@ export default function ReportForm() {
     />
 </View>
 
-<View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
+<View><Text style={styles.Present}>What Obstacles are Present?</Text></View>
 <Text style={styles.Options}>Add any relevant options</Text>
 
-  <TouchableOpacity onPress={handlePress} style={[styles.Collisionbutton,{ backgroundColor: collisionButtonColor }]}>
-    <Text style={styles.AccidentOptions}>Vehicle Collision</Text>
+  <TouchableOpacity onPress={handleObjectPress} style={[styles.Collisionbutton,{ backgroundColor: objectButtonColor }]}>
+    <Text style={styles.AccidentOptions}>Object on Road</Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={handleRolloverPress} style={[styles.Rolloverbutton,,{ backgroundColor: rolloverButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Vehicle Rollover</Text>
+  <TouchableOpacity onPress={handlePotHolesPress} style={[styles.Rolloverbutton,,{ backgroundColor: potholesButtonColor}]}>
+    <Text style={styles.AccidentOptions}>Road Potholes</Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={handleSubwayPress} style={[styles.Subwaybutton,{backgroundColor:subwayButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Subway Related</Text>
+  <TouchableOpacity onPress={handleRoadKillPress} style={[styles.Subwaybutton,{backgroundColor:RoadKillButtonColor}]}>
+    <Text style={styles.AccidentOptions}>Road Kill</Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={handlePedestrianPress} style={[styles.Pedestrianbutton,{backgroundColor:pedestrianButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Pedestrian and Vehicle</Text>
+  <TouchableOpacity onPress={handleFoodPress} style={[styles.Pedestrianbutton,{backgroundColor:FoodButtonColot}]}>
+    <Text style={styles.AccidentOptions}>Spilled Food</Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={handleSinglePress} style={[styles.SingleCar,{backgroundColor:singleButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Single Car Accident</Text>
+  <TouchableOpacity onPress={handleIcePress} style={[styles.SingleCar,{backgroundColor:IceButtonColor,width:120}]}>
+    <Text style={styles.AccidentOptions}>Black Ice/Ice</Text>
   </TouchableOpacity>
-  <TouchableOpacity onPress={handleOtherPress} style={[styles.Other,{backgroundColor:otherButtonColor}]}>
+  <TouchableOpacity onPress={handlePuddlePress} style={[styles.Other,{backgroundColor:PuddleButtonColor,right:-125}]}>
+    <Text style={styles.AccidentOptions}>Puddles</Text>
+  </TouchableOpacity>
+  <TouchableOpacity onPress={handleOtherPress} style={[styles.Other,{backgroundColor:otherButtonColor,top:-9,left:220,width:120}]}>
     <Text style={styles.AccidentOptions}>Other</Text>
   </TouchableOpacity>
- 
+    <View style={{top:-50}}>
       <Text style={{color: '#52525A', fontSize: 17, fontFamily: 'Montserrat', fontWeight: '600',lineHeight: 25,bottom: -45,left:5,}}>Any Other Details?</Text>
-        <View style={styles.MessageContainer}>
+      </View>
+        <View style={[styles.MessageContainer,{top:0}]}>
           {/* <View style={styles.rowContainer}>
             <Text style={styles.toggleText}>Name</Text>
             <TextInput
@@ -215,10 +221,11 @@ export default function ReportForm() {
         />
           </View>
         {/* </View> */}
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row',top:-50}}>
                 <TouchableOpacity style={styles.cancelButton}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.SubmitButton} onPress={handleSubmit}><Text style={{color:'white', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Submit</Text></TouchableOpacity>
             </View>
+           
       
       </View>
     </>
