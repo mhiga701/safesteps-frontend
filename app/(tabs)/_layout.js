@@ -54,7 +54,15 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
         }}
       />
-    </Tabs>
+    <Tabs.Screen
+    name="bluetooth"
+    options={{
+      title: "BTLE",
+      display: "flex",
+      tabBarIcon: ({ color }) => <TabBarIcon name="bluetooth-b" color={color} />,
+    }}
+  />
+</Tabs>
   );
 }
 
