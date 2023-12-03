@@ -50,7 +50,7 @@ return (
             <TouchableOpacity
                 style={styles.button}
                 onPress={async () => {
-                    if (visualAlertEnabled) {
+                    if (notifcationEnabled) {
                         await schedulePushNotification();
                     }
                 } }
@@ -69,7 +69,7 @@ async function schedulePushNotification() {
         body: 'Be careful when walking in this area!',
         data: { data: 'goes here' },
       },
-      trigger: { seconds: 2 },
+      trigger: { seconds: 60, repeats: true },
     });
   }
   

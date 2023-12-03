@@ -8,8 +8,6 @@ import AlertHeader from "../../assets/AlertTypes3.svg";
 import PushNotifications from "../../components/Notifications";
 
 export default function Profile() {
-  const manager = new BleManager();
-  // const [sound, setSound] = useState(new Audio.Sound());
 
   return (
     <>
