@@ -1,6 +1,14 @@
+/*
+  This is a debug page for bluetooth. We're trying to test the following functionalities:
+  - Start/Stop Scan
+  - Retrieve devices
+  - Iterate over devices and choose which one to connect to
+  - Pub/Sub to the device
+  - Disconnect when done
+*/
+
 import React, { Component, useEffect, useState } from "react";
 import { Text, View, ScrollView, TouchableOpacity } from "react-native";
-// import { AppRegistry } from "react-native";
 import BleManager from "react-native-ble-manager";
 import { styles } from "../../components/styles";
 import AlertHeader from "../../assets/AlertTypes3.svg";
