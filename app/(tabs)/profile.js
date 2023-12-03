@@ -5,6 +5,7 @@ import FeedbackForm from "../../components/FeedbackForm";
 import VisAlert from "../../components/VisAlert";
 import AudioAlert from "../../components/AudioAlert";
 import AlertHeader from "../../assets/AlertTypes3.svg";
+import PushNotifications from "../../components/Notifications";
 
 export default function Profile() {
   return (
@@ -24,27 +25,21 @@ export default function Profile() {
           position: "absolute",
         }}
       >
-        Alert Types
-      </Text>
-      <View style={styles.profileContainer}>
-        <ScrollView
-          automaticallyAdjustKeyboardInsets={true}
-          automaticallyAdjustContentInsets={true}
-          // bounces={false}
-          contentContainerStyle={{
-            flexGrow: 1,
-          }}
-        >
-          <VisAlert />
 
-          <Text style={styles.subheadingText}>AUDIO ALERT</Text>
+        
+        <PushNotifications />
+        
+        <VisAlert />
 
-          <AudioAlert />
+        <Text style={styles.subheadingText}>AUDIO ALERT</Text>
 
-          <Text style={styles.subheadingText}>Feedback Form</Text>
+        <AudioAlert />
 
-          <FeedbackForm />
-        </ScrollView>
+        <Text style={styles.subheadingText}>Feedback Form</Text>
+
+        <FeedbackForm />
+      </ScrollView>
+
       </View>
     </>
   );

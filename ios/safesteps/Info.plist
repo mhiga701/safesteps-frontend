@@ -58,6 +58,7 @@
     <string>Allow $(PRODUCT_NAME) to connect to bluetooth devices</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Allow $(PRODUCT_NAME) to access your microphone</string>
+    
     <key>UIBackgroundModes</key>
     <array>
       <string>bluetooth-central</string>

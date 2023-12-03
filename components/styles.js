@@ -194,7 +194,7 @@ export const styles = StyleSheet.create({
   },
   ObstacleSVGcontainer:{
     top:5,
-    left: -40,
+    left: 10,
   },
   ObstacleSubText:{
     left:20,
@@ -616,7 +616,7 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    width:75,
+    width:90,
     marginBottom: 10,
     right:-170,
     top: 35

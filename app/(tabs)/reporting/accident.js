@@ -20,8 +20,8 @@ export default function AccidentScreen() {
         contentContainerStyle={{
           flexGrow: 1,
         }}>
-      <TouchableOpacity onPress={() => history.back()} >
-          <View style={styles.ArrowSVGContainer}><SvgXml xml={ARROW_SVG}/></View>
+      <TouchableOpacity onPress={() => history.back()}>
+          <View style={[styles.ArrowSVGContainer,{bottom:-40,left:0}]}><SvgXml xml={ARROW_SVG}/></View>
       </TouchableOpacity>
 
       <ReportForm />
