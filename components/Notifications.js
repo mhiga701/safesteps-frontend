@@ -69,7 +69,7 @@ async function schedulePushNotification() {
         body: 'Be careful when walking in this area!',
         data: { data: 'goes here' },
       },
-      trigger: { seconds: 60, repeats: true },
+      trigger: { seconds: 1, repeats: false },
     });
   }
   
