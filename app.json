@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "safesteps-bostonu",
+    "name": "SafeSteps",
     "slug": "safesteps-bostonu",
     "version": "0.1.0",
     "orientation": "portrait",
@@ -30,7 +30,7 @@
 
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "1",
+      "buildNumber": "2",
       "supportsTablet": true,
       "bundleIdentifier": "com.doshir.safesteps",
       "infoPlist": {
