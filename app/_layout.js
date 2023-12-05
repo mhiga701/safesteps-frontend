@@ -14,6 +14,7 @@ import Splash1 from "../assets/Logo.svg"
 import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Onboarding from "../components/Onboarding";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -25,6 +26,7 @@ function RootLayoutNav() {
   return (
     <>
       <Stack>
+        <Stack.Screen name="onboarding" component={Onboarding} options={{ headerShown: false}} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
      
      
