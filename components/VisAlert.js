@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./styles";
-import Alert from '../assets/alert.svg';
+import Alert from '../assets/alert1.svg';
 import AlertHeader from '../assets/AlertTypes3.svg'
 
 export default function VisAlert() {
@@ -76,7 +76,7 @@ export default function VisAlert() {
         <View style={styles.alert2Container}>
           <Text style={styles.alert2Text}>Approaching</Text>
           <Text style={styles.alert2Text}>Intersection</Text>
-          <Image source={require('../assets/ripple.gif')}/>
+          <Image source={require('../assets/ripple.gif')} style={{marginTop:80}}/>
           <Alert style={{marginVertical: 50, position: 'absolute'}}/>
           <Text style={styles.alert2Text}>Look Up!</Text>
           <TouchableOpacity

@@ -1,17 +1,23 @@
 import Onboarding from 'react-native-onboarding-swiper';
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import { Text } from 'react-native';
+import { styles } from '../components/styles';
 import Onboarding1 from '../assets/onboarding1.svg';
 import Onboarding2 from '../assets/onboarding2.svg';
 import Onboarding3 from '../assets/onboarding3.svg';
+import { useRouter } from 'expo-router'
 
-import { View, Text } from 'react-native'
-import React from 'react'
 
-const Onboarding = () => {
+export default function OnboardingScreen(){
+  const router = useRouter();
+
+  const handleDone = () => {
+    router.push("(tabs)");
+  };
   return (
     <Onboarding
+    onDone={handleDone}
+    onSkip={handleDone}
   pages={[
     {
       backgroundColor: '#fcfcfc',
@@ -45,10 +51,12 @@ const Onboarding = () => {
       subtitle: (
         <Text style={styles.toggleText}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
       ),
+      submitButton: (
+        <Text style={styles.toggleText}>Get Started</Text>
+      ),
     },
   ]}
 />
   )
 }
 
-export default Onboarding

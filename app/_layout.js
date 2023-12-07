@@ -14,10 +14,12 @@ import Splash1 from "../assets/Logo.svg"
 import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Onboarding from "../components/Onboarding";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import OnboardingScreen from "./onboarding";
 
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: "onboarding",
 };
 
 function RootLayoutNav() {
@@ -25,8 +27,8 @@ function RootLayoutNav() {
 
   return (
     <>
-      <Stack>
-        <Stack.Screen name="onboarding" component={Onboarding} options={{ headerShown: false}} />
+      <Stack >
+        <Stack.Screen name="onboarding" options={{ headerShown: false}} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
      
      
