@@ -9,7 +9,6 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Icon2 from "react-native-vector-icons/Octicons";
 import BottomSheet from "@gorhom/bottom-sheet";
@@ -116,7 +115,6 @@ export default function Page() {
   return (
     <>
       <BackgroundLocation />
-      <BluetoothClient />
       <View style={styles.map_container}>
         <MapView
           // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md

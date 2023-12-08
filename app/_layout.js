@@ -1,25 +1,28 @@
 import { Redirect, Stack, Tabs } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
-import { useColorScheme, View, Text, TouchableOpacity, Modal } from "react-native";
+import {
+  useColorScheme,
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
 import { styles } from "../components/styles";
-import Splash1 from "../assets/Logo.svg"
+import Splash1 from "../assets/Logo.svg";
 import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-
 
 export const unstable_settings = {
   initialRouteName: "index",
 };
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <>
-      <Stack initialRouteName="index" >
-        <Stack.Screen name="index" options={{ headerShown: false}} />
+      <Stack initialRouteName={unstable_settings.initialRouteName}>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </>
@@ -41,9 +44,7 @@ export default function RootLayout() {
   loadFont();
 
   if (!fontLoaded) {
-    return (
-      <Splash1 />
-    );
+    return <Splash1 />;
   } else {
     if (splash) {
       return (
@@ -53,22 +54,32 @@ export default function RootLayout() {
             <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}
-                onPress={() => setSplash(false)}
+                onPress={() => {
+                  setSplash(false);
+                }}
               >
-                <Text style={styles.buttonText}>Get Started</Text>
+                <Text style={styles.buttonText}>Onboarding</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.contentContainer}>
+              <TouchableOpacity
+                style={styles.buttonHomeScreen}
+                onPress={() => {
+                  unstable_settings.initialRouteName = "(tabs)";
+                  setSplash(false);
+                }}
+              >
+                <Text style={styles.buttonText}>Main Page</Text>
               </TouchableOpacity>
             </View>
           </View>
         </Modal>
       );
     } else {
-      
       return (
         <>
-         
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
-            
               <RootLayoutNav />
             </RootSiblingParent>
           </GestureHandlerRootView>
@@ -77,4 +88,3 @@ export default function RootLayout() {
     }
   }
 }
-
