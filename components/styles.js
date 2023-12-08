@@ -786,23 +786,60 @@ export const styles = StyleSheet.create({
   onboardingContainer: {
     flex: 1,
     backgroundColor: "#fcfcfc",
-    padding: 20,
-    textAlign: "left",
-    marginTop: 35,
+    padding: 35,
+    alignItems: "center",
+    textAlign: "center",
+
   },
-  onboardingTitle: {
+  onboarding1Title: {
     color: "black",
     fontSize: 25,
     fontWeight: "700",
-    marginBottom: 20,
+    marginTop: -50,
     fontFamily: "Montserrat-Bold",
+    alignItems: "center",
   },
-  onboardingSubtitle: {
+  onboarding1Subtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 20,
+    fontFamily: "Bitter-Regular",
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },  
+  onboarding2Title: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginTop: -23,
+    fontFamily: "Montserrat-Bold",
+    alignItems: "center",
+  },
+  onboarding2Subtitle: {
     color: "black",
     fontSize: 16,
     fontWeight: "500",
     marginBottom: 15,
     fontFamily: "Bitter-Regular",
+    alignItems: "center",
+  },
+  onboarding3Title: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginBottom: 20,
+    fontFamily: "Montserrat-Bold",
+    alignItems: "center",
+  },
+  onboarding3Subtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 15,
+    fontFamily: "Bitter-Regular",
+    alignItems: "center",
   },
   wormContainer:{
     marginLeft: 38

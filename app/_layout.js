@@ -1,21 +1,13 @@
 import { Redirect, Stack, Tabs } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
-import {
-  useColorScheme,
-  Image,
-  Modal,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { useColorScheme, View, Text, TouchableOpacity, Modal } from "react-native";
 import { styles } from "../components/styles";
 import Splash1 from "../assets/Logo.svg"
 import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 
 export const unstable_settings = {
   initialRouteName: "index",

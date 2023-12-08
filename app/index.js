@@ -67,13 +67,13 @@ export default function OnboardingScreen(){
         <Onboarding1 />
       ),
       title: (
-        <Text style={styles.onboardingTitle}>Personalize Your Alerts</Text>
+        <Text style={styles.onboarding1Title}>Personalize Your Alerts</Text>
       ),
       subtitle: (
         <>
         <View style={styles.onboardingContainer}>
-        <Text style={styles.onboardingSubtitle}>Prefebeing notified with vibrations rather than auditory alerts? No problem.</Text>
-        <Text style={styles.onboardingSubtitle}>Choose and adjust alert types in the alerts page, allowing an easy integration of SafeSteps into your life.</Text>
+        <Text style={styles.onboarding1Subtitle}>Prefer being notified with vibrations rather than auditory alerts? No problem.</Text>
+        <Text style={styles.onboarding1Subtitle}>Choose and adjust alert types in the alerts page, allowing an easy integration of SafeSteps into your life.</Text>
         </View>
       
         </>
@@ -85,11 +85,11 @@ export default function OnboardingScreen(){
         <Onboarding2 style={styles.slide2}/>
       ),
       title: (
-        <Text style={styles.onboardingTitle}>View Intersections and Reports</Text>
+        <Text style={styles.onboarding2Title}>View Intersections and Reports</Text>
       ),
       subtitle: (
         <View style={styles.onboardingContainer}>
-           <Text style={styles.onboardingSubtitle}>Be able to view nearby intersections and its reports on our home page to stay up-to-date.</Text>
+           <Text style={styles.onboarding2Subtitle}>Be able to view nearby intersections and its reports on our home page to stay up-to-date.</Text>
         </View>
           ),
        
@@ -100,11 +100,11 @@ export default function OnboardingScreen(){
         <Onboarding3 style={styles.wormContainer}/>
       ),
       title: (
-        <Text style={styles.onboardingTitle}>Submit Reports</Text>
+        <Text style={styles.onboarding1Title}>Submit Reports</Text>
       ),
       subtitle: (
         <View style={styles.onboardingContainer}>
-                    <Text style={styles.onboardingSubtitle}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
+                    <Text style={styles.onboarding2Subtitle}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
 
         </View>
       ),
