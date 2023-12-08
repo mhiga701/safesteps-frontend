@@ -201,8 +201,8 @@ const localStyles = StyleSheet.create({
     flex: 1,
     padding: 10,
     borderRadius: 10,
-    borderWidth: 0.5,
-    borderColor: "black",
+    borderWidth: 0.3,
+    borderColor: "#52525a",
   },
   bottomSheetHeader: {
     fontSize: 20,

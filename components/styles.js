@@ -783,4 +783,85 @@ export const styles = StyleSheet.create({
     alignItems: 'right',
     height: 40,
   },
+  onboardingContainer: {
+    flex: 1,
+    backgroundColor: "#fcfcfc",
+    padding: 35,
+    alignItems: "center",
+    textAlign: "center",
+
+  },
+  onboarding1Title: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginTop: -50,
+    fontFamily: "Montserrat-Bold",
+    alignItems: "center",
+  },
+  onboarding1Subtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 20,
+    fontFamily: "Bitter-Regular",
+    alignItems: "center",
+    justifyContent: "center",
+    
+  },  
+  onboarding2Title: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginTop: -23,
+    fontFamily: "Montserrat-Bold",
+    alignItems: "center",
+  },
+  onboarding2Subtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 15,
+    fontFamily: "Bitter-Regular",
+    alignItems: "center",
+  },
+  onboarding3Title: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginBottom: 20,
+    fontFamily: "Montserrat-Bold",
+    alignItems: "center",
+  },
+  onboarding3Subtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 15,
+    fontFamily: "Bitter-Regular",
+    alignItems: "center",
+  },
+  wormContainer:{
+    marginLeft: 38
+  },
+  slide2: {
+    marginLeft :38,
+    marginTop: -25
+  },
+  nextButton: {
+    //position: "absolute",
+      backgroundColor: "#B164E8",
+      borderRadius: 40,
+      height: 35,
+      width: 93,
+      marginTop: 35,
+      marginRight: 40,
+  },
+  nextButtonText:{
+    textAlign: "center",
+    color: "#fcfcfc",
+    fontSize: 14,
+    fontFamily: "Montserrat-Regular",
+    marginTop: 8,
+  },
 });

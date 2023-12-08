@@ -1,22 +1,16 @@
-import { RootContainer, SplashScreen, Stack, Tabs } from "expo-router";
+import { Redirect, Stack, Tabs } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
-import {
-  useColorScheme,
-  Image,
-  Modal,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { useColorScheme, View, Text, TouchableOpacity, Modal } from "react-native";
 import { styles } from "../components/styles";
 import Splash1 from "../assets/Logo.svg"
 import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+
 export const unstable_settings = {
-  initialRouteName: "(tabs)",
+  initialRouteName: "index",
 };
 
 function RootLayoutNav() {
@@ -24,10 +18,9 @@ function RootLayoutNav() {
 
   return (
     <>
-      <Stack>
+      <Stack initialRouteName="index" >
+        <Stack.Screen name="index" options={{ headerShown: false}} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-     
-     
       </Stack>
     </>
   );
@@ -69,10 +62,13 @@ export default function RootLayout() {
         </Modal>
       );
     } else {
+      
       return (
         <>
+         
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
+            
               <RootLayoutNav />
             </RootSiblingParent>
           </GestureHandlerRootView>
@@ -81,3 +77,4 @@ export default function RootLayout() {
     }
   }
 }
+

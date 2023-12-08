@@ -1,10 +1,10 @@
 import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 import { Image } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 function TabBarIcon(props) {
-  return <FontAwesome size={32} style={{ paddingVertical: 4 }} {...props} />;
+  return <Ionicons size={32} style={{ paddingVertical: 4 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -35,7 +35,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="bell" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="notifications" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -59,7 +59,7 @@ export default function TabLayout() {
     options={{
       title: "BTLE",
       display: "flex",
-      tabBarIcon: ({ color }) => <TabBarIcon name="bluetooth-b" color={color} />,
+      tabBarIcon: ({ color }) => <TabBarIcon name="bluetooth" color={color} />,
     }}
   />
 </Tabs>
