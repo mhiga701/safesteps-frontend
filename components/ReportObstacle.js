@@ -7,8 +7,12 @@ import Toast from "react-native-root-toast";
 import { SelectList } from "react-native-dropdown-select-list";
 
 export default function ReportObstacle() {
-    const [intersection, setSelectedIntersection] = useState("");
+    const [intersection, setSelectedIntersection] = useState("Choose an Intersection");
     const [reports, setreports] = useState([]);
+    const [message, setMessage] = useState("");
+    const date = new Date();
+    const day = date.toLocaleDateString();
+    const time = date.toLocaleTimeString();
     const Data = [
       {key:'1',value:'BU Central'},
       {key:'2',value:"St Mary's Street"},
@@ -17,16 +21,14 @@ export default function ReportObstacle() {
     const handleDropdownSelect = (value) => {
       setSelectedIntersection(value);
     };
-//   const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const date = new Date();
-  const day = date.toLocaleDateString();
-  const time = date.toLocaleTimeString();
+  
+  // console.log(message);
+
   const handleSubmit = async () => {
-    // don't submit if name or message is empty
-    if (intersection === "") {
-      console.log("Name or message is empty. Returning...");
-      let etoast = Toast.show("Error: Please enter a location.", {
+    // don't submit if intersection is empty
+    if (intersection === "Choose an Intersection") {
+      console.log("Intersection not chosen. Returning...");
+      let etoast = Toast.show("Error: Please select a location.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
         shadow: true,
@@ -34,59 +36,120 @@ export default function ReportObstacle() {
         hideOnPress: true,
         delay: 0,
       });
-
       setTimeout(function hideToast() {
         Toast.hide(etoast);
       }, 3000);
       return;
-    }
-
-    // Post name and message to Firebase with auto-generated doc name
-
-    // try {
-    //   const docRef = await addDoc(collection(db, "Feedback"), {
-    //     name: name,
-    //     message: message,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
-
-    // Post name and message to Firebase with custom doc name
-    
-    try {
-
-      await setDoc(doc(db, "Reports", intersection), {
-        reports: reports,
-        intersection: intersection,
-        message: message,
-        day:day,
-        time:time,
-      });
-      console.log("Uploaded!");
-      console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-
-      let etoast = Toast.show(
-        "Error submitting feedback: please try again later.",
-        {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          shadow: true,
-          animation: true,
-          hideOnPress: true,
-          delay: 0,
+    }//Check to see if message is empty but options are still available to submit
+    else{
+      if (message === "") {
+          if (!potholesPressed || !objectonRoad || !roadKillPressed || !foodPressed || !icePressed || !puddlesPressed || !otherPressed){
+            try {
+              await setDoc(doc(db, "Obstacle Reports", intersection), {
+                reports: reports,
+                intersection: intersection,
+                message: message,
+                day:day,
+                time:time,
+              });
+              console.log("Uploaded!");
+              console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
+            } catch (e) {
+              console.error("Error adding document: ", e);
+              let etoast = Toast.show(
+                "Error submitting feedback: please try again later.",
+                {
+                  duration: Toast.durations.LONG,
+                  position: Toast.positions.BOTTOM,
+                  shadow: true,
+                  animation: true,
+                  hideOnPress: true,
+                  delay: 0,
+                }
+              );
+              setTimeout(function hideToast() {
+                Toast.hide(etoast);
+              }, 3000);
+            }
+          }//Else case is if message is empty and no options are selected
+          else{
+            console.log("message or options is empty. Returning...");
+            let etoast = Toast.show("Error: Please enter a message", {
+              duration: Toast.durations.LONG,
+              position: Toast.positions.BOTTOM,
+              shadow: true,
+              animation: true,
+              hideOnPress: true,
+              delay: 0,
+            });
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+            return;
+          }
+        }//Handles cases for having a message on the text box and options chosen
+      else if (message !== ""){
+        if (!potholesPressed || !objectonRoad || !roadKillPressed || !foodPressed || !icePressed || !puddlesPressed || !otherPressed){
+          try {
+            await setDoc(doc(db, "Obstacle Reports", intersection), {
+              reports: reports,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+          }
+        }else{
+          try {
+            await setDoc(doc(db, "Obstacle Reports", intersection), {
+              reports: reports,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+          }
         }
-      );
-
-      setTimeout(function hideToast() {
-        Toast.hide(etoast);
-      }, 3000);
+      }
     }
     resetForm();
-
+    console.log(reports);
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -108,7 +171,7 @@ export default function ReportObstacle() {
   const [icePressed, setIcePressed] = useState(true);
   const [puddlesPressed, setPuddlesPressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
-
+  console.log(intersection);
   const resetForm = () => {
     setObjectPressed(true);
     setPotholesPressed(true);
@@ -118,7 +181,7 @@ export default function ReportObstacle() {
     setPuddlesPressed(true);
     setOtherPressed(true);
     setMessage("");
-    setSelectedIntersection("");
+    setSelectedIntersection("Choose an Intersection");
   }
 
   const handleObjectPress = () => {
@@ -176,25 +239,23 @@ export default function ReportObstacle() {
   const otherButtonColor = otherPressed ? '#808080' : '#5787F5';
   return (
     <>
+    <View>
+      <Text style={styles.ReportAccident}>Report Obstacle</Text>
+      <Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
+      <View style={{top:110}}>
+      <SelectList
+        setSelected={handleDropdownSelect}
+        selected={intersection}
+        fontFamily='Montserrat'
+        data={Data}
+        search={false}
+        save="value"
+        placeholder={intersection}
+        inputStyles ={{marginRight:100}}
+        dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
+      />
+    </View>
     
-      <View>
-
-<Text style={styles.ReportAccident}>Report Obstacle</Text>
-<Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
-<View style={{top:110}}>
-  <SelectList
-    setSelected={handleDropdownSelect}
-    selected={intersection}
-    fontFamily='Montserrat'
-    data={Data}
-    search={false}
-    save="value"
-    placeholder="Choose Intersection"
-    inputStyles ={{marginRight:100}}
-    dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
-    />
-</View>
-
 <View><Text style={styles.Present}>What Obstacles are Present?</Text></View>
 <Text style={styles.Options}>Add any relevant options</Text>
 
@@ -223,23 +284,6 @@ export default function ReportObstacle() {
       <Text style={{color: '#52525A', fontSize: 17, fontFamily: 'Montserrat', fontWeight: '600',lineHeight: 25,bottom: -45,left:5,}}>Any Other Details?</Text>
       </View>
         <View style={[styles.MessageContainer,{top:0}]}>
-          {/* <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Name</Text>
-            <TextInput
-              style={styles.input}
-              value={name}
-              onChangeText={setName}
-              placeholder="Enter your name here"
-              maxLength={100}
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                this.secondTextInput.focus();
-              }}
-              blurOnSubmit={false}
-            />
-          </View> */}
-          
-          {/* <View style={styles.MessageContainer}> */}
         <TextInput
         style={{top:10 ,fontSize: 16, fontFamily: 'Bitter', fontWeight: '400', lineHeight: 20, letterSpacing: 0.50}}
         ref={(input) => {
@@ -254,13 +298,10 @@ export default function ReportObstacle() {
           blurOnSubmit={true}
         />
           </View>
-        {/* </View> */}
             <View style={{flexDirection:'row',top:-50}}>
                 <TouchableOpacity style={styles.cancelButton}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.SubmitButton} onPress={handleSubmit}><Text style={{color:'white', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Submit</Text></TouchableOpacity>
             </View>
-           
-      
       </View>
     </>
   );
