@@ -1,4 +1,4 @@
-import { RootContainer, SplashScreen, Stack, Tabs } from "expo-router";
+import { Redirect, Stack, Tabs } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
 import {
@@ -16,10 +16,9 @@ import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import OnboardingScreen from "./onboarding";
 
 export const unstable_settings = {
-  initialRouteName: "onboarding",
+  initialRouteName: "index",
 };
 
 function RootLayoutNav() {
@@ -27,11 +26,9 @@ function RootLayoutNav() {
 
   return (
     <>
-      <Stack >
-        <Stack.Screen name="onboarding" options={{ headerShown: false}} />
+      <Stack initialRouteName="index" >
+        <Stack.Screen name="index" options={{ headerShown: false}} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-     
-     
       </Stack>
     </>
   );
@@ -73,10 +70,13 @@ export default function RootLayout() {
         </Modal>
       );
     } else {
+      
       return (
         <>
+         
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
+            
               <RootLayoutNav />
             </RootSiblingParent>
           </GestureHandlerRootView>
@@ -85,3 +85,4 @@ export default function RootLayout() {
     }
   }
 }
+

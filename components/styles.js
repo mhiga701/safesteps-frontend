@@ -783,4 +783,11 @@ export const styles = StyleSheet.create({
     alignItems: 'right',
     height: 40,
   },
+  onboardingContainer: {
+    flex: 1,
+    backgroundColor: "#d6d5d5",
+    padding: 20,
+    textAlign: "left",
+    marginTop: 35,
+  },
 });

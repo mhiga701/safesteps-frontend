@@ -1,10 +1,10 @@
 import Onboarding from 'react-native-onboarding-swiper';
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { styles } from '../components/styles';
-import Onboarding1 from '../assets/onboarding1.svg';
-import Onboarding2 from '../assets/onboarding2.svg';
-import Onboarding3 from '../assets/onboarding3.svg';
+import Onboarding1 from '../assets/First.svg';
+import Onboarding2 from '../assets/Second.svg';
+import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
 
 
@@ -20,15 +20,18 @@ export default function OnboardingScreen(){
     onSkip={handleDone}
   pages={[
     {
-      backgroundColor: '#fcfcfc',
+      backgroundColor: '#d6d5d5',
       image: (
         <Onboarding1 />
       ),
       title: 'Personalize Your Alerts',
       subtitle: (
         <>
+        <View style={styles.onboardingContainer}>
         <Text style={styles.toggleText}>Prefebeing notified with vibrations rather than auditory alerts? No problem.</Text>
         <Text style={styles.toggleText}>Choose and adjust alert types in the alerts page, allowing an easy integration of SafeSteps into your life.</Text>
+        </View>
+      
         </>
       ),
     },
