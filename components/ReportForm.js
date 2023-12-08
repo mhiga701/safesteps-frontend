@@ -56,36 +56,39 @@ export default function ReportForm() {
     // }
 
     // Post name and message to Firebase with custom doc name
-    
-    try {
+    else{
+      try {
 
-      await setDoc(doc(db, "Reports", intersection), {
-        report: report,
-        intersection: intersection,
-        message: message,
-        day:day,
-        time:time,
-      });
-      console.log("Uploaded!");
-      console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+        await setDoc(doc(db, "Accident Report", intersection), {
+          reports: report,
+          intersection: intersection,
+          message: message,
+          day:day,
+          time:time,
+        });
+        console.log("Uploaded!");
+        console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+        resetForm();
+      } catch (e) {
+        console.error("Error adding document: ", e);
 
-      let etoast = Toast.show(
-        "Error submitting feedback: please try again later.",
-        {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          shadow: true,
-          animation: true,
-          hideOnPress: true,
-          delay: 0,
-        }
-      );
+        let etoast = Toast.show(
+          "Error submitting feedback: please try again later.",
+          {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+          }
+        );
 
-      setTimeout(function hideToast() {
-        Toast.hide(etoast);
-      }, 3000);
+        setTimeout(function hideToast() {
+          Toast.hide(etoast);
+        }, 3000);
+      }
+      resetForm();
     }
 
     resetForm();
@@ -183,6 +186,7 @@ export default function ReportForm() {
     search={false}
     save="value"
     value={intersection}
+    placeholder={"Choose an intersection"}
     inputStyles ={{marginRight:100}}
     dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
     />

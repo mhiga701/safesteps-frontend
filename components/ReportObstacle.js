@@ -39,51 +39,38 @@ export default function ReportObstacle() {
         Toast.hide(etoast);
       }, 3000);
       return;
-    }
+    }else{
+      
+      try {
 
-    // Post name and message to Firebase with auto-generated doc name
+        await setDoc(doc(db, "Reports", intersection), {
+          reports: reports,
+          intersection: intersection,
+          message: message,
+          day:day,
+          time:time,
+        });
+        console.log("Uploaded!");
+        console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
+      } catch (e) {
+        console.error("Error adding document: ", e);
 
-    // try {
-    //   const docRef = await addDoc(collection(db, "Feedback"), {
-    //     name: name,
-    //     message: message,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
+        let etoast = Toast.show(
+          "Error submitting feedback: please try again later.",
+          {
+            duration: Toast.durations.LONG,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 0,
+          }
+        );
 
-    // Post name and message to Firebase with custom doc name
-    
-    try {
-
-      await setDoc(doc(db, "Reports", intersection), {
-        reports: reports,
-        intersection: intersection,
-        message: message,
-        day:day,
-        time:time,
-      });
-      console.log("Uploaded!");
-      console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-
-      let etoast = Toast.show(
-        "Error submitting feedback: please try again later.",
-        {
-          duration: Toast.durations.LONG,
-          position: Toast.positions.BOTTOM,
-          shadow: true,
-          animation: true,
-          hideOnPress: true,
-          delay: 0,
-        }
-      );
-
-      setTimeout(function hideToast() {
-        Toast.hide(etoast);
-      }, 3000);
+        setTimeout(function hideToast() {
+          Toast.hide(etoast);
+        }, 3000);
+      }
     }
     resetForm();
 
