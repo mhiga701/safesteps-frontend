@@ -21,7 +21,6 @@ export default function ReportForm() {
     const handleDropdownSelect = (value) => {
       setSelectedIntersection(value);
     };
-  const conditions = [collisionPressed,rolloverPressed,subwayPressed,pedestrianPressed,singlePressed,otherPressed]
   const handleSubmit = async () => {
     // don't submit if name or message is empty
     if (intersection === "Choose an intersection") {
@@ -34,7 +33,6 @@ export default function ReportForm() {
         hideOnPress: true,
         delay: 0,
       });
-
       setTimeout(function hideToast() {
         Toast.hide(etoast);
       }, 3000);
@@ -43,7 +41,6 @@ export default function ReportForm() {
       if (message === ""){
         if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
           try {
-
             await setDoc(doc(db, "Accident Reports", intersection), {
               reports: report,
               intersection: intersection,
@@ -87,7 +84,35 @@ export default function ReportForm() {
           return;
         }
       }else if (message !== ""){
-        if (conditions.some(condition => !condition)){
+        if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
+          try {
+            await setDoc(doc(db, "Accident Reports", intersection), {
+              reports: report,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+          }
+        }else{
           try {
             await setDoc(doc(db, "Accident Reports", intersection), {
               reports: report,
@@ -140,6 +165,7 @@ export default function ReportForm() {
   const [pedestrianPressed, setPedestrianPressed] = useState(true);
   const [singlePressed, setSinglePressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
+
   const resetForm = () => {
     setCollisionPressed(true);
     setRolloverPressed(true);
@@ -149,7 +175,7 @@ export default function ReportForm() {
     setOtherPressed(true);
     setMessage("");
     setSelectedIntersection("");
-    // setPlaceholderText("Choose an Intersection");
+
   }
   const handlePress = () => {
     setCollisionPressed(!collisionPressed);
@@ -201,51 +227,45 @@ export default function ReportForm() {
   
   return (
     <>
-    
-      <View>
-
-<Text style={styles.ReportAccident}>Report Traffic Accident</Text>
-<Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
-<View style={{top:110}}>
-  <SelectList
-    setSelected={handleDropdownSelect}
-    // onSelect={handleItemSelect}
-    fontFamily='Montserrat'
-    data={Data}
-    search={false}
-    save="value"
-    // value={placeholderText}
-    placeholder="Choose Intersection"
-    inputStyles ={{marginRight:100}}
-    dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
-    />
-</View>
-
-<View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
-<Text style={styles.Options}>Add any relevant options</Text>
-
-  <TouchableOpacity onPress={handlePress} style={[styles.Collisionbutton,{ backgroundColor: collisionButtonColor }]}>
-    <Text style={styles.AccidentOptions}>Vehicle Collision</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={handleRolloverPress} style={[styles.Rolloverbutton,,{ backgroundColor: rolloverButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Vehicle Rollover</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={handleSubwayPress} style={[styles.Subwaybutton,{backgroundColor:subwayButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Subway Related</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={handlePedestrianPress} style={[styles.Pedestrianbutton,{backgroundColor:pedestrianButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Pedestrian and Vehicle</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={handleSinglePress} style={[styles.SingleCar,{backgroundColor:singleButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Single Car Accident</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={handleOtherPress} style={[styles.Other,{backgroundColor:otherButtonColor}]}>
-    <Text style={styles.AccidentOptions}>Other</Text>
-  </TouchableOpacity>
- 
+    <View>
+      <Text style={styles.ReportAccident}>Report Traffic Accident</Text>
+      <Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
+      <View style={{top:110}}>
+        <SelectList
+        setSelected={handleDropdownSelect}
+        // onSelect={handleItemSelect}
+        fontFamily='Montserrat'
+        data={Data}
+        search={false}
+        save="value"
+        // value={placeholderText}
+        placeholder="Choose Intersection"
+        inputStyles ={{marginRight:100}}
+        dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
+        />
+    </View>
+    <View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
+    <Text style={styles.Options}>Add any relevant options</Text>
+    <TouchableOpacity onPress={handlePress} style={[styles.Collisionbutton,{ backgroundColor: collisionButtonColor }]}>
+      <Text style={styles.AccidentOptions}>Vehicle Collision</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleRolloverPress} style={[styles.Rolloverbutton,,{ backgroundColor: rolloverButtonColor}]}>
+      <Text style={styles.AccidentOptions}>Vehicle Rollover</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleSubwayPress} style={[styles.Subwaybutton,{backgroundColor:subwayButtonColor}]}>
+      <Text style={styles.AccidentOptions}>Subway Related</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handlePedestrianPress} style={[styles.Pedestrianbutton,{backgroundColor:pedestrianButtonColor}]}>
+      <Text style={styles.AccidentOptions}>Pedestrian and Vehicle</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleSinglePress} style={[styles.SingleCar,{backgroundColor:singleButtonColor}]}>
+      <Text style={styles.AccidentOptions}>Single Car Accident</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={handleOtherPress} style={[styles.Other,{backgroundColor:otherButtonColor}]}>
+      <Text style={styles.AccidentOptions}>Other</Text>
+    </TouchableOpacity>
       <Text style={{color: '#52525A', fontSize: 17, fontFamily: 'Montserrat', fontWeight: '600',lineHeight: 25,bottom: -45,left:5,}}>Any Other Details?</Text>
         <View style={styles.MessageContainer}>
-        
         <TextInput
         style={{top:10 ,fontSize: 16, fontFamily: 'Bitter', fontWeight: '400', lineHeight: 20, letterSpacing: 0.50}}
         ref={(input) => {

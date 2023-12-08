@@ -22,7 +22,7 @@ export default function ReportObstacle() {
       setSelectedIntersection(value);
     };
   
-  console.log(message);
+  // console.log(message);
 
   const handleSubmit = async () => {
     // don't submit if intersection is empty
@@ -117,11 +117,39 @@ export default function ReportObstacle() {
               Toast.hide(etoast);
             }, 3000);
           }
+        }else{
+          try {
+            await setDoc(doc(db, "Obstacle Reports", intersection), {
+              reports: reports,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${reports}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+          }
         }
       }
     }
     resetForm();
-
+    console.log(reports);
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
