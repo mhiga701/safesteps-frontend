@@ -9,6 +9,10 @@ import { SelectList } from "react-native-dropdown-select-list";
 export default function ReportForm() {
     const [intersection, setSelectedIntersection] = useState("Choose an intersection");
     const [report, setReport] = useState([]);
+    const [message, setMessage] = useState("");
+    const date = new Date();
+    const day = date.toLocaleDateString();
+    const time = date.toLocaleTimeString();
     const Data = [
       {key:'1',value:'BU Central'},
       {key:'2',value:"St Mary's Street"},
@@ -17,15 +21,11 @@ export default function ReportForm() {
     const handleDropdownSelect = (value) => {
       setSelectedIntersection(value);
     };
-//   const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const date = new Date();
-  const day = date.toLocaleDateString();
-  const time = date.toLocaleTimeString();
+  const conditions = [collisionPressed,rolloverPressed,subwayPressed,pedestrianPressed,singlePressed,otherPressed]
   const handleSubmit = async () => {
     // don't submit if name or message is empty
-    if (intersection === "") {
-      console.log("Name or message is empty. Returning...");
+    if (intersection === "Choose an intersection") {
+      console.log("Please select an intersection. Returning...");
       let etoast = Toast.show("Error: Please enter a location.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -38,59 +38,86 @@ export default function ReportForm() {
       setTimeout(function hideToast() {
         Toast.hide(etoast);
       }, 3000);
-      setSinglePressed(true)
-      const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
       return;
-    }
+    }else{
+      if (message === ""){
+        if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
+          try {
 
-    // Post name and message to Firebase with auto-generated doc name
+            await setDoc(doc(db, "Accident Reports", intersection), {
+              reports: report,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
 
-    // try {
-    //   const docRef = await addDoc(collection(db, "Feedback"), {
-    //     name: name,
-    //     message: message,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
-
-    // Post name and message to Firebase with custom doc name
-    else{
-      try {
-
-        await setDoc(doc(db, "Accident Report", intersection), {
-          reports: report,
-          intersection: intersection,
-          message: message,
-          day:day,
-          time:time,
-        });
-        console.log("Uploaded!");
-        console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
-        resetForm();
-      } catch (e) {
-        console.error("Error adding document: ", e);
-
-        let etoast = Toast.show(
-          "Error submitting feedback: please try again later.",
-          {
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
+          }
+        }else{
+          console.log("message or options is empty. Returning...");
+          let etoast = Toast.show("Error: Please enter a message or select an option", {
             duration: Toast.durations.LONG,
             position: Toast.positions.BOTTOM,
             shadow: true,
             animation: true,
             hideOnPress: true,
             delay: 0,
+          });
+          setTimeout(function hideToast() {
+            Toast.hide(etoast);
+          }, 3000);
+          return;
+        }
+      }else if (message !== ""){
+        if (conditions.some(condition => !condition)){
+          try {
+            await setDoc(doc(db, "Accident Reports", intersection), {
+              reports: report,
+              intersection: intersection,
+              message: message,
+              day:day,
+              time:time,
+            });
+            console.log("Uploaded!");
+            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+          } catch (e) {
+            console.error("Error adding document: ", e);
+            let etoast = Toast.show(
+              "Error submitting feedback: please try again later.",
+              {
+                duration: Toast.durations.LONG,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+              }
+            );
+            setTimeout(function hideToast() {
+              Toast.hide(etoast);
+            }, 3000);
           }
-        );
-
-        setTimeout(function hideToast() {
-          Toast.hide(etoast);
-        }, 3000);
+        }
       }
-      resetForm();
     }
-
     resetForm();
 
     let toast = Toast.show("Thank you for your report!", {
@@ -122,6 +149,7 @@ export default function ReportForm() {
     setOtherPressed(true);
     setMessage("");
     setSelectedIntersection("");
+    // setPlaceholderText("Choose an Intersection");
   }
   const handlePress = () => {
     setCollisionPressed(!collisionPressed);
@@ -181,12 +209,13 @@ export default function ReportForm() {
 <View style={{top:110}}>
   <SelectList
     setSelected={handleDropdownSelect}
+    // onSelect={handleItemSelect}
     fontFamily='Montserrat'
     data={Data}
     search={false}
     save="value"
-    value={intersection}
-    placeholder={"Choose an intersection"}
+    // value={placeholderText}
+    placeholder="Choose Intersection"
     inputStyles ={{marginRight:100}}
     dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
     />
@@ -216,23 +245,7 @@ export default function ReportForm() {
  
       <Text style={{color: '#52525A', fontSize: 17, fontFamily: 'Montserrat', fontWeight: '600',lineHeight: 25,bottom: -45,left:5,}}>Any Other Details?</Text>
         <View style={styles.MessageContainer}>
-          {/* <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Name</Text>
-            <TextInput
-              style={styles.input}
-              value={name}
-              onChangeText={setName}
-              placeholder="Enter your name here"
-              maxLength={100}
-              returnKeyType="next"
-              onSubmitEditing={() => {
-                this.secondTextInput.focus();
-              }}
-              blurOnSubmit={false}
-            />
-          </View> */}
-          
-          {/* <View style={styles.MessageContainer}> */}
+        
         <TextInput
         style={{top:10 ,fontSize: 16, fontFamily: 'Bitter', fontWeight: '400', lineHeight: 20, letterSpacing: 0.50}}
         ref={(input) => {
@@ -247,7 +260,6 @@ export default function ReportForm() {
           blurOnSubmit={true}
         />
           </View>
-        {/* </View> */}
             <View style={{flexDirection:'row'}}>
                 <TouchableOpacity style={styles.cancelButton}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.SubmitButton} onPress={handleSubmit}><Text style={{color:'white', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Submit</Text></TouchableOpacity>
