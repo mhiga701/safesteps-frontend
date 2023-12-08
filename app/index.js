@@ -1,13 +1,49 @@
 import Onboarding from 'react-native-onboarding-swiper';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from '../components/styles';
 import Onboarding1 from '../assets/First.svg';
 import Onboarding2 from '../assets/Second.svg';
 import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
 
+const Circle = ({ isLight, selected }) => {
+  let backgroundColor;
+  if (isLight) {
+    backgroundColor = selected ? 'rgba(254, 45, 1, 1)' : 'rgba(254, 45, 1, 0.3)';
+  } else {
+    backgroundColor = selected ? '#fe2d01' : 'rgba(254, 45, 1, 0.3)';
+  }
+  return (
+    <View
+      style={{
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        marginHorizontal: 3,
+        left: -132,
+        top: 20,
+        backgroundColor,
+      }}
+    />
+  );
+};
 
+const Next = ({ ...props }) => {
+  return (
+<TouchableOpacity style={styles.nextButton} {...props} >
+  <Text style={styles.nextButtonText}>Next</Text>
+</TouchableOpacity>
+  );
+}
+
+const Done = ({ ...props }) => {
+  return (
+<TouchableOpacity style={styles.nextButton} {...props} >
+  <Text style={styles.nextButtonText}>Done</Text>
+</TouchableOpacity>
+  );
+}
 export default function OnboardingScreen(){
   const router = useRouter();
 
@@ -17,19 +53,27 @@ export default function OnboardingScreen(){
   return (
     <Onboarding
     onDone={handleDone}
-    onSkip={handleDone}
+    showSkip={false}
+    bottomBarHighlight={false}
+    bottomBarHeight={50}
+    DotComponent={Circle}
+    NextButtonComponent={Next}
+    DoneButtonComponent={Done}
+
   pages={[
     {
-      backgroundColor: '#d6d5d5',
+      backgroundColor: '#fcfcfc',
       image: (
         <Onboarding1 />
       ),
-      title: 'Personalize Your Alerts',
+      title: (
+        <Text style={styles.onboardingTitle}>Personalize Your Alerts</Text>
+      ),
       subtitle: (
         <>
         <View style={styles.onboardingContainer}>
-        <Text style={styles.toggleText}>Prefebeing notified with vibrations rather than auditory alerts? No problem.</Text>
-        <Text style={styles.toggleText}>Choose and adjust alert types in the alerts page, allowing an easy integration of SafeSteps into your life.</Text>
+        <Text style={styles.onboardingSubtitle}>Prefebeing notified with vibrations rather than auditory alerts? No problem.</Text>
+        <Text style={styles.onboardingSubtitle}>Choose and adjust alert types in the alerts page, allowing an easy integration of SafeSteps into your life.</Text>
         </View>
       
         </>
@@ -38,28 +82,36 @@ export default function OnboardingScreen(){
     {
       backgroundColor: '#fcfcfc',
       image:(
-        <Onboarding2 />
+        <Onboarding2 style={styles.slide2}/>
       ),
-      title: 'View Intersections and Reports',
+      title: (
+        <Text style={styles.onboardingTitle}>View Intersections and Reports</Text>
+      ),
       subtitle: (
-        <Text style={styles.toggleText}>Be able to view nearby intersections and its reports on our home page to stay up-to-date.</Text>
-      ),
+        <View style={styles.onboardingContainer}>
+           <Text style={styles.onboardingSubtitle}>Be able to view nearby intersections and its reports on our home page to stay up-to-date.</Text>
+        </View>
+          ),
+       
     },
     {
       backgroundColor: '#fcfcfc',
       image: (
-        <Onboarding3 />
+        <Onboarding3 style={styles.wormContainer}/>
       ),
-      title: 'Submit Reports',
+      title: (
+        <Text style={styles.onboardingTitle}>Submit Reports</Text>
+      ),
       subtitle: (
-        <Text style={styles.toggleText}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
+        <View style={styles.onboardingContainer}>
+                    <Text style={styles.onboardingSubtitle}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
+
+        </View>
       ),
-      submitButton: (
-        <Text style={styles.toggleText}>Get Started</Text>
-      ),
+      
     },
   ]}
 />
-  )
+  );
 }
 

@@ -785,9 +785,46 @@ export const styles = StyleSheet.create({
   },
   onboardingContainer: {
     flex: 1,
-    backgroundColor: "#d6d5d5",
+    backgroundColor: "#fcfcfc",
     padding: 20,
     textAlign: "left",
     marginTop: 35,
+  },
+  onboardingTitle: {
+    color: "black",
+    fontSize: 25,
+    fontWeight: "700",
+    marginBottom: 20,
+    fontFamily: "Montserrat-Bold",
+  },
+  onboardingSubtitle: {
+    color: "black",
+    fontSize: 16,
+    fontWeight: "500",
+    marginBottom: 15,
+    fontFamily: "Bitter-Regular",
+  },
+  wormContainer:{
+    marginLeft: 38
+  },
+  slide2: {
+    marginLeft :38,
+    marginTop: -25
+  },
+  nextButton: {
+    //position: "absolute",
+      backgroundColor: "#B164E8",
+      borderRadius: 40,
+      height: 35,
+      width: 93,
+      marginTop: 35,
+      marginRight: 40,
+  },
+  nextButtonText:{
+    textAlign: "center",
+    color: "#fcfcfc",
+    fontSize: 14,
+    fontFamily: "Montserrat-Regular",
+    marginTop: 8,
   },
 });
