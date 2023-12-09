@@ -65,8 +65,13 @@ export default function RootLayout() {
               <TouchableOpacity
                 style={styles.buttonHomeScreen}
                 onPress={() => {
-                  unstable_settings.initialRouteName = "(tabs)";
-                  setSplash(false);
+                  Promise.resolve(
+                    (unstable_settings.initialRouteName = "(tabs)")
+                  ).then(() => {
+                    setSplash(false);
+                  });
+                  // unstable_settings.initialRouteName = "(tabs)";
+                  // setSplash(false);
                 }}
               >
                 <Text style={styles.buttonText}>Main Page</Text>

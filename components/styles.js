@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     textAlign: "left",
     borderRadius: 10,
     //marginTop: 35,
-    // paddingBottom: 10
+    paddingBottom: 60,
   },
   reportingContainer: {
     flex: 3,
