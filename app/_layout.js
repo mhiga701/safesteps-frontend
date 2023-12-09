@@ -64,14 +64,25 @@ export default function RootLayout() {
             <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}
-                onPress={() => {
-                  Promise.resolve(
-                    (unstable_settings.initialRouteName = "(tabs)")
-                  ).then(() => {
-                    setSplash(false);
-                  });
-                  // unstable_settings.initialRouteName = "(tabs)";
-                  // setSplash(false);
+                onPress={async () => {
+                  const changeRouteAndHideSplash = () => {
+                    return new Promise((resolve) => {
+                      // Change the initial route name
+                      unstable_settings.initialRouteName = "(tabs)";
+
+                      // Resolve the promise after changing the route name
+                      resolve();
+                    });
+                  };
+
+                  console.log(unstable_settings.initialRouteName);
+
+                  // Call the function to change the route name
+                  await changeRouteAndHideSplash();
+
+                  console.log(unstable_settings.initialRouteName);
+
+                  setSplash(false);
                 }}
               >
                 <Text style={styles.buttonText}>Main Page</Text>
