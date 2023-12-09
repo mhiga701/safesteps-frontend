@@ -10,6 +10,7 @@ export default function ReportObstacle() {
     const [intersection, setSelectedIntersection] = useState("Choose an Intersection");
     const [reports, setreports] = useState([]);
     const [message, setMessage] = useState("");
+    const [messages, setMessages] = useState([]);
     const date = new Date();
     const day = date.toLocaleDateString();
     const time = date.toLocaleTimeString();
@@ -42,13 +43,15 @@ export default function ReportObstacle() {
       return;
     }//Check to see if message is empty but options are still available to submit
     else{
+      
       if (message === "") {
           if (!potholesPressed || !objectonRoad || !roadKillPressed || !foodPressed || !icePressed || !puddlesPressed || !otherPressed){
             try {
+              
               await setDoc(doc(db, "Obstacle Reports", intersection), {
                 reports: reports,
                 intersection: intersection,
-                message: message,
+                message: messages,
                 day:day,
                 time:time,
               });
@@ -94,7 +97,7 @@ export default function ReportObstacle() {
             await setDoc(doc(db, "Obstacle Reports", intersection), {
               reports: reports,
               intersection: intersection,
-              message: message,
+              message: messages,
               day:day,
               time:time,
             });
@@ -122,7 +125,7 @@ export default function ReportObstacle() {
             await setDoc(doc(db, "Obstacle Reports", intersection), {
               reports: reports,
               intersection: intersection,
-              message: message,
+              message: messages,
               day:day,
               time:time,
             });
@@ -148,6 +151,7 @@ export default function ReportObstacle() {
         }
       }
     }
+    
     resetForm();
     console.log(reports);
     let toast = Toast.show("Thank you for your report!", {
@@ -182,6 +186,7 @@ export default function ReportObstacle() {
     setOtherPressed(true);
     setMessage("");
     setSelectedIntersection("Choose an Intersection");
+    setMessages([...messages, message]); 
   }
 
   const handleObjectPress = () => {
