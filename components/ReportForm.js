@@ -22,17 +22,8 @@ export default function ReportForm() {
       { label: 'BU East', value: '3' },
     ];
 
-  //   const handleDropdownSelect = async (value) => {
-  //     if (value && value.hasOwnProperty("label")){
-          
-  //         const i = value["label"];
-  //         setSelectedIntersection2(i);
-          
-  //         console.log(intersection2);
-  //         return;
-  //     } 
-  // };
-
+  
+  
   const handleSubmit = async () => {
     // don't submit if name or message is empty
     if (intersection2 === "Choose an intersection") {
@@ -50,19 +41,21 @@ export default function ReportForm() {
       }, 3000);
       return;
     }else{
+
       if (message === ""){
         if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
           try {
-            await setDoc(doc(db, "Accident Reports", intersection2), {
-              reports: report,
-              intersection: intersection2,
-              message: message,
-              day:day,
-              time:time,
-            });
+            const docRef = doc(db, "Accident Reports", intersection2);
+            const additional_data = {
+              [day]:{
+              [time]:report
+              } 
+            };
+            await setDoc(docRef,additional_data,{merge:true});
             console.log("Uploaded!");
             console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
+
             console.error("Error adding document: ", e);
             let etoast = Toast.show(
               "Error submitting feedback: please try again later.",
@@ -98,13 +91,14 @@ export default function ReportForm() {
       }else if (message !== ""){
         if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
           try {
-            await setDoc(doc(db, "Accident Reports", intersection2), {
-              reports: report,
-              intersection: intersection2,
-              message: message,
-              day:day,
-              time:time,
-            });
+            report.push(message);
+            const docRef = doc(db, "Accident Reports", intersection2);
+            const additional_data = {
+              [day]:{
+              [time]:report
+              } 
+            };
+            await setDoc(docRef,additional_data,{merge:true});
             console.log("Uploaded!");
             console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
@@ -125,14 +119,16 @@ export default function ReportForm() {
             }, 3000);
           }
         }else{
+          
           try {
-            await setDoc(doc(db, "Accident Reports", intersection2), {
-              reports: report,
-              intersection: intersection2,
-              message: message,
-              day:day,
-              time:time,
-            });
+            report.push(message);
+            const docRef = doc(db, "Accident Reports", intersection2);
+            const additional_data = {
+              [day]:{
+              [time]:report
+              } 
+            };
+            await setDoc(docRef,additional_data,{merge:true});
             console.log("Uploaded!");
             console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
@@ -186,6 +182,7 @@ export default function ReportForm() {
     setSinglePressed(true);
     setOtherPressed(true);
     setMessage("");
+    setReport([]);
     setSelectedIntersection2("Choose an intersection");
 
   }
@@ -239,7 +236,7 @@ export default function ReportForm() {
   const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
   const otherButtonColor = otherPressed ? '#808080' : '#5787F5';
 
-  console.log(intersection2);
+  
   return (
     <>
     <View>
