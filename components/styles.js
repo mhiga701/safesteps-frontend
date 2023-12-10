@@ -857,4 +857,32 @@ export const styles = StyleSheet.create({
     fontFamily: "Montserrat-Regular",
     marginTop: 8,
   },
+
+  dropdownContainer:{
+    backgroundColor: '#fcfcfc',
+    alignItems: 'center',
+    borderRadius: 10,
+    shadowColor: "#52525a", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
+    top: 0,
+    right: 0
+  },
+  dropdownText: {
+    fontFamily: "Montserrat-Regular",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  itemText: {
+    fontFamily: "Montserrat-Regular",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "center",
+  },
+  dropdownIcon: {
+    marginRight: 10,
+  }
 });
+

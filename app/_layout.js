@@ -92,6 +92,7 @@ export default function RootLayout() {
               >
                 <Text style={styles.buttonText}>Main Page</Text>
               </TouchableOpacity>
+              
             </View>
           </View>
         </Modal>
@@ -101,7 +102,9 @@ export default function RootLayout() {
         <>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
-              <RootLayoutNav initial_route={initial_route} />
+
+              <RootLayoutNav />
+
             </RootSiblingParent>
           </GestureHandlerRootView>
         </>

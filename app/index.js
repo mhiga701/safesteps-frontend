@@ -50,10 +50,12 @@ export default function OnboardingScreen(){
   const handleDone = () => {
     router.push("(tabs)");
   };
+  //IMPLEMENT SKIP BUTTON
   return (
     <Onboarding
     onDone={handleDone}
-    showSkip={false}
+    onSkip={handleDone}
+    showSkip={true}
     bottomBarHighlight={false}
     bottomBarHeight={50}
     DotComponent={Circle}
