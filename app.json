@@ -30,7 +30,10 @@
 
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "buildNumber": "2",
+      "buildNumber": "3",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
       "supportsTablet": true,
       "bundleIdentifier": "com.doshir.safesteps",
       "infoPlist": {

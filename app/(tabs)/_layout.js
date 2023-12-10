@@ -35,7 +35,9 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => <TabBarIcon name="notifications" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="notifications" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -54,15 +56,17 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
         }}
       />
-    <Tabs.Screen
-    name="bluetooth"
-    options={{
-      title: "BTLE",
-      display: "flex",
-      tabBarIcon: ({ color }) => <TabBarIcon name="bluetooth" color={color} />,
-    }}
-  />
-</Tabs>
+      <Tabs.Screen
+        name="bluetooth"
+        options={{
+          title: "BTLE",
+          display: "flex",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bluetooth" color={color} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }
 

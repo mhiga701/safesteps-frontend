@@ -1,8 +1,9 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { Audio } from "expo-av";
 import { View, Text, TouchableOpacity, Switch, Modal } from "react-native";
 import { styles } from "./styles";
+import { save, getValueFor } from "../components/ExpoStorage";
 
 export default function AudioAlert() {
   const [alert3, setAlert3] = useState(false);
@@ -11,6 +12,20 @@ export default function AudioAlert() {
   const [audioAlertEnabled, setAudioAlertEnabled] = useState(false);
   const [soundIndex, setSoundIndex] = useState(0);
   const [soundSelection, setSoundSelection] = useState("Beep (Default)");
+
+  useEffect(() => {
+    getValueFor("audioAlertEnabled").then((value) => {
+      console.log("Got value: " + value);
+      setAudioAlertEnabled(value == "true" ? true : false);
+    });
+
+    getValueFor("soundIndex").then((value) => {
+      console.log("Got value: " + value);
+      value = value == "null" ? 0 : value;
+      setSoundIndex(value);
+      setSoundSelection(soundNames[value]);
+    });
+  }, []);
 
   const handleNewAudio = (index) => {
     setSoundIndex(index);
@@ -58,6 +73,7 @@ export default function AudioAlert() {
         onPress={() => {
           handleNewAudio(i);
           setSoundSelection(soundNames[i]);
+          save("soundIndex", i.toString());
         }}
       >
         <Text style={styles.toggleText}>{soundNames[i]}</Text>
@@ -92,7 +108,10 @@ export default function AudioAlert() {
           <Text style={styles.toggleText}>Enable Audio Alerts</Text>
           <Switch
             value={audioAlertEnabled}
-            onValueChange={() => setAudioAlertEnabled(!audioAlertEnabled)}
+            onValueChange={() => {
+              setAudioAlertEnabled(!audioAlertEnabled);
+              save("audioAlertEnabled", !audioAlertEnabled ? "true" : "false");
+            }}
             trackColor={{ false: "#e9e9ea", true: "#B164E8" }}
           />
         </View>
