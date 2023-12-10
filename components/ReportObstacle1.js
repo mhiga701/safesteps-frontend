@@ -32,7 +32,7 @@ const data = [
         }
        
        
-      };
+    };
       const handleSubmit = async () => {
         // don't submit if intersection is empty
         if (intersection === "Choose an Intersection") {
@@ -197,7 +197,6 @@ const data = [
         setMessages([...messages, message]); 
       }
       const handleReset = () => {
-        setSelectedIntersection("Choose an Intersection");
         resetForm();
       };
       const handleObjectPress = () => {

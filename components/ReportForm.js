@@ -4,8 +4,8 @@ import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
 import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import Toast from "react-native-root-toast";
-import { SelectList } from "react-native-dropdown-select-list";
-
+import { Dropdown } from 'react-native-element-dropdown';
+import { StyleSheet } from 'react-native';
 export default function ReportForm() {
     const [intersection, setSelectedIntersection] = useState("Choose an intersection");
     const [report, setReport] = useState([]);
@@ -13,14 +13,21 @@ export default function ReportForm() {
     const date = new Date();
     const day = date.toLocaleDateString();
     const time = date.toLocaleTimeString();
-    const Data = [
-      {key:'1',value:'BU Central'},
-      {key:'2',value:"St Mary's Street"},
-      {key:'3',value:'BU East'},
-    ]
-    const handleDropdownSelect = (value) => {
-      setSelectedIntersection(value);
-    };
+    const data = [
+      { label: 'BU Central', value: '1' },
+      { label: "St Mary's Street", value: '2' },
+      { label: 'BU East', value: '3' },
+    ];
+    const handleDropdownSelect = async (value) => {
+      if (value && value.hasOwnProperty("label")){
+          
+          const i = value["label"];
+          setSelectedIntersection(i);
+          
+          console.log(intersection);
+          return;
+      } 
+  };
   const handleSubmit = async () => {
     // don't submit if name or message is empty
     if (intersection === "Choose an intersection") {
@@ -217,6 +224,9 @@ export default function ReportForm() {
       [...report, 'Other']
     );
   };
+  const handleReset = () => {
+    resetForm();
+  };
   const collisionButtonColor = collisionPressed ? '#808080' : '#5787F5';
   const rolloverButtonColor = rolloverPressed ? '#808080' : '#5787F5';
   const subwayButtonColor = subwayPressed ? '#808080' : '#5787F5';
@@ -231,17 +241,24 @@ export default function ReportForm() {
       <Text style={styles.ReportAccident}>Report Traffic Accident</Text>
       <Text style={styles.Intersection}>Which Intersection Are You Closest To?</Text>
       <View style={{top:110}}>
-        <SelectList
-        setSelected={handleDropdownSelect}
-        // onSelect={handleItemSelect}
-        fontFamily='Montserrat'
-        data={Data}
-        search={false}
-        save="value"
-        // value={placeholderText}
-        placeholder="Choose Intersection"
-        inputStyles ={{marginRight:100}}
-        dropdownItemStyles={{marginHorizontal:90, marginVertical:10, backgroundColor:'#F2F2F7', borderRadius: 10,}}
+      <Dropdown
+            mode='default'
+            style={styles1.dropdown}
+            placeholderStyle={styles1.placeholderStyle}
+            selectedTextStyle={styles1.selectedTextStyle}
+            inputSearchStyle={styles1.inputSearchStyle}
+            iconStyle={styles1.iconStyle}
+            data={data}
+            search={false}
+            showsVerticalScrollIndicator={true}
+            maxHeight={300}
+            labelField="label"
+            valueField="value"
+            placeholder="Choose an Intersection"
+            searchPlaceholder="Search..."
+            value={intersection}
+            
+            onChange={intersection => setSelectedIntersection(intersection.label)}
         />
     </View>
     <View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
@@ -281,7 +298,7 @@ export default function ReportForm() {
         />
           </View>
             <View style={{flexDirection:'row'}}>
-                <TouchableOpacity style={styles.cancelButton}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.cancelButton} onPress={handleReset}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.SubmitButton} onPress={handleSubmit}><Text style={{color:'white', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Submit</Text></TouchableOpacity>
             </View>
       
@@ -289,3 +306,35 @@ export default function ReportForm() {
     </>
   );
 }
+const styles1 = StyleSheet.create({
+  dropdown: {
+    margin: 16,
+    height: 20,
+    borderBottomColor: 'gray',
+    borderBottomWidth: 0.5,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    textAlign:'center'
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  item: {
+      padding: 17,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+});
