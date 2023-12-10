@@ -6,31 +6,35 @@ import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { Dropdown } from 'react-native-element-dropdown';
 import { StyleSheet } from 'react-native';
+
 export default function ReportForm() {
-    const [intersection, setSelectedIntersection] = useState("Choose an intersection");
+
+    const [intersection2, setSelectedIntersection2] = useState("Choose an intersection");
     const [report, setReport] = useState([]);
     const [message, setMessage] = useState("");
     const date = new Date();
     const day = date.toLocaleDateString();
     const time = date.toLocaleTimeString();
+
     const data = [
       { label: 'BU Central', value: '1' },
       { label: "St Mary's Street", value: '2' },
       { label: 'BU East', value: '3' },
     ];
+
     const handleDropdownSelect = async (value) => {
       if (value && value.hasOwnProperty("label")){
           
           const i = value["label"];
-          setSelectedIntersection(i);
+          setSelectedIntersection2(i);
           
-          console.log(intersection);
+          console.log(intersection2);
           return;
       } 
   };
   const handleSubmit = async () => {
     // don't submit if name or message is empty
-    if (intersection === "Choose an intersection") {
+    if (intersection2 === "Choose an intersection") {
       console.log("Please select an intersection. Returning...");
       let etoast = Toast.show("Error: Please enter a location.", {
         duration: Toast.durations.LONG,
@@ -48,15 +52,15 @@ export default function ReportForm() {
       if (message === ""){
         if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
           try {
-            await setDoc(doc(db, "Accident Reports", intersection), {
+            await setDoc(doc(db, "Accident Reports", intersection2), {
               reports: report,
-              intersection: intersection,
+              intersection: intersection2,
               message: message,
               day:day,
               time:time,
             });
             console.log("Uploaded!");
-            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+            console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
             console.error("Error adding document: ", e);
             let etoast = Toast.show(
@@ -93,15 +97,15 @@ export default function ReportForm() {
       }else if (message !== ""){
         if (!collisionPressed || !rolloverPressed || !subwayPressed || !pedestrianPressed || !singlePressed || !otherPressed){
           try {
-            await setDoc(doc(db, "Accident Reports", intersection), {
+            await setDoc(doc(db, "Accident Reports", intersection2), {
               reports: report,
-              intersection: intersection,
+              intersection: intersection2,
               message: message,
               day:day,
               time:time,
             });
             console.log("Uploaded!");
-            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+            console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
             console.error("Error adding document: ", e);
             let etoast = Toast.show(
@@ -121,15 +125,15 @@ export default function ReportForm() {
           }
         }else{
           try {
-            await setDoc(doc(db, "Accident Reports", intersection), {
+            await setDoc(doc(db, "Accident Reports", intersection2), {
               reports: report,
-              intersection: intersection,
+              intersection: intersection2,
               message: message,
               day:day,
               time:time,
             });
             console.log("Uploaded!");
-            console.log(`Report: ${report}, ${message} at ${intersection} on ${day}, at ${time}`);
+            console.log(`Report: ${report}, ${message} at ${intersection2} on ${day}, at ${time}`);
           } catch (e) {
             console.error("Error adding document: ", e);
             let etoast = Toast.show(
@@ -150,7 +154,7 @@ export default function ReportForm() {
         }
       }
     }
-    resetForm();
+    resetForm1();
 
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
@@ -173,7 +177,7 @@ export default function ReportForm() {
   const [singlePressed, setSinglePressed] = useState(true);
   const [otherPressed, setOtherPressed] = useState(true);
 
-  const resetForm = () => {
+  const resetForm1 = () => {
     setCollisionPressed(true);
     setRolloverPressed(true);
     setSubwayPressed(true);
@@ -181,7 +185,7 @@ export default function ReportForm() {
     setSinglePressed(true);
     setOtherPressed(true);
     setMessage("");
-    setSelectedIntersection("");
+    setSelectedIntersection2("");
 
   }
   const handlePress = () => {
@@ -224,8 +228,8 @@ export default function ReportForm() {
       [...report, 'Other']
     );
   };
-  const handleReset = () => {
-    resetForm();
+  const handleReset1 = () => {
+    resetForm1();
   };
   const collisionButtonColor = collisionPressed ? '#808080' : '#5787F5';
   const rolloverButtonColor = rolloverPressed ? '#808080' : '#5787F5';
@@ -256,9 +260,9 @@ export default function ReportForm() {
             valueField="value"
             placeholder="Choose an Intersection"
             searchPlaceholder="Search..."
-            value={intersection}
+            value={intersection2}
             
-            onChange={intersection => setSelectedIntersection(intersection.label)}
+            onChange={intersection2 => setSelectedIntersection2(intersection2.label)}
         />
     </View>
     <View><Text style={styles.Present}>What Traffic Accident Is Present?</Text></View>
@@ -298,7 +302,7 @@ export default function ReportForm() {
         />
           </View>
             <View style={{flexDirection:'row'}}>
-                <TouchableOpacity style={styles.cancelButton} onPress={handleReset}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.cancelButton} onPress={handleReset1}><Text style={{color:'#7E678F', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Cancel</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.SubmitButton} onPress={handleSubmit}><Text style={{color:'white', fontSize: 15, fontFamily: 'Montserrat', fontWeight: '500', lineHeight: 20}}>Submit</Text></TouchableOpacity>
             </View>
       
