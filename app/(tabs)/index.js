@@ -11,11 +11,11 @@ import React, {
 } from "react";
 import BluetoothClient from "../../components/BluetoothClient";
 import Icon from "react-native-vector-icons/FontAwesome";
-import Icon2 from "react-native-vector-icons/Octicons";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BackgroundLocation from "../../components/BackgroundLocation";
 import Mapmarker from "../../assets/Mapmarker.svg";
 import { locationData } from "../../components/Beacons";
+import DefaultMap, { MarshPlaza, BUBridge, CCDS } from "../../components/Bottomsheets";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -88,10 +88,20 @@ export default function Page() {
       // useNativeDriver: true,
     });
   };
+  const goToInitialLocation = async () => {
+    mapRef.current.animateCamera({
+      center: {
+        latitude: 42.35021,
+        longitude: -71.10653,
+     
+      },
+      altitude: 4000,
+    });
+  };
   const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
 
   const bottomSheetRef = useRef(null);
-
+  const [selectedMarker, setSelectedMarker] = useState(null);
   const renderMarkers = () => {
     return locationData.map((marker, index) => {
       return (
@@ -101,8 +111,15 @@ export default function Page() {
           title={marker.title}
           description={marker.description}
           onPress={() => {
-            //bottomSheetRef.current.expand();
-            goToMarkerLocation(marker);
+            if (selectedMarker === null) {
+              setSelectedMarker(marker);
+              goToMarkerLocation(marker);
+            }
+            else {
+              setSelectedMarker(null);
+              goToInitialLocation();
+            }
+            
           }}
         >
           {/* <Image source={require("../../assets/Mapmarker.svg")} />
@@ -147,48 +164,11 @@ export default function Page() {
           index={0}
           ref={bottomSheetRef}
         >
-          <View>
-            <Text style={localStyles.bottomSheetHeader}>Nearby Beacons</Text>
-            <View style={localStyles.settingsContainer}>
-              <View style={localStyles.rowContainer}>
-                <Text style={styles.toggleText}>BU Central</Text>
-              </View>
-              <View style={localStyles.rowContainer3}>
-                <Icon2 name="dot-fill" size={20} color="#fe2d01" />
-                <TouchableOpacity onPress={() => {}}>
-                  <Text style={styles.toggleText}>
-                    2 New Reports Since Yesterday
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={localStyles.settingsContainer}>
-              <View style={localStyles.rowContainer}>
-                <Text style={styles.toggleText}>BU East</Text>
-              </View>
-              <View style={localStyles.rowContainer3}>
-                {/* <Icon name="dot-circle-o" size={15} color="#fe2d01" /> */}
-                <TouchableOpacity onPress={() => {}}>
-                  <Text style={styles.toggleText}>
-                    No New Reports Since Yesterday
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={localStyles.settingsContainer}>
-              <View style={localStyles.rowContainer}>
-                <Text style={styles.toggleText}>St. Mary's Street</Text>
-              </View>
-              <View style={localStyles.rowContainer3}>
-                <Icon2 name="dot-fill" size={20} color="#fe2d01" />
-                <TouchableOpacity onPress={() => {}}>
-                  <Text style={styles.toggleText}>
-                    1 New Report Since Yesterday
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
+          {selectedMarker === null && <DefaultMap />}
+          {selectedMarker !== null && selectedMarker.title === "Marsh Plaza" && <MarshPlaza />}
+          {selectedMarker !== null && selectedMarker.title === "BU Bridge" && <BUBridge />}
+          {selectedMarker !== null && selectedMarker.title === "CCDS" && <CCDS />}
+       
         </BottomSheet>
       </View>
     </>
