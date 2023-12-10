@@ -2,9 +2,9 @@ import Onboarding from 'react-native-onboarding-swiper';
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from '../components/styles';
-import Onboarding1 from '../assets/First.svg';
-import Onboarding2 from '../assets/Second.svg';
-import Onboarding3 from '../assets/Third.svg';
+import Onboarding1 from '../assets/first.svg';
+import Onboarding2 from '../assets/second.svg';
+import Onboarding3 from '../assets/third.svg';
 import { useRouter } from 'expo-router'
 
 const Circle = ({ isLight, selected }) => {
@@ -21,7 +21,7 @@ const Circle = ({ isLight, selected }) => {
         height: 8,
         borderRadius: 4,
         marginHorizontal: 3,
-        left: -132,
+        left: 0,
         top: 20,
         backgroundColor,
       }}
@@ -44,6 +44,14 @@ const Done = ({ ...props }) => {
 </TouchableOpacity>
   );
 }
+
+const Skip = ({ ...props }) => {
+  return (
+<TouchableOpacity style={styles.skipButton} {...props} >
+  <Text style={styles.skipButtonText}>Skip</Text>
+</TouchableOpacity>
+  );
+}
 export default function OnboardingScreen(){
   const router = useRouter();
 
@@ -61,6 +69,7 @@ export default function OnboardingScreen(){
     DotComponent={Circle}
     NextButtonComponent={Next}
     DoneButtonComponent={Done}
+    SkipButtonComponent={Skip}
 
   pages={[
     {

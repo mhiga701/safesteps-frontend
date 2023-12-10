@@ -94,7 +94,7 @@ export default function VisAlert() {
 
           <Text style={styles.alert2Text}>APPROACHING</Text>
           <Text style={styles.alert2Text}>INTERSECTION</Text>
-          <Image source={require('../assets/NewRipple.gif')} style={{marginTop:80}}/>
+          <Image source={require('../assets/ripple.gif')} style={{marginTop:80}}/>
           <Alert style={{marginVertical: 50, position: 'absolute'}}/>
           <Text style={styles.alert2Text}>LOOK UP!</Text>
 

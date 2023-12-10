@@ -62,10 +62,10 @@ export default function RootLayout() {
                   setSplash(false);
                 }}
               >
-                <Text style={styles.buttonText}>Onboarding</Text>
+                <Text style={styles.buttonText}>Get Started</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.contentContainer}>
+            {/* <View style={styles.contentContainer}>
               <TouchableOpacity
                 style={styles.buttonHomeScreen}
                 onPress={async () => {
@@ -93,7 +93,7 @@ export default function RootLayout() {
                 <Text style={styles.buttonText}>Main Page</Text>
               </TouchableOpacity>
               
-            </View>
+            </View> */}
           </View>
         </Modal>
       );

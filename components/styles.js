@@ -848,7 +848,7 @@ export const styles = StyleSheet.create({
     height: 35,
     width: 93,
     marginTop: 35,
-    marginRight: 40,
+    marginRight: 30,
   },
   nextButtonText: {
     textAlign: "center",
@@ -857,6 +857,24 @@ export const styles = StyleSheet.create({
     fontFamily: "Montserrat-Regular",
     marginTop: 8,
   },
+  skipButton: {
+    backgroundColor: "fcfcfc",
+    borderRadius: 40,
+    borderColor: "#fe2d01",
+    borderWidth: 1,
+    height: 35,
+    width: 93,
+    marginTop: 35,
+    marginLeft: 30,
+  },
+  skipButtonText: {
+    textAlign: "center",
+    color: "#fe2d01",
+    fontSize: 14,
+    fontFamily: "Montserrat-Regular",
+    marginTop: 8,
+  },
+  
 
   dropdownContainer:{
     backgroundColor: '#fcfcfc',
