@@ -3,36 +3,25 @@ import { StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
-import { doc, setDoc, addDoc, collection } from "firebase/firestore";
+import { doc, setDoc, addDoc, collection,updateDoc} from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { styles } from "./styles";
+
 const data = [
     { label: 'BU Central', value: '1' },
     { label: "St Mary's Street", value: '2' },
     { label: 'BU East', value: '3' },
   ];
 
-  export default function ReportObstacle1(){
+  export default function ReportObstacle(){
     const [value, setValue] = useState(null);
     const [intersection1, setSelectedIntersection1] = useState("Choose an Intersection");
     const [reports, setreports] = useState([]);
     const [message, setMessage] = useState("");
-    const [messages, setMessages] = useState([]);
     const date = new Date();
     const day = date.toLocaleDateString();
     const time = date.toLocaleTimeString();
-    const handleDropdownSelect = async (value) => {
-        if (value && value.hasOwnProperty("label")){
-            
-            const i = value["label"];
-            setSelectedIntersection1(i);
-            
-            console.log(intersection1);
-            return;
-        }
-       
-       
-    };
+ 
       const handleSubmit = async () => {
         // don't submit if intersection is empty
         if (intersection1 === "Choose an Intersection") {
@@ -56,15 +45,17 @@ const data = [
               if (!potholesPressed || !objectonRoad || !roadKillPressed || !foodPressed || !icePressed || !puddlesPressed || !otherPressed){
                 try {
                   
-                  await setDoc(doc(db, "Obstacle Reports", intersection1), {
-                    reports: reports,
-                    intersection: intersection1,
-                    message: messages,
-                    day:day,
-                    time:time,
-                  });
+                  const docRef = doc(db, "Obstacle Reports", intersection1);
+                  const additional_data = {
+                    [day]:{
+                    [time]:reports
+                    } 
+                  };
+
+                  await setDoc(docRef,additional_data,{merge:true});
                   console.log("Uploaded!");
                   console.log(`Report: ${reports}, ${message} at ${intersection1} on ${day}, at ${time}`);
+
                 } catch (e) {
                   console.error("Error adding document: ", e);
                   let etoast = Toast.show(
@@ -99,16 +90,19 @@ const data = [
                 return;
               }
             }//Handles cases for having a message on the text box and options chosen
+            
           else if (message !== ""){
+            
             if (!potholesPressed || !objectonRoad || !roadKillPressed || !foodPressed || !icePressed || !puddlesPressed || !otherPressed){
               try {
-                await setDoc(doc(db, "Obstacle Reports", intersection1), {
-                  reports: reports,
-                  intersection: intersection1,
-                  message: messages,
-                  day:day,
-                  time:time,
-                });
+                reports.push(message);
+                const docRef = doc(db, "Obstacle Reports", intersection1);
+                  const additional_data = {
+                    [day]:{
+                    [time]:reports
+                    }
+                  };
+                  await setDoc(docRef,additional_data,{merge:true});
                 console.log("Uploaded!");
                 console.log(`Report: ${reports}, ${message} at ${intersection1} on ${day}, at ${time}`);
               } catch (e) {
@@ -130,13 +124,14 @@ const data = [
               }
             }else{
               try {
-                await setDoc(doc(db, "Obstacle Reports", intersection1), {
-                  reports: reports,
-                  intersection: intersection1,
-                  message: messages,
-                  day:day,
-                  time:time,
-                });
+                reports.push(message);
+                const docRef = doc(db, "Obstacle Reports", intersection1);
+                  const additional_data = {
+                    [day]:{
+                    [time]:reports
+                    }
+                  };
+                await setDoc(docRef,additional_data,{merge:true});
                 console.log("Uploaded!");
                 console.log(`Report: ${reports}, ${message} at ${intersection1} on ${day}, at ${time}`);
               } catch (e) {
@@ -161,7 +156,7 @@ const data = [
         }
         
         resetForm();
-        console.log(reports);
+        // console.log(reports);
         let toast = Toast.show("Thank you for your report!", {
           duration: Toast.durations.LONG,
           position: Toast.positions.BOTTOM,
@@ -183,7 +178,7 @@ const data = [
       const [icePressed, setIcePressed] = useState(true);
       const [puddlesPressed, setPuddlesPressed] = useState(true);
       const [otherPressed, setOtherPressed] = useState(true);
-      console.log(intersection1);
+      
       const resetForm = () => {
         setObjectPressed(true);
         setPotholesPressed(true);
@@ -194,7 +189,7 @@ const data = [
         setOtherPressed(true);
         setMessage("");
         setSelectedIntersection1("Choose an Intersection");
-        setMessages([...messages, message]); 
+        setreports([]);
       }
       const handleReset = () => {
         resetForm();
@@ -332,4 +327,4 @@ const data = [
         </>
       );
     }
- 
+
