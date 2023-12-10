@@ -57,6 +57,7 @@ export default function RootLayout() {
               >
                 <Text style={styles.buttonText}>Get Started</Text>
               </TouchableOpacity>
+              
             </View>
           </View>
         </Modal>
@@ -68,7 +69,6 @@ export default function RootLayout() {
          
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
-            
               <RootLayoutNav />
             </RootSiblingParent>
           </GestureHandlerRootView>
