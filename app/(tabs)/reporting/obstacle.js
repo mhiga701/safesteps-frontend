@@ -3,14 +3,16 @@ import { Text, View ,TextInput,TouchableOpacity, ScrollView } from "react-native
 import { styles } from "../../../components/styles";
 import { useRouter } from "expo-router";
 import ReportObstacle from "../../../components/ReportObstacle";
+
 import Ionicon from 'react-native-vector-icons/Ionicons';
+
 export default function ObstacleScreen() {
 
    
     const history = useRouter();
     return (
       <> 
-      
+  
       <ScrollView
           style={styles.container}
           automaticallyAdjustKeyboardInsets={true}
