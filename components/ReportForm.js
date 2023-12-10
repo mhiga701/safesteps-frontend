@@ -6,7 +6,7 @@ import { doc, setDoc, addDoc, collection } from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { Dropdown } from 'react-native-element-dropdown';
 import { StyleSheet } from 'react-native';
-
+//Accident Report Form
 export default function ReportForm() {
 
     const [intersection2, setSelectedIntersection2] = useState("Choose an intersection");
@@ -22,16 +22,17 @@ export default function ReportForm() {
       { label: 'BU East', value: '3' },
     ];
 
-    const handleDropdownSelect = async (value) => {
-      if (value && value.hasOwnProperty("label")){
+  //   const handleDropdownSelect = async (value) => {
+  //     if (value && value.hasOwnProperty("label")){
           
-          const i = value["label"];
-          setSelectedIntersection2(i);
+  //         const i = value["label"];
+  //         setSelectedIntersection2(i);
           
-          console.log(intersection2);
-          return;
-      } 
-  };
+  //         console.log(intersection2);
+  //         return;
+  //     } 
+  // };
+
   const handleSubmit = async () => {
     // don't submit if name or message is empty
     if (intersection2 === "Choose an intersection") {
@@ -185,7 +186,7 @@ export default function ReportForm() {
     setSinglePressed(true);
     setOtherPressed(true);
     setMessage("");
-    setSelectedIntersection2("");
+    setSelectedIntersection2("Choose an intersection");
 
   }
   const handlePress = () => {
@@ -238,7 +239,7 @@ export default function ReportForm() {
   const singleButtonColor = singlePressed ? '#808080' : '#5787F5';
   const otherButtonColor = otherPressed ? '#808080' : '#5787F5';
 
-  
+  console.log(intersection2);
   return (
     <>
     <View>
@@ -258,7 +259,7 @@ export default function ReportForm() {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder="Choose an Intersection"
+            placeholder={intersection2}
             searchPlaceholder="Search..."
             value={intersection2}
             
@@ -325,7 +326,7 @@ const styles1 = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: 16,
-    textAlign:'center'
+    //textAlign:'center'
   },
   iconStyle: {
     width: 20,
@@ -339,6 +340,6 @@ const styles1 = StyleSheet.create({
       padding: 17,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
+      // alignItems: 'center',
     },
 });
