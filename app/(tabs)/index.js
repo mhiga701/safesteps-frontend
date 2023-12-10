@@ -15,7 +15,8 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import BackgroundLocation from "../../components/BackgroundLocation";
 import Mapmarker from "../../assets/Mapmarker.svg";
 import { locationData } from "../../components/Beacons";
-import DefaultMap, { MarshPlaza, BUBridge, CCDS } from "../../components/Bottomsheets";
+import DefaultMap from "../../components/Bottomsheets";
+import CollapsibleView from "@eliav2/react-native-collapsible-view";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -111,13 +112,18 @@ export default function Page() {
           title={marker.title}
           description={marker.description}
           onPress={() => {
-            if (selectedMarker === null) {
+            if (selectedMarker !== null && selectedMarker === marker) {
+              setSelectedMarker(null);
+              goToInitialLocation();
+            }
+            else if (selectedMarker !== null && selectedMarker !== marker) {
               setSelectedMarker(marker);
               goToMarkerLocation(marker);
             }
             else {
-              setSelectedMarker(null);
-              goToInitialLocation();
+              setSelectedMarker(marker);
+              goToMarkerLocation(marker);
+             
             }
             
           }}
@@ -161,13 +167,45 @@ export default function Page() {
           snapPoints={snapPoints}
           backgroundStyle={localStyles.bottomSheetContainer}
           style={localStyles.bottomSheetContainer}
-          index={0}
+          index={1}
           ref={bottomSheetRef}
         >
           {selectedMarker === null && <DefaultMap />}
-          {selectedMarker !== null && selectedMarker.title === "Marsh Plaza" && <MarshPlaza />}
-          {selectedMarker !== null && selectedMarker.title === "BU Bridge" && <BUBridge />}
-          {selectedMarker !== null && selectedMarker.title === "CCDS" && <CCDS />}
+
+
+          {selectedMarker !== null && selectedMarker.title === "Marsh Plaza" &&  
+          <View>
+          <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
+         
+          <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+        <CollapsibleView title="Black Ice">
+         <Text>Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!</Text> 
+        </CollapsibleView>
+        </View>
+        }
+
+
+          {selectedMarker !== null && selectedMarker.title === "BU Bridge" && 
+          <View>
+          <Text style={localStyles.bottomSheetHeader}>BU Bridge</Text>
+         
+          <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+        <CollapsibleView title="Black Ice">
+         <Text>Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!</Text> 
+        </CollapsibleView>
+        </View>
+          }
+
+          {selectedMarker !== null && selectedMarker.title === "CCDS" &&
+             <View>
+             <Text style={localStyles.bottomSheetHeader}>CCDS</Text>
+            
+             <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+           <CollapsibleView title="Black Ice">
+            <Text>Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!</Text> 
+           </CollapsibleView>
+           </View>
+          }
        
         </BottomSheet>
       </View>

@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./styles";
-import Alert from '../assets/alert1.svg';
+import Alert from '../assets/alert.svg';
 import AlertHeader from '../assets/AlertTypes3.svg'
 
 export default function VisAlert() {
@@ -74,11 +74,11 @@ export default function VisAlert() {
 
       <Modal visible={alert2} animationType="fade">
         <View style={styles.alert2Container}>
-          <Text style={styles.alert2Text}>Approaching</Text>
-          <Text style={styles.alert2Text}>Intersection</Text>
-          <Image source={require('../assets/ripple.gif')} style={{marginTop:80}}/>
+          <Text style={styles.alert2Text}>APPROACHING</Text>
+          <Text style={styles.alert2Text}>INTERSECTION</Text>
+          <Image source={require('../assets/NewRipple.gif')} style={{marginTop:80}}/>
           <Alert style={{marginVertical: 50, position: 'absolute'}}/>
-          <Text style={styles.alert2Text}>Look Up!</Text>
+          <Text style={styles.alert2Text}>LOOK UP!</Text>
           <TouchableOpacity
             style={styles.button1}
             onPress={() => setAlert2(false)}

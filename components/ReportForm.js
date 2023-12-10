@@ -248,15 +248,16 @@ export default function ReportForm() {
       <View style={{top:110}}>
       <Dropdown
             mode='default'
-            style={styles1.dropdown}
-            placeholderStyle={styles1.placeholderStyle}
-            selectedTextStyle={styles1.selectedTextStyle}
-            inputSearchStyle={styles1.inputSearchStyle}
-            iconStyle={styles1.iconStyle}
+            style={styles.dropdownContainer}
+            placeholderStyle={styles.dropdownText}
+            selectedTextStyle={styles.dropdownText}
+            iconStyle={styles.dropdownIcon}
+            containerStyle={styles.dropdownContainer}
+            itemTextStyle={styles.itemText}
             data={data}
             search={false}
-            showsVerticalScrollIndicator={true}
-            maxHeight={300}
+            showsVerticalScrollIndicator={false}
+            maxHeight={200}
             labelField="label"
             valueField="value"
             placeholder={intersection2}
@@ -311,35 +312,3 @@ export default function ReportForm() {
     </>
   );
 }
-const styles1 = StyleSheet.create({
-  dropdown: {
-    margin: 16,
-    height: 20,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 0.5,
-  },
-  icon: {
-    marginRight: 5,
-  },
-  placeholderStyle: {
-    fontSize: 16,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    //textAlign:'center'
-  },
-  iconStyle: {
-    width: 20,
-    height: 20,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-  },
-  item: {
-      padding: 17,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      // alignItems: 'center',
-    },
-});

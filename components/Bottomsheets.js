@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { styles } from "./styles";
-import { CollapsibleView } from 'react-native-collapsible-view';
+//import { CollapsibleView } from '@eliav2/react-native-collapsible-view';
 import Icon2 from "react-native-vector-icons/Octicons";
 
 export default DefaultMap = () => {
@@ -55,15 +55,13 @@ const MarshPlaza = () => {
 
   return (
     <View>
-      <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
-     
-      <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-    <CollapsibleView title="Black Ice">
-      Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!
-    </CollapsibleView>
-
-
-    </View>
+    <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
+   
+    <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+  <CollapsibleView title="Black Ice">
+   <Text>Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!</Text> 
+  </CollapsibleView>
+  </View>
   );
 }
 
