@@ -1,5 +1,5 @@
-import { Redirect, Stack, Tabs } from "expo-router";
-import { React, useState } from "react";
+import { Redirect, Stack, Tabs, useRouter, Navigate } from "expo-router";
+import { React, useEffect, useState } from "react";
 import * as Font from "expo-font";
 import {
   useColorScheme,
@@ -18,10 +18,12 @@ export const unstable_settings = {
   initialRouteName: "index",
 };
 
-function RootLayoutNav() {
+function RootLayoutNav({ initial_route }) {
+  console.log("initial_route: " + initial_route);
+
   return (
     <>
-      <Stack initialRouteName={unstable_settings.initialRouteName}>
+      <Stack initialRouteName={initial_route}>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
@@ -32,6 +34,8 @@ function RootLayoutNav() {
 export default function RootLayout() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [splash, setSplash] = useState(true);
+  const [initial_route, setInitialRoute] = useState("index");
+
   async function loadFont() {
     await Font.loadAsync({
       "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.otf"),
@@ -68,7 +72,8 @@ export default function RootLayout() {
                   const changeRouteAndHideSplash = () => {
                     return new Promise((resolve) => {
                       // Change the initial route name
-                      unstable_settings.initialRouteName = "(tabs)";
+                      // unstable_settings.initialRouteName = "(tabs)";
+                      setInitialRoute("(tabs)");
 
                       // Resolve the promise after changing the route name
                       resolve();
@@ -96,7 +101,7 @@ export default function RootLayout() {
         <>
           <GestureHandlerRootView style={{ flex: 1 }}>
             <RootSiblingParent>
-              <RootLayoutNav />
+              <RootLayoutNav initial_route={initial_route} />
             </RootSiblingParent>
           </GestureHandlerRootView>
         </>

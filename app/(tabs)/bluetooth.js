@@ -8,10 +8,20 @@
 */
 
 import React, { Component, useEffect, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import Alert from "../../assets/alert1.svg";
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  Image,
+} from "react-native";
 import BleManager from "react-native-ble-manager";
 import { styles } from "../../components/styles";
 import BluetoothHeader from "../../assets/BluetoothHeader.svg";
+import { getValueFor } from "../../components/ExpoStorage";
+import { useFocusEffect } from "expo-router";
 // import BluetoothDiff from "../../components/BluetoothDiff";
 
 export const UUID_filter = ["6969"];
@@ -25,6 +35,62 @@ const bluetooth = () => {
   const [diff1, setDiff1] = useState(0);
   const [diff2, setDiff2] = useState(0);
   const [closerDevice, setCloserDevice] = useState(0);
+  const [visAlert, setVisAlert] = useState(false);
+  const [audioAlert, setAudioAlert] = useState(false);
+  const [notificationAlert, setNotificationAlert] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [flag, setFlag] = useState(false);
+
+  useFocusEffect(() => {
+    getValueFor("visualAlertEnabled").then((value) => {
+      console.log("Got value visual: " + value);
+      setVisAlert(value == "true" ? true : false);
+    });
+    getValueFor("audioAlertEnabled").then((value) => {
+      console.log("Got value audio: " + value);
+      setAudioAlert(value == "true" ? true : false);
+    });
+    getValueFor("notificationEnabled").then((value) => {
+      console.log("Got value notification: " + value);
+      setNotificationAlert(value == "true" ? true : false);
+    });
+  });
+
+  // useEffect(() => {
+
+  // }, [visAlert, audioAlert, notificationAlert]);
+
+  useEffect(() => {
+    if (!alert && !flag && closerDevice === 1) {
+      if (visAlert) {
+        setAlert(true);
+        console.log("Vis alert!");
+      } else {
+        console.log("Vis alerts disabled");
+      }
+      setFlag(true);
+      console.log("bro back up");
+    }
+
+    // const timeoutId = setTimeout(() => {
+    //   setFlag(false);
+    //   console.log("timeout");
+    // }, 10000);
+
+    // // Clear the timeout if the component unmounts or closerDevice changes before 10 seconds
+    // return () => clearTimeout(timeoutId);
+  }, [flag, closerDevice]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (!alert) {
+        setFlag(false);
+        console.log("timeout");
+      }
+    }, 10000);
+
+    return () => clearTimeout(timeoutId);
+  }, [alert]);
 
   const startBleManager = () => {
     BleManager.start({ showAlert: false }).then(() => {
@@ -145,7 +211,7 @@ const bluetooth = () => {
     BleManager.scan(UUID_filter, 2.5, true)
       .then(async () => {
         // Success code
-        await delay(2500);
+        await delay(1000);
         console.log("Scanned for 2.5 secs");
       })
       .then(() => {
@@ -172,13 +238,13 @@ const bluetooth = () => {
       getState();
       if (isConnected) {
         scanIds.map((item) => retrieveRssi(item));
+        if (diff1 > diff2) {
+          setCloserDevice(0);
+        } else {
+          setCloserDevice(1);
+        }
       }
-      if (diff1 > diff2) {
-        setCloserDevice(0);
-      } else {
-        setCloserDevice(1);
-      }
-    }, 100);
+    }, 500);
     return () => clearInterval(interval);
   }, [isConnected, scanIds, diff1, diff2, closerDevice]);
 
@@ -314,6 +380,25 @@ const bluetooth = () => {
           )}
         </ScrollView>
       </View>
+
+      <Modal visible={alert && visAlert} animationType="fade">
+        <View style={styles.alert2Container}>
+          <Text style={styles.alert2Text}>Approaching</Text>
+          <Text style={styles.alert2Text}>Intersection</Text>
+          <Image
+            source={require("../../assets/ripple.gif")}
+            style={{ marginTop: 80 }}
+          />
+          <Alert style={{ marginVertical: 50, position: "absolute" }} />
+          <Text style={styles.alert2Text}>Look Up!</Text>
+          <TouchableOpacity
+            style={styles.button1}
+            onPress={() => setAlert(false)}
+          >
+            <Text style={styles.ackButtonText}>I acknowledge</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </>
   );
 };
