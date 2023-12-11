@@ -878,6 +878,7 @@ export const styles = StyleSheet.create({
 
   dropdownContainer:{
     backgroundColor: '#fcfcfc',
+    
     borderRadius: 10,
     shadowColor: "#52525a", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS

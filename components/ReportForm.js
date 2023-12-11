@@ -249,7 +249,7 @@ export default function ReportForm() {
             placeholderStyle={styles.dropdownText}
             selectedTextStyle={styles.dropdownText}
             iconStyle={styles.dropdownIcon}
-            containerStyle={styles.dropdownContainer}
+            containerStyle={{borderRadius: 10}}
             itemTextStyle={styles.itemText}
             data={data}
             search={false}
