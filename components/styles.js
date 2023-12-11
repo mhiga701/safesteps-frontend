@@ -870,7 +870,7 @@ export const styles = StyleSheet.create({
   skipButtonText: {
     textAlign: "center",
     color: "#fe2d01",
-    fontSize: 14,
+    fontSize: 16,
     fontFamily: "Montserrat-Regular",
     marginTop: 8,
   },
@@ -878,7 +878,7 @@ export const styles = StyleSheet.create({
 
   dropdownContainer:{
     backgroundColor: '#fcfcfc',
-    alignItems: 'center',
+    
     borderRadius: 10,
     shadowColor: "#52525a", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
@@ -890,7 +890,7 @@ export const styles = StyleSheet.create({
   dropdownText: {
     fontFamily: "Montserrat-Regular",
     color: "#52525a",
-    fontSize: 14,
+    fontSize: 16,
     textAlign: "center",
   },
   itemText: {

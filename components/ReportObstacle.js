@@ -20,7 +20,8 @@ const data = [
     const [message, setMessage] = useState("");
     const date = new Date();
     const day = date.toLocaleDateString();
-    const time = date.toLocaleTimeString();
+    const timeOptions = { hour12: true, hour: 'numeric', minute: 'numeric' };
+    const time = date.toLocaleTimeString('en-US', timeOptions);
  
       const handleSubmit = async () => {
         // don't submit if intersection is empty
@@ -327,4 +328,4 @@ const data = [
         </>
       );
     }
-
+    

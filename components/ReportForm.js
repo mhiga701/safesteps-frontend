@@ -14,7 +14,8 @@ export default function ReportForm() {
     const [message, setMessage] = useState("");
     const date = new Date();
     const day = date.toLocaleDateString();
-    const time = date.toLocaleTimeString();
+    const timeOptions = { hour12: true, hour: 'numeric', minute: 'numeric' };
+    const time = date.toLocaleTimeString('en-US', timeOptions);
 
     const data = [
       { label: 'CCDS', value: '1' },

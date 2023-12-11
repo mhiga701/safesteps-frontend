@@ -2,9 +2,9 @@ import Onboarding from 'react-native-onboarding-swiper';
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from '../components/styles';
-import Onboarding1 from '../assets/first.svg';
-import Onboarding2 from '../assets/second.svg';
-import Onboarding3 from '../assets/third.svg';
+import Onboarding1 from '../assets/First.svg';
+import Onboarding2 from '../assets/Second.svg';
+import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
 
 const Circle = ({ isLight, selected }) => {
