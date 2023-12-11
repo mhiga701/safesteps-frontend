@@ -176,7 +176,11 @@ export default function Page() {
           <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
          
           <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-        <CollapsibleView title="Black Ice">
+        <CollapsibleView 
+        title="Black Ice"
+        style={styles.collapsibleContainer}
+        titleStyle={styles.collapsibleTitle}
+        >
          <Text>Watch out for black ice near the curbs around Marsh Plaza. It's very slippery!</Text> 
         </CollapsibleView>
         </View>

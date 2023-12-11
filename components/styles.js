@@ -906,6 +906,19 @@ export const styles = StyleSheet.create({
   },
   dropdownIcon: {
     marginRight: 10,
+  },
+  collapsibleContainer: {
+    borderRadius: 10,
+    backgroundColor: '#fcfcfc',
+    alignItems: 'left',
+    borderColor: "#fcfcfc"
+  },
+  collapsibleTitle: {
+    fontFamily: "Bitter-Regular",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "left",
+    paddingLeft: 10,
   }
 });
 
