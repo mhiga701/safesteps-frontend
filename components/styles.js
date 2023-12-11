@@ -898,6 +898,11 @@ export const styles = StyleSheet.create({
     color: "#52525a",
     fontSize: 14,
     textAlign: "center",
+    position: "relative",
+    paddingHorizontal: 20
+  },
+  itemContainer: {
+    borderRadius: 10,
   },
   dropdownIcon: {
     marginRight: 10,

@@ -17,9 +17,9 @@ export default function ReportForm() {
     const time = date.toLocaleTimeString();
 
     const data = [
-      { label: 'BU Central', value: '1' },
-      { label: "St Mary's Street", value: '2' },
-      { label: 'BU East', value: '3' },
+      { label: 'CCDS', value: '1' },
+      { label: "Marsh Plaza", value: '2' },
+      { label: 'BU Bridge', value: '3' },
     ];
 
   
@@ -249,7 +249,7 @@ export default function ReportForm() {
             placeholderStyle={styles.dropdownText}
             selectedTextStyle={styles.dropdownText}
             iconStyle={styles.dropdownIcon}
-            containerStyle={styles.dropdownContainer}
+            containerStyle={styles.itemContainer}
             itemTextStyle={styles.itemText}
             data={data}
             search={false}
