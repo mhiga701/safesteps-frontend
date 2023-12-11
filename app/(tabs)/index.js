@@ -72,13 +72,14 @@ export default function Page() {
           // }
           
 
-          console.log("St Mary");
-          const accidentquery = await getDoc(doc(db,"Accident Reports","St Mary's Street"));
+          console.log("Marsh Plaza");
+          const accidentquery = await getDoc(doc(db,"Accident Reports","Marsh Plaza"));
           const accdata = accidentquery.data();
           let dates = Object.keys(accdata);
-          const obstaclequery = await getDoc(doc(db,"Obstacle Reports","St Mary's Street"));
+          const obstaclequery = await getDoc(doc(db,"Obstacle Reports","Marsh Plaza"));
           const obsdata = obstaclequery.data();
-          
+          one_day = dates;
+          console.log(one_day);
           dates.forEach(date => {
             
             const time1 = accdata[date];
@@ -86,13 +87,13 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a = accdata[date][time_key1[0]];
             setMaryAccidentData(a);
-            console.log("Time and accident data at St Mary's Street",date,"-",time_key1[0],"-",a);
+            console.log("Time and accident data at Marsh Plaza",date,"-",time_key1[0],"-",a);
             const time2 = obsdata[date];
             const time_key2 = Object.keys(time2);
             //Gets the most recent timestamp of a obstacle report
             const o = obsdata[date][time_key2[0]];
             setMaryObstacleData(o);
-            console.log("Time and obstacle data at St Mary's Street",date,"-",time_key2[0],"-",o);
+            console.log("Time and obstacle data at Marsh Plaza",date,"-",time_key2[0],"-",o);
             
           });
 
@@ -108,12 +109,12 @@ export default function Page() {
           setAData(accidentresult);
           setOData(obstacleresult);
           
-          console.log("Central");
+          console.log("BU Bridge");
 
-          const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Central"));
+          const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Bridge"));
           const accdata2 = accidentquery2.data();
           dates = Object.keys(accdata2);
-          const obstaclequery2 = await getDoc(doc(db,"Obstacle Reports","BU Central"));
+          const obstaclequery2 = await getDoc(doc(db,"Obstacle Reports","BU Bridge"));
           const obsdata2 = obstaclequery2.data();
          
           dates.forEach(date => {
@@ -122,14 +123,14 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a2 = accdata2[date][time_key1[0]];
             setCentralAccidentData(a2);
-            console.log("Time and accident data at BU CENTRAL",date,"-",time_key1[0],"-",a2);
+            console.log("Time and accident data at BU Bridge",date,"-",time_key1[0],"-",a2);
             const time2 = obsdata2[date];
             const time_key2 = Object.keys(time2);
           
             //Gets the most recent timestamp of a obstacle report
             const o2 = obsdata2[date][time_key2[0]];
             setCentralObstacleData(o2);
-            console.log("Time and obstacle data at BU CENTRAL",date,"-",time_key2[0],"-",o2);
+            console.log("Time and obstacle data at BU Bridge",date,"-",time_key2[0],"-",o2);
             
           });
           // console.log(o3);
@@ -146,12 +147,12 @@ export default function Page() {
           setOData2(obstacleresult);
           
 
-          console.log("East");
+          console.log("CCDS");
 
-          const accidentquery3 = await getDoc(doc(db,"Accident Reports","BU East"));
+          const accidentquery3 = await getDoc(doc(db,"Accident Reports","CCDS"));
           const accdata3 = accidentquery3.data();
           dates = Object.keys(accdata3);
-          const obstaclequery3 = await getDoc(doc(db,"Obstacle Reports","BU East"));
+          const obstaclequery3 = await getDoc(doc(db,"Obstacle Reports","CCDS"));
           const obsdata3 = obstaclequery3.data();
           
           dates.forEach (date => {
@@ -162,14 +163,14 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a3 = accdata3[date][time_key2[0]];
             setEastAccidentData(a3);
-            console.log("Time and accident data at BU EAST",date,"-",time_key2[0],"-",a3);
+            console.log("Time and accident data at CCDS",date,"-",time_key2[0],"-",a3);
             const time3 = obsdata3[date];
             const time_key3 = Object.keys(time3);
             
             //Gets the most recent timestamp of a obstacle report
             const o3 = obsdata3[date][time_key3[0]];
             setEastObstacleData(o3);
-            console.log("Time and obstacle data at BU EAST",date,"-",time_key3[0],"-",o3);
+            console.log("Time and obstacle data at CCDS",date,"-",time_key3[0],"-",o3);
             
           });
           
@@ -183,7 +184,6 @@ export default function Page() {
           }
           setAData3(accidentresult);
           setOData3(obstacleresult);
-          
           
         }catch(e){
           console.log('Error Fetching Data',e);
