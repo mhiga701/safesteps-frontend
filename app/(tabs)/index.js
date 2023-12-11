@@ -72,20 +72,33 @@ export default function Page() {
           // }
           
 
+          console.log("St Mary");
           const accidentquery = await getDoc(doc(db,"Accident Reports","St Mary's Street"));
           const accdata = accidentquery.data();
-          const a = accdata[day]['9:05 PM'];
-          
+          let dates = Object.keys(accdata);
           const obstaclequery = await getDoc(doc(db,"Obstacle Reports","St Mary's Street"));
           const obsdata = obstaclequery.data();
-          const o = obsdata[day]['9:05 PM'];
           
-          setMaryAccidentData(a);
-          setMaryObstacleData(o);
-          
-          
+          dates.forEach(date => {
+            
+            const time1 = accdata[date];
+            const time_key1 = Object.keys(time1);
+            //Gets the most recent timestamp of a accident report
+            const a = accdata[date][time_key1[0]];
+            setMaryAccidentData(a);
+            console.log("Time and accident data at St Mary's Street",date,"-",time_key1[0],"-",a);
+            const time2 = obsdata[date];
+            const time_key2 = Object.keys(time2);
+            //Gets the most recent timestamp of a obstacle report
+            const o = obsdata[date][time_key2[0]];
+            setMaryObstacleData(o);
+            console.log("Time and obstacle data at St Mary's Street",date,"-",time_key2[0],"-",o);
+            
+          });
+
           let accidentresult = ""+day+'\t'+time+'\n';
           let obstacleresult = ""+day+'\t'+time+'\n';
+          
           for (let i = 0; i< MaryaccidentData.length; i++){
             accidentresult += (i+1) + ':'+MaryaccidentData[i] + '\n';
           }
@@ -95,20 +108,32 @@ export default function Page() {
           setAData(accidentresult);
           setOData(obstacleresult);
           
+          console.log("Central");
 
           const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Central"));
           const accdata2 = accidentquery2.data();
-          const a2 = accdata2[day]['10:13 PM'];
-          
-         
+          dates = Object.keys(accdata2);
           const obstaclequery2 = await getDoc(doc(db,"Obstacle Reports","BU Central"));
           const obsdata2 = obstaclequery2.data();
-          const o2 = obsdata2[day]['10:19 PM'];
+         
+          dates.forEach(date => {
+            const time1 = accdata2[date];
+            const time_key1 = Object.keys(time1);
+            //Gets the most recent timestamp of a accident report
+            const a2 = accdata2[date][time_key1[0]];
+            setCentralAccidentData(a2);
+            console.log("Time and accident data at BU CENTRAL",date,"-",time_key1[0],"-",a2);
+            const time2 = obsdata2[date];
+            const time_key2 = Object.keys(time2);
           
-          console.log(o3);
-          setCentralAccidentData(a2);
-          setCentralObstacleData(o2);
-
+            //Gets the most recent timestamp of a obstacle report
+            const o2 = obsdata2[date][time_key2[0]];
+            setCentralObstacleData(o2);
+            console.log("Time and obstacle data at BU CENTRAL",date,"-",time_key2[0],"-",o2);
+            
+          });
+          // console.log(o3);
+          
           accidentresult = ""+day+'\t'+time+'\n';
           obstacleresult = ""+day+'\t'+time+'\n';
           for (let i = 0; i< CentralaccidentData.length; i++){
@@ -119,18 +144,35 @@ export default function Page() {
           }
           setAData2(accidentresult);
           setOData2(obstacleresult);
-          console.log(o);
+          
+
+          console.log("East");
+
           const accidentquery3 = await getDoc(doc(db,"Accident Reports","BU East"));
           const accdata3 = accidentquery3.data();
-          const a3 = accdata3[day]['10:13 PM'];
-          
+          dates = Object.keys(accdata3);
           const obstaclequery3 = await getDoc(doc(db,"Obstacle Reports","BU East"));
           const obsdata3 = obstaclequery3.data();
-          const o3 = obsdata3[day]['10:19 PM'];
           
-          setEastAccidentData(a3);
-          setEastObstacleData(o3);
-
+          dates.forEach (date => {
+            
+            const time2 = accdata3[date];
+            const time_key2 = Object.keys(time2);
+            
+            //Gets the most recent timestamp of a accident report
+            const a3 = accdata3[date][time_key2[0]];
+            setEastAccidentData(a3);
+            console.log("Time and accident data at BU EAST",date,"-",time_key2[0],"-",a3);
+            const time3 = obsdata3[date];
+            const time_key3 = Object.keys(time3);
+            
+            //Gets the most recent timestamp of a obstacle report
+            const o3 = obsdata3[date][time_key3[0]];
+            setEastObstacleData(o3);
+            console.log("Time and obstacle data at BU EAST",date,"-",time_key3[0],"-",o3);
+            
+          });
+          
           accidentresult = ""+day+'\t'+time+'\n';
           obstacleresult = ""+day+'\t'+time+'\n';
           for (let i = 0; i< EastaccidentData.length; i++){
