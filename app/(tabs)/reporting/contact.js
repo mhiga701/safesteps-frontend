@@ -7,7 +7,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 export default function ContactScreen() {
     return (
      <View style={styles.container}>
-        <TouchableOpacity onPress={() => history.back()} style={{top: 40, left: 0}}>
+        <TouchableOpacity style={{top: 40, left: 0}}>
             <Ionicon name="arrow-back" size={30} color="black" />
         </TouchableOpacity>
 
