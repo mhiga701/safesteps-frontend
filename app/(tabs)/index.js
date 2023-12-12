@@ -321,11 +321,11 @@ export default function Page() {
           <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
          
           <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-        <CollapsibleView title="Obstacles">
-        <Text>{Odata? Odata: 'Loading...'}</Text> 
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+        <Text style={styles.collapsibleTitle}>{Odata? Odata: 'Loading...'}</Text> 
         </CollapsibleView>
-        <CollapsibleView title="Accidents">
-         <Text>{Adata? Adata: 'Loading...'}</Text> 
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+         <Text style={styles.collapsibleTitle}>{Adata? Adata: 'Loading...'}</Text> 
          
         </CollapsibleView>
         
@@ -338,11 +338,11 @@ export default function Page() {
           <Text style={localStyles.bottomSheetHeader}>BU Bridge</Text>
          
           <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-          <CollapsibleView title="Obstacles">
-          <Text>{Odata2? Odata2: 'Loading...'}</Text> 
+          <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>}  titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+          <Text style={styles.collapsibleTitle}>{Odata2? Odata2: 'Loading...'}</Text> 
           </CollapsibleView>
-          <CollapsibleView title="Accidents">
-          <Text>{Adata2? Adata2: 'Loading...'}</Text> 
+          <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+          <Text style={styles.collapsibleTitle}>{Adata2? Adata2: 'Loading...'}</Text> 
          
         </CollapsibleView>
        
@@ -354,11 +354,11 @@ export default function Page() {
              <Text style={localStyles.bottomSheetHeader}>CCDS</Text>
             
              <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-             <CollapsibleView title="Obstacles">
-              <Text>{Odata3? Odata3: 'Loading...'}</Text> 
+             <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+              <Text style={styles.collapsibleTitle}>{Odata3? Odata3: 'Loading...'}</Text> 
              </CollapsibleView>
-             <CollapsibleView title="Accidents">
-              <Text>{Adata3? Adata3: 'Loading...'}</Text> 
+             <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+              <Text style={styles.collapsibleTitle}>{Adata3? Adata3: 'Loading...'}</Text> 
              </CollapsibleView>
            </View>
           }
@@ -377,6 +377,14 @@ const localStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.3,
     borderColor: "#52525a",
+  },
+  bottomSheetSubheader: {
+    fontFamily: "Montserrat-Regular",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "left",
+    paddingLeft: 20,
+    marginVertical: 10,
   },
   bottomSheetHeader: {
     fontSize: 20,

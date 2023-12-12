@@ -911,7 +911,8 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#fcfcfc',
     alignItems: 'left',
-    borderColor: "#fcfcfc"
+    borderColor: "#fcfcfc",
+    marginHorizontal: 20
   },
   collapsibleTitle: {
     fontFamily: "Bitter-Regular",
@@ -919,6 +920,15 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "left",
     paddingLeft: 10,
-  }
+  },
+  collapsibleContainerFull: {
+    borderRadius: 10,
+    backgroundColor: '#fcfcfc',
+    alignItems: 'left',
+    borderTopWidth: 0.3,
+    borderColor: "#52525a",
+    paddingVertical: 10,
+    marginTop: 10,
+  },
 });
 
