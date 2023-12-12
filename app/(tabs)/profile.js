@@ -14,17 +14,7 @@ export default function Profile() {
         <AlertHeader style={styles.alertHeader} />
       </View>
 
-      <Text
-        style={{
-          color: "#f2f2f2",
-          fontSize: 24,
-          fontWeight: "700",
-          marginTop: 100,
-          marginLeft: 20,
-          fontFamily: "Montserrat-Bold",
-          position: "absolute",
-        }}
-      >
+      <Text style={{ color: "#f2f2f2", fontSize: 24, fontWeight: "700", marginTop: 100, marginLeft: 20, fontFamily: "Montserrat-Bold", position: "absolute" }}>
         Alert Types
       </Text>
       <View style={styles.profileContainer}>
@@ -32,10 +22,6 @@ export default function Profile() {
           automaticallyAdjustKeyboardInsets={true}
           automaticallyAdjustContentInsets={true}
           showsVerticalScrollIndicator={false}
-          // bounces={false}
-          // contentContainerStyle={{
-          //   flexGrow: 1,
-          // }}
         >
           <PushNotifications />
 

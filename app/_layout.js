@@ -1,13 +1,7 @@
-import { Redirect, Stack, Tabs, useRouter, Navigate } from "expo-router";
-import { React, useEffect, useState } from "react";
+import { Stack } from "expo-router";
+import { React, useState } from "react";
 import * as Font from "expo-font";
-import {
-  useColorScheme,
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-} from "react-native";
+import { View, Text, TouchableOpacity, Modal } from "react-native";
 import { styles } from "../components/styles";
 import Splash1 from "../assets/Logo.svg";
 import Splash2 from "../assets/logo2.svg";
@@ -18,12 +12,10 @@ export const unstable_settings = {
   initialRouteName: "index",
 };
 
-function RootLayoutNav({ initial_route }) {
-  console.log("initial_route: " + initial_route);
-
+function RootLayoutNav() {
   return (
     <>
-      <Stack initialRouteName={initial_route}>
+      <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
@@ -34,7 +26,6 @@ function RootLayoutNav({ initial_route }) {
 export default function RootLayout() {
   const [fontLoaded, setFontLoaded] = useState(false);
   const [splash, setSplash] = useState(true);
-  const [initial_route, setInitialRoute] = useState("index");
 
   async function loadFont() {
     await Font.loadAsync({
@@ -65,35 +56,6 @@ export default function RootLayout() {
                 <Text style={styles.buttonText}>Get Started</Text>
               </TouchableOpacity>
             </View>
-            {/* <View style={styles.contentContainer}>
-              <TouchableOpacity
-                style={styles.buttonHomeScreen}
-                onPress={async () => {
-                  const changeRouteAndHideSplash = () => {
-                    return new Promise((resolve) => {
-                      // Change the initial route name
-                      // unstable_settings.initialRouteName = "(tabs)";
-                      setInitialRoute("(tabs)");
-
-                      // Resolve the promise after changing the route name
-                      resolve();
-                    });
-                  };
-
-                  console.log(unstable_settings.initialRouteName);
-
-                  // Call the function to change the route name
-                  await changeRouteAndHideSplash();
-
-                  console.log(unstable_settings.initialRouteName);
-
-                  setSplash(false);
-                }}
-              >
-                <Text style={styles.buttonText}>Main Page</Text>
-              </TouchableOpacity>
-              
-            </View> */}
           </View>
         </Modal>
       );

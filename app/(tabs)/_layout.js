@@ -1,7 +1,5 @@
-import { Link, Tabs } from "expo-router";
-import { Pressable, useColorScheme } from "react-native";
-import { Image } from "react-native";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 function TabBarIcon(props) {
   return <Ionicons size={32} style={{ paddingVertical: 4 }} {...props} />;

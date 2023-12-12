@@ -7,16 +7,9 @@
   - Disconnect when done
 */
 
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Alert from "../../assets/alert1.svg";
-import {
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Modal,
-  Image,
-} from "react-native";
+import { Text, View, ScrollView, TouchableOpacity, Modal, Image } from "react-native";
 import BleManager from "react-native-ble-manager";
 import { styles } from "../../components/styles";
 import BluetoothHeader from "../../assets/BluetoothHeader.svg";

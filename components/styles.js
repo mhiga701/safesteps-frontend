@@ -957,5 +957,52 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 10,
   },
+  bottomSheetContainer: {
+    backgroundColor: "#ecedf2",
+    flex: 1,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 0.3,
+    borderColor: "#52525a",
+  },
+  bottomSheetSubheader: {
+    fontFamily: "Montserrat-Regular",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "left",
+    paddingLeft: 20,
+    marginVertical: 10,
+  },
+  bottomSheetHeader: {
+    fontSize: 20,
+    fontFamily: "Montserrat-Bold",
+    marginLeft: 20,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "rgba(0, 0, 0, 0.1)",
+    marginHorizontal: -15,
+  },
+  rowContainer3: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 15,
+    paddingRight: 50,
+  },
+  settingsContainer: {
+    backgroundColor: "white",
+    borderRadius: 16,
+    elevation: 5,
+    marginBottom: 15,
+    paddingHorizontal: 25, // Add padding to separate elements
+    marginHorizontal: 15,
+    marginVertical: 15,
+  },
 });
 

@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
@@ -8,9 +8,9 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import BackgroundLocation from "../../components/BackgroundLocation";
 import Mapmarker from "../../assets/Mapmarker.svg";
 import { locationData } from "../../components/Beacons";
-import DefaultMap from "../../components/Bottomsheets";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import Ionicon from 'react-native-vector-icons/Ionicons';
+import Icon2 from "react-native-vector-icons/Octicons";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -18,11 +18,12 @@ let BuBridge_numreports = 0;
 let MarshPlaza_numreports = 0;
 let CCDS_numreports = 0;
 
-export {BuBridge_numreports,MarshPlaza_numreports,CCDS_numreports};
-
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
   const mapRef = useRef();
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
+  const bottomSheetRef = useRef(null);
   
   const [MaryaccidentData, setMaryAccidentData] = useState(null);
   const [MaryobstacleData, setMaryObstacleData] = useState(null);
@@ -47,11 +48,10 @@ export default function Page() {
   const [accidentresult3, setaccidentresult3] = useState("");
   const [obstacleresult3, setobstacleresult3] = useState("");
 
-  
   useEffect(() => {
     const fetchData = async () => {
         try{
-          console.log("Marsh Plaza");
+          // console.log("Marsh Plaza");
           const accidentquery = await getDoc(doc(db,"Accident Reports","Marsh Plaza"));
           const accdata = accidentquery.data();
           let dates = Object.keys(accdata);
@@ -62,10 +62,9 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a = accdata[date][time_key1[0]];
             setMaryAccidentData(a);
-            console.log("Time and accident data at Marsh Plaza",date,"-",time_key1[0],"-",a);
+            // console.log("Time and accident data at Marsh Plaza",date,"-",time_key1[0],"-",a);
             setaccidentresult(""+date+'\t'+time_key1[0]+'\n');              
           });
-
           const obstaclequery = await getDoc(doc(db,"Obstacle Reports","Marsh Plaza"));
           const obsdata = obstaclequery.data();
           dates = Object.keys(obsdata);
@@ -76,11 +75,10 @@ export default function Page() {
             //Gets the most recent timestamp of a obstacle report
             const o = obsdata[date][time_key2[0]];
             setMaryObstacleData(o);
-            console.log("Time and obstacle data at Marsh Plaza",date,"-",time_key2[0],"-",o);
+            // console.log("Time and obstacle data at Marsh Plaza",date,"-",time_key2[0],"-",o);
             setobstacleresult(""+date+'\t'+time_key2[0]+'\n');    
           });
-
-          console.log("BU Bridge");
+          // console.log("BU Bridge");
           const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Bridge"));
           const accdata2 = accidentquery2.data();
           dates = Object.keys(accdata2);
@@ -91,7 +89,7 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a2 = accdata2[date][time_key1[0]];
             setCentralAccidentData(a2);
-            console.log("Time and accident data at BU Bridge",date,"-",time_key1[0],"-",a2);
+            // console.log("Time and accident data at BU Bridge",date,"-",time_key1[0],"-",a2);
             setaccidentresult2(""+date+'\t'+time_key1[0]+'\n');
             
           });
@@ -106,11 +104,11 @@ export default function Page() {
             //Gets the most recent timestamp of a obstacle report
             const o2 = obsdata2[date][time_key2[0]];
             setCentralObstacleData(o2);
-            console.log("Time and obstacle data at BU Bridge",date,"-",time_key2[0],"-",o2);
+            // console.log("Time and obstacle data at BU Bridge",date,"-",time_key2[0],"-",o2);
             setobstacleresult2(""+date+'\t'+time_key2[0]+'\n');
           });
 
-          console.log("CCDS");
+          // console.log("CCDS");
           const accidentquery3 = await getDoc(doc(db,"Accident Reports","CCDS"));
           const accdata3 = accidentquery3.data();
           dates = Object.keys(accdata3);
@@ -121,7 +119,7 @@ export default function Page() {
             //Gets the most recent timestamp of a accident report
             const a3 = accdata3[date][time_key2[0]];
             setEastAccidentData(a3);
-            console.log("Time and accident data at CCDS",date,"-",time_key2[0],"-",a3);
+            // console.log("Time and accident data at CCDS",date,"-",time_key2[0],"-",a3);
             setaccidentresult3(""+date+'\t'+time_key2[0]+'\n');
             
           });
@@ -136,13 +134,13 @@ export default function Page() {
             //Gets the most recent timestamp of a obstacle report
             const o3 = obsdata3[date][time_key2[0]];
             setEastObstacleData(o3);
-            console.log("Time and obstacle data at CCDS",date,"-",time_key2[0],"-",o3);
+            // console.log("Time and obstacle data at CCDS",date,"-",time_key2[0],"-",o3);
             setobstacleresult3(""+date+'\t'+time_key2[0]+'\n');
           });
 
           setIsLoading(false);
         }catch(e){
-          console.log('Error Fetching Data',e);
+           console.log('Error Fetching Data',e);
         }
       };
       fetchData()
@@ -191,6 +189,64 @@ export default function Page() {
         setOData3(o3);      
     }
   },[isLoading, MaryaccidentData, MaryobstacleData,CentralaccidentData,CentralobstacleData,EastaccidentData,EastobstacleData]);
+
+//marker that pops up if there are reports at a beacon
+const RedDot = () => {
+  return (
+    <Icon2 name="dot-fill" size={20} color="#fe2d01" /> 
+  )
+};
+//default view of the bottomsheet
+const DefaultMap = () => {
+  return (
+    <View>
+    <Text style={styles.bottomSheetHeader}>Nearby Beacons</Text>
+    <View style={styles.settingsContainer}>
+      <View style={styles.rowContainer}>
+        <Text style={styles.toggleText}>Marsh Plaza</Text>
+      </View>
+      <View style={styles.rowContainer3}>
+        { MarshPlaza_numreports ? <RedDot /> : null}
+        <TouchableOpacity onPress={() => {
+          setSelectedMarker({title: "Marsh Plaza"});
+         
+        }}>
+            {<Text style={styles.toggleText}>{MarshPlaza_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{MarshPlaza_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View style={styles.settingsContainer}>
+      <View style={styles.rowContainer}>
+        <Text style={styles.toggleText}>CCDS</Text>
+      </View>
+      <View style={styles.rowContainer3}>
+      { CCDS_numreports ? <RedDot /> : null}
+        <TouchableOpacity onPress={() => {
+          setSelectedMarker({ title: "CCDS" });
+         
+        }}>
+          {<Text style={styles.toggleText}>{CCDS_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{CCDS_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}        
+        </TouchableOpacity>
+      </View>
+    </View>
+    <View style={styles.settingsContainer}>
+      <View style={styles.rowContainer}>
+        <Text style={styles.toggleText}>BU Bridge</Text>
+      </View>
+      <View style={styles.rowContainer3}>
+      { BuBridge_numreports ? <RedDot /> : null}
+        <TouchableOpacity onPress={() => {
+          setSelectedMarker({ title: "BU Bridge" });
+
+        }}>
+          {<Text style={styles.toggleText}>{BuBridge_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{BuBridge_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+  )
+};
+
   useEffect(() => {
     let locationWatcher = null;
 
@@ -211,9 +267,7 @@ export default function Page() {
         }
       );
     };
-
     startWatching();
-
     return () => {
       if (locationWatcher) {
         locationWatcher.remove();
@@ -274,10 +328,8 @@ export default function Page() {
       altitude: 4000,
     });
   };
-  const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
 
-  const bottomSheetRef = useRef(null);
-  const [selectedMarker, setSelectedMarker] = useState(null);
+
   const renderMarkers = () => {
     return locationData.map((marker, index) => {
       return (
@@ -298,23 +350,15 @@ export default function Page() {
             else {
               setSelectedMarker(marker);
               goToMarkerLocation(marker);
-            ;
-             
             }
-            
-          }}
-        >
-          {/* <Image source={require("../../assets/Mapmarker.svg")} />
-           */}
+          }}>
           <Mapmarker />
         </Marker>
       );
     });
   };
-  
   return (
     <>
-    
       <BackgroundLocation />
       <View style={styles.map_container}>
         <MapView
@@ -333,70 +377,60 @@ export default function Page() {
           showsTraffic={true}
           showsIndoors={true}
           showsMyLocationButton={true}
-          // followsUserLocation={true}
         >
-          {/* <RenderMarkers /> */}
           {renderMarkers()}
         </MapView>
         <LocationButton />
         {selectedMarker ? <DefaultMapButton /> : null}
         <BottomSheet
           snapPoints={snapPoints}
-          backgroundStyle={localStyles.bottomSheetContainer}
-          style={localStyles.bottomSheetContainer}
+          backgroundStyle={styles.bottomSheetContainer}
+          style={styles.bottomSheetContainer}
           index={1}
           ref={bottomSheetRef}
         >
           {selectedMarker === null && <DefaultMap />}
 
-
           {selectedMarker !== null && selectedMarker.title === "Marsh Plaza" &&  
-          <View>
-          <Text style={localStyles.bottomSheetHeader}>Marsh Plaza</Text>
-         
-          <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+      <View>
+          <Text style={styles.bottomSheetHeader}>Marsh Plaza</Text>
+          <Text style={styles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
         <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
-        <Text style={styles.collapsibleTitle}>{Odata? Odata: 'Loading...'}</Text> 
+            <Text style={styles.collapsibleTitle}>{Odata? Odata: 'Loading...'}</Text> 
         </CollapsibleView>
-        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
-         <Text style={styles.collapsibleTitle}>{Adata? Adata: 'Loading...'}</Text> 
-         
-        </CollapsibleView>
-        
-        </View>
-        }
 
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+            <Text style={styles.collapsibleTitle}>{Adata? Adata: 'Loading...'}</Text> 
+        </CollapsibleView>
+      </View>}
 
           {selectedMarker !== null && selectedMarker.title === "BU Bridge" && 
-          <View>
-          <Text style={localStyles.bottomSheetHeader}>BU Bridge</Text>
-         
-          <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-          <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>}  titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+      <View>
+          <Text style={styles.bottomSheetHeader}>BU Bridge</Text>
+          <Text style={styles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>}  titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
           <Text style={styles.collapsibleTitle}>{Odata2? Odata2: 'Loading...'}</Text> 
-          </CollapsibleView>
-          <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
-          <Text style={styles.collapsibleTitle}>{Adata2? Adata2: 'Loading...'}</Text> 
-         
         </CollapsibleView>
-       
-        </View>
+
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+          <Text style={styles.collapsibleTitle}>{Adata2? Adata2: 'Loading...'}</Text> 
+        </CollapsibleView>
+      </View>
           }
 
           {selectedMarker !== null && selectedMarker.title === "CCDS" &&
-             <View>
-             <Text style={localStyles.bottomSheetHeader}>CCDS</Text>
-            
-             <Text style={localStyles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
-             <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
-              <Text style={styles.collapsibleTitle}>{Odata3? Odata3: 'Loading...'}</Text> 
-             </CollapsibleView>
-             <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
-              <Text style={styles.collapsibleTitle}>{Adata3? Adata3: 'Loading...'}</Text> 
-             </CollapsibleView>
+      <View>
+          <Text style={styles.bottomSheetHeader}>CCDS</Text>
+          <Text style={styles.bottomSheetSubheader}>REPORTS THIS WEEK</Text>
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Obstacles</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+          <Text style={styles.collapsibleTitle}>{Odata3? Odata3: 'Loading...'}</Text> 
+        </CollapsibleView>
+
+        <CollapsibleView title={<Text style={styles.collapsibleTitle}>Accidents</Text>} titleStyle={styles.collapsibleTitle} style={styles.collapsibleContainer} collapsibleContainerStyle={styles.collapsibleContainerFull} unmountOnCollapse={true}>
+          <Text style={styles.collapsibleTitle}>{Adata3? Adata3: 'Loading...'}</Text> 
+        </CollapsibleView>
            </View>
           }
-       
         </BottomSheet>
       </View>
     </>
@@ -405,53 +439,3 @@ export default function Page() {
 };
 
 
-
-const localStyles = StyleSheet.create({
-  bottomSheetContainer: {
-    backgroundColor: "#ecedf2",
-    flex: 1,
-    padding: 10,
-    borderRadius: 10,
-    borderWidth: 0.3,
-    borderColor: "#52525a",
-  },
-  bottomSheetSubheader: {
-    fontFamily: "Montserrat-Regular",
-    color: "#52525a",
-    fontSize: 14,
-    textAlign: "left",
-    paddingLeft: 20,
-    marginVertical: 10,
-  },
-  bottomSheetHeader: {
-    fontSize: 20,
-    fontFamily: "Montserrat-Bold",
-    marginLeft: 20,
-  },
-  rowContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(0, 0, 0, 0.1)",
-    marginHorizontal: -15,
-  },
-  rowContainer3: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 15,
-    paddingRight: 50,
-  },
-  settingsContainer: {
-    backgroundColor: "white",
-    borderRadius: 16,
-    elevation: 5,
-    marginBottom: 15,
-    paddingHorizontal: 25, // Add padding to separate elements
-    marginHorizontal: 15,
-    marginVertical: 15,
-  },
-});

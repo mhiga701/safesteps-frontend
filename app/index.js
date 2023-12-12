@@ -7,6 +7,7 @@ import Onboarding2 from '../assets/Second.svg';
 import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
 
+//custom onboarding dots to show which page you're on
 const Circle = ({ isLight, selected }) => {
   let backgroundColor;
   if (isLight) {
@@ -29,6 +30,7 @@ const Circle = ({ isLight, selected }) => {
   );
 };
 
+//onboarding buttons
 const Next = ({ ...props }) => {
   return (
 <TouchableOpacity style={styles.nextButton} {...props} >
@@ -54,11 +56,11 @@ const Skip = ({ ...props }) => {
 }
 export default function OnboardingScreen(){
   const router = useRouter();
-
+  //navigates to the home screen after onboarding is done/if skipped
   const handleDone = () => {
     router.push("(tabs)");
   };
-  //IMPLEMENT SKIP BUTTON
+
   return (
     <Onboarding
     onDone={handleDone}
@@ -115,8 +117,7 @@ export default function OnboardingScreen(){
       ),
       subtitle: (
         <View style={styles.onboardingContainer}>
-                    <Text style={styles.onboarding2Subtitle}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
-
+            <Text style={styles.onboarding2Subtitle}>Report traffic accidents and road obstacles on the reporting page to help keep other users safe and up-to-date.</Text>
         </View>
       ),
       
