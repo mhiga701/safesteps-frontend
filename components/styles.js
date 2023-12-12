@@ -147,7 +147,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 30, // Adjust this value for vertical padding
     // Shadow/elevation for iOS and Android respectively
     shadowColor: "#000",
-
     shadowOffset: {
       width: 0,
       height: 1,
@@ -163,6 +162,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 15,
     paddingHorizontal: 15, // Add padding to separate elements
+    paddingTop: 10
   },
   boundary: {
     height: 1,
@@ -173,7 +173,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 15,
+    paddingTop: 25,
     paddingHorizontal: 15,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(0, 0, 0, 0.1)",
@@ -195,7 +195,8 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginBottom: 10,
+    marginTop: 20,
+
   },
   buttonHomeScreen: {
     backgroundColor: "#B164E8",

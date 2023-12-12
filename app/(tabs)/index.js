@@ -2,13 +2,7 @@ import { View, TouchableOpacity, Text, StyleSheet, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { styles } from "../../components/styles";
 import * as Location from "expo-location";
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useState, useEffect, useRef, useMemo, } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import BottomSheet from "@gorhom/bottom-sheet";
 import BackgroundLocation from "../../components/BackgroundLocation";
@@ -18,15 +12,16 @@ import DefaultMap from "../../components/Bottomsheets";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { db } from "../../firebase";
-import { doc, setDoc, addDoc,getDoc, collection,updateDoc} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
+
 let BuBridge_numreports = 0;
 let MarshPlaza_numreports = 0;
 let CCDS_numreports = 0;
 
 export {BuBridge_numreports,MarshPlaza_numreports,CCDS_numreports};
+
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
-  // const background = BluetoothClient();
   const mapRef = useRef();
   
   const [MaryaccidentData, setMaryAccidentData] = useState(null);
