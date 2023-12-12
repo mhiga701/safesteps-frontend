@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { styles } from "./styles";
 //import { CollapsibleView } from '@eliav2/react-native-collapsible-view';
 import Icon2 from "react-native-vector-icons/Octicons";
-
+import {BuBridge_numreports,CCDS_numreports,MarshPlaza_numreports} from '../app/(tabs)/index.js';
 export default DefaultMap = () => {
   return (
     <View>
@@ -16,7 +16,7 @@ export default DefaultMap = () => {
         <Icon2 name="dot-fill" size={20} color="#fe2d01" />
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.toggleText}>
-            2 New Reports Since Yesterday
+            {MarshPlaza_numreports+' New Reports Since Yesterday' ? MarshPlaza_numreports+ ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}
           </Text>
         </TouchableOpacity>
       </View>
@@ -29,7 +29,7 @@ export default DefaultMap = () => {
         {/* <Icon name="dot-circle-o" size={15} color="#fe2d01" /> */}
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.toggleText}>
-            No New Reports Since Yesterday
+          {CCDS_numreports+' New Reports Since Yesterday' ? CCDS_numreports+ ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}          
           </Text>
         </TouchableOpacity>
       </View>
@@ -42,7 +42,8 @@ export default DefaultMap = () => {
         <Icon2 name="dot-fill" size={20} color="#fe2d01" />
         <TouchableOpacity onPress={() => {}}>
           <Text style={styles.toggleText}>
-            1 New Report Since Yesterday
+          {BuBridge_numreports+' New Reports Since Yesterday' ? BuBridge_numreports + ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}
+            
           </Text>
         </TouchableOpacity>
       </View>

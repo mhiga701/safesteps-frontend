@@ -19,12 +19,16 @@ import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { db } from "../../firebase";
 import { doc, setDoc, addDoc,getDoc, collection,updateDoc} from "firebase/firestore";
+let BuBridge_numreports = 0;
+let MarshPlaza_numreports = 0;
+let CCDS_numreports = 0;
+
+export {BuBridge_numreports,MarshPlaza_numreports,CCDS_numreports};
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
   // const background = BluetoothClient();
   const mapRef = useRef();
-  const date = new Date();
-  const day = date.toLocaleDateString();
+  
   const [MaryaccidentData, setMaryAccidentData] = useState(null);
   const [MaryobstacleData, setMaryObstacleData] = useState(null);
   const [CentralaccidentData, setCentralAccidentData] = useState(null);
@@ -37,11 +41,18 @@ export default function Page() {
   const [Adata2, setAData2] = useState("");
   const [Odata3, setOData3] = useState("");
   const [Adata3, setAData3] = useState("");
-  const timeOptions = { hour12: true, hour: 'numeric', minute: 'numeric' };
-  const time = date.toLocaleTimeString('en-US', timeOptions);
+
   const [location, setLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  
+  const [accidentresult, setaccidentresult] = useState("");
+  const [obstacleresult, setobstacleresult] = useState("");
+  const [accidentresult2, setaccidentresult2] = useState("");
+  const [obstacleresult2, setobstacleresult2] = useState("");
+  const [accidentresult3, setaccidentresult3] = useState("");
+  const [obstacleresult3, setobstacleresult3] = useState("");
 
+  
   useEffect(() => {
     const fetchData = async () => {
         try{
@@ -68,8 +79,11 @@ export default function Page() {
             setMaryObstacleData(o);
             console.log("Time and obstacle data at Marsh Plaza",date,"-",time_key2[0],"-",o);
             
+            setaccidentresult(""+date+'\t'+time_key1[0]+'\n');
+            setobstacleresult(""+date+'\t'+time_key2[0]+'\n');
+            
+            
           });
-          
           console.log("BU Bridge");
           
           const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Bridge"));
@@ -92,6 +106,8 @@ export default function Page() {
             const o2 = obsdata2[date][time_key2[0]];
             setCentralObstacleData(o2);
             console.log("Time and obstacle data at BU Bridge",date,"-",time_key2[0],"-",o2);
+            setaccidentresult2(""+date+'\t'+time_key1[0]+'\n');
+            setobstacleresult2(""+date+'\t'+time_key2[0]+'\n');
             
           });
         
@@ -120,7 +136,9 @@ export default function Page() {
             const o3 = obsdata3[date][time_key3[0]];
             setEastObstacleData(o3);
             console.log("Time and obstacle data at CCDS",date,"-",time_key3[0],"-",o3);
-            
+
+            setaccidentresult3(""+date+'\t'+time_key2[0]+'\n');
+            setobstacleresult3(""+date+'\t'+time_key3[0]+'\n');
           });
           setIsLoading(false);
         }catch(e){
@@ -128,47 +146,51 @@ export default function Page() {
         }
       };
       fetchData()
+      
   },[]);
-
+  
   useEffect(() => {
     if (!isLoading){
-      let accidentresult = ""+day+'\t'+time+'\n';
-      let obstacleresult = ""+day+'\t'+time+'\n';
-            
+      let a = accidentresult;
+      let o = obstacleresult;
+     
+      MarshPlaza_numreports = MaryaccidentData.length + MaryobstacleData.length;
+      
       for (let i = 0; i< MaryaccidentData.length; i++){
-          accidentresult += (i+1) + ':'+MaryaccidentData[i] + '\n';
+          a += (i+1) + ':'+MaryaccidentData[i] + '\n';
       }
       for (let i = 0; i<MaryobstacleData.length; i++){
-          obstacleresult += (i+1) + ':'+MaryobstacleData[i] + '\n';
+          o += (i+1) + ':'+MaryobstacleData[i] + '\n';
       }
-      setAData(accidentresult);
-      setOData(obstacleresult);
+      setAData(a);
+      setOData(o);
 
-      accidentresult = ""+day+'\t'+time+'\n';
-      obstacleresult = ""+day+'\t'+time+'\n';
+      let a2 = accidentresult2;
+      let o2 = obstacleresult2;
+      BuBridge_numreports = CentralaccidentData.length + CentralobstacleData.length;
+      
       for (let i = 0; i< CentralaccidentData.length; i++){
-        accidentresult += (i+1) + ':'+ CentralaccidentData[i] + '\n';
+        a2 += (i+1) + ':'+ CentralaccidentData[i] + '\n';
       }
       for (let i = 0; i<CentralobstacleData.length; i++){
-        obstacleresult += (i+1) + ':'+ CentralobstacleData[i] + '\n';
+        o2 += (i+1) + ':'+ CentralobstacleData[i] + '\n';
       }
-        setAData2(accidentresult);
-        setOData2(obstacleresult);
-        accidentresult = ""+day+'\t'+time+'\n';
-        obstacleresult = ""+day+'\t'+time+'\n';
-        for (let i = 0; i< EastaccidentData.length; i++){
-          accidentresult += (i+1) + ':'+ EastaccidentData[i] + '\n';
-        }
-        for (let i = 0; i<EastobstacleData.length; i++){
-          obstacleresult += (i+1) + ':'+ EastobstacleData[i] + '\n';
-        }
-        setAData3(accidentresult);
-        setOData3(obstacleresult);
+        setAData2(a2);
+        setOData2(o2);
+      let a3 = accidentresult3;
+      let o3 = obstacleresult3;
+      CCDS_numreports = EastaccidentData.length + EastobstacleData.length;
       
-            
+      for (let i = 0; i< EastaccidentData.length; i++){
+        a3 += (i+1) + ':'+ EastaccidentData[i] + '\n';
+      }
+      for (let i = 0; i<EastobstacleData.length; i++){
+        o3 += (i+1) + ':'+ EastobstacleData[i] + '\n';
+      }
+        setAData3(a3);
+        setOData3(o3);      
     }
   },[isLoading, MaryaccidentData, MaryobstacleData,CentralaccidentData,CentralobstacleData,EastaccidentData,EastobstacleData]);
-
   useEffect(() => {
     let locationWatcher = null;
 
@@ -289,7 +311,7 @@ export default function Page() {
       );
     });
   };
-
+  
   return (
     <>
     
@@ -379,7 +401,10 @@ export default function Page() {
       </View>
     </>
   );
-}
+  
+};
+
+
 
 const localStyles = StyleSheet.create({
   bottomSheetContainer: {
