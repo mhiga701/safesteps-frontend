@@ -4,6 +4,13 @@ import { styles } from "./styles";
 //import { CollapsibleView } from '@eliav2/react-native-collapsible-view';
 import Icon2 from "react-native-vector-icons/Octicons";
 import {BuBridge_numreports,CCDS_numreports,MarshPlaza_numreports} from '../app/(tabs)/index.js';
+
+const RedDot = () => {
+  return (
+    <Icon2 name="dot-fill" size={20} color="#fe2d01" /> 
+  )
+}
+
 export default DefaultMap = () => {
   return (
     <View>
@@ -13,11 +20,11 @@ export default DefaultMap = () => {
         <Text style={styles.toggleText}>Marsh Plaza</Text>
       </View>
       <View style={localStyles.rowContainer3}>
-        <Icon2 name="dot-fill" size={20} color="#fe2d01" />
+        { MarshPlaza_numreports ? <RedDot /> : null}
         <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.toggleText}>
-            {MarshPlaza_numreports+' New Reports Since Yesterday' ? MarshPlaza_numreports+ ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}
-          </Text>
+        
+            {<Text style={styles.toggleText}>{MarshPlaza_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{MarshPlaza_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}
+    
         </TouchableOpacity>
       </View>
     </View>
@@ -26,11 +33,11 @@ export default DefaultMap = () => {
         <Text style={styles.toggleText}>CCDS</Text>
       </View>
       <View style={localStyles.rowContainer3}>
-        {/* <Icon name="dot-circle-o" size={15} color="#fe2d01" /> */}
+      { CCDS_numreports ? <RedDot /> : null}
         <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.toggleText}>
-          {CCDS_numreports+' New Reports Since Yesterday' ? CCDS_numreports+ ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}          
-          </Text>
+         
+          {<Text style={styles.toggleText}>{CCDS_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{CCDS_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}        
+   
         </TouchableOpacity>
       </View>
     </View>
@@ -39,12 +46,12 @@ export default DefaultMap = () => {
         <Text style={styles.toggleText}>BU Bridge</Text>
       </View>
       <View style={localStyles.rowContainer3}>
-        <Icon2 name="dot-fill" size={20} color="#fe2d01" />
+      { BuBridge_numreports ? <RedDot /> : null}
         <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.toggleText}>
-          {BuBridge_numreports+' New Reports Since Yesterday' ? BuBridge_numreports + ' New Reports Since Yesterday' : '0 new Reports Since Yesterday'}
+        
+          {<Text style={styles.toggleText}>{BuBridge_numreports} New Reports Since Yesterday</Text> ? <Text style={styles.toggleText}>{BuBridge_numreports} New Reports Since Yesterday</Text> : <Text style={styles.toggleText}>0 new Reports Since Yesterday</Text>}
             
-          </Text>
+        
         </TouchableOpacity>
       </View>
     </View>

@@ -896,7 +896,7 @@ export const styles = StyleSheet.create({
   skipButtonText: {
     textAlign: "center",
     color: "#fe2d01",
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Montserrat-Regular",
     marginTop: 8,
   },
