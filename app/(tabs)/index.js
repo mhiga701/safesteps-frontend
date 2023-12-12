@@ -39,47 +39,19 @@ export default function Page() {
   const timeOptions = { hour12: true, hour: 'numeric', minute: 'numeric' };
   const time = date.toLocaleTimeString('en-US', timeOptions);
   const [location, setLocation] = useState(null);
-  const test = async () =>{
-    
-      const accidentquery = await getDoc(doc(db,"Accident Reports","St Mary's Street"));
-      const accdata = accidentquery.data();
-      console.log(day);
-      console.log(time);
-      const q = accdata[day]['9:05 PM'];
-      console.log("Document data:", q);
+  const [isLoading, setIsLoading] = useState(true);
 
-      const obstaclequey = await getDoc(doc(db,"Obstacle Reports","St Mary's Street"));
-      const obsdata = obstaclequey.data();
-      const o = obsdata[day]['9:05 PM'];
-      console.log("Document data:", o);
-      return;
-  };
   useEffect(() => {
     const fetchData = async () => {
         try{
-          // const intersection = ["BU Central","St Mary's Street","BU East"];
-          // for (let i = 0; i < intersection.length;i++){
-          //   const obstaclequey = await getDoc(doc(db,"Obstacle Reports",intersection[i]));
-          //   const obsdata = obstaclequey.data();
-          //   const o = obsdata[day]['10:19 PM'];
-          //   setMaryObstacleData(o);
-          //   // setCentralObstacleData
-          //   // setEastObstacleData
-          //   let obstacleresult = ""+day+'\t'+time+'\n';
-          //   for (let j = 0; MaryobstacleData.length;j++){
-          //     obstacleresult += i + ':'+MaryobstacleData[i] + '\n';
-          //   }
-          // }
-          
-
           console.log("Marsh Plaza");
           const accidentquery = await getDoc(doc(db,"Accident Reports","Marsh Plaza"));
           const accdata = accidentquery.data();
           let dates = Object.keys(accdata);
           const obstaclequery = await getDoc(doc(db,"Obstacle Reports","Marsh Plaza"));
           const obsdata = obstaclequery.data();
-          one_day = dates;
-          console.log(one_day);
+          //one_day = dates;
+          //console.log(one_day);
           dates.forEach(date => {
             
             const time1 = accdata[date];
@@ -96,21 +68,9 @@ export default function Page() {
             console.log("Time and obstacle data at Marsh Plaza",date,"-",time_key2[0],"-",o);
             
           });
-
-          let accidentresult = ""+day+'\t'+time+'\n';
-          let obstacleresult = ""+day+'\t'+time+'\n';
-          
-          for (let i = 0; i< MaryaccidentData.length; i++){
-            accidentresult += (i+1) + ':'+MaryaccidentData[i] + '\n';
-          }
-          for (let i = 0; i<MaryobstacleData.length; i++){
-            obstacleresult += (i+1) + ':'+MaryobstacleData[i] + '\n';
-          }
-          setAData(accidentresult);
-          setOData(obstacleresult);
           
           console.log("BU Bridge");
-
+          
           const accidentquery2 = await getDoc(doc(db,"Accident Reports","BU Bridge"));
           const accdata2 = accidentquery2.data();
           dates = Object.keys(accdata2);
@@ -133,20 +93,8 @@ export default function Page() {
             console.log("Time and obstacle data at BU Bridge",date,"-",time_key2[0],"-",o2);
             
           });
-          // console.log(o3);
+        
           
-          accidentresult = ""+day+'\t'+time+'\n';
-          obstacleresult = ""+day+'\t'+time+'\n';
-          for (let i = 0; i< CentralaccidentData.length; i++){
-            accidentresult += (i+1) + ':'+ CentralaccidentData[i] + '\n';
-          }
-          for (let i = 0; i<CentralobstacleData.length; i++){
-            obstacleresult += (i+1) + ':'+ CentralobstacleData[i] + '\n';
-          }
-          setAData2(accidentresult);
-          setOData2(obstacleresult);
-          
-
           console.log("CCDS");
 
           const accidentquery3 = await getDoc(doc(db,"Accident Reports","CCDS"));
@@ -173,24 +121,52 @@ export default function Page() {
             console.log("Time and obstacle data at CCDS",date,"-",time_key3[0],"-",o3);
             
           });
-          
-          accidentresult = ""+day+'\t'+time+'\n';
-          obstacleresult = ""+day+'\t'+time+'\n';
-          for (let i = 0; i< EastaccidentData.length; i++){
-            accidentresult += (i+1) + ':'+ EastaccidentData[i] + '\n';
-          }
-          for (let i = 0; i<EastobstacleData.length; i++){
-            obstacleresult += (i+1) + ':'+ EastobstacleData[i] + '\n';
-          }
-          setAData3(accidentresult);
-          setOData3(obstacleresult);
-          
+          setIsLoading(false);
         }catch(e){
           console.log('Error Fetching Data',e);
         }
       };
       fetchData()
   },[]);
+
+  useEffect(() => {
+    if (!isLoading){
+      let accidentresult = ""+day+'\t'+time+'\n';
+      let obstacleresult = ""+day+'\t'+time+'\n';
+            
+      for (let i = 0; i< MaryaccidentData.length; i++){
+          accidentresult += (i+1) + ':'+MaryaccidentData[i] + '\n';
+      }
+      for (let i = 0; i<MaryobstacleData.length; i++){
+          obstacleresult += (i+1) + ':'+MaryobstacleData[i] + '\n';
+      }
+      setAData(accidentresult);
+      setOData(obstacleresult);
+
+      accidentresult = ""+day+'\t'+time+'\n';
+      obstacleresult = ""+day+'\t'+time+'\n';
+      for (let i = 0; i< CentralaccidentData.length; i++){
+        accidentresult += (i+1) + ':'+ CentralaccidentData[i] + '\n';
+      }
+      for (let i = 0; i<CentralobstacleData.length; i++){
+        obstacleresult += (i+1) + ':'+ CentralobstacleData[i] + '\n';
+      }
+        setAData2(accidentresult);
+        setOData2(obstacleresult);
+        accidentresult = ""+day+'\t'+time+'\n';
+        obstacleresult = ""+day+'\t'+time+'\n';
+        for (let i = 0; i< EastaccidentData.length; i++){
+          accidentresult += (i+1) + ':'+ EastaccidentData[i] + '\n';
+        }
+        for (let i = 0; i<EastobstacleData.length; i++){
+          obstacleresult += (i+1) + ':'+ EastobstacleData[i] + '\n';
+        }
+        setAData3(accidentresult);
+        setOData3(obstacleresult);
+      
+            
+    }
+  },[isLoading, MaryaccidentData, MaryobstacleData,CentralaccidentData,CentralobstacleData,EastaccidentData,EastobstacleData]);
 
   useEffect(() => {
     let locationWatcher = null;
