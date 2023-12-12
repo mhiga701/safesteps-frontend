@@ -35,14 +35,40 @@ export const styles = StyleSheet.create({
     right: 20,
     // bottom: 90,
     padding: 6,
-    backgroundColor: "white",
-    borderRadius: 300,
+    backgroundColor: "#fcfcfc",
+    height: 40,
+    width: 40,
+    borderRadius: 20,
     elevation: 10, // for Android
     shadowColor: "#000000", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
     shadowOpacity: 0.5, // for iOS
     shadowRadius: 2, // for iOS
   },
+  initialButton: {
+    position: "absolute",
+    top: 50,
+    left: 20,
+    padding: 6,
+    backgroundColor: "#fcfcfc",
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    elevation: 10, // for Android
+    shadowColor: "#000000", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
+  },
+  mapButtonStyle: {
+     marginLeft: 3,
+     marginTop: 1,
+  },
+  initButtonStyle: {
+    marginLeft: 3,
+    marginTop: 1,
+  },
+
   map: {
     width: "100%",
     height: "100%",

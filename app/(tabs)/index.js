@@ -16,6 +16,7 @@ import Mapmarker from "../../assets/Mapmarker.svg";
 import { locationData } from "../../components/Beacons";
 import DefaultMap from "../../components/Bottomsheets";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
+import Ionicon from 'react-native-vector-icons/Ionicons';
 import { db } from "../../firebase";
 import { doc, setDoc, addDoc,getDoc, collection,updateDoc} from "firebase/firestore";
 export default function Page() {
@@ -200,7 +201,16 @@ export default function Page() {
 
   const LocationButton = () => (
     <TouchableOpacity style={styles.locationButton} onPress={goToMyLocation}>
-      <Icon name="crosshairs" size={25} color="#066ee6" />
+      <Icon name="crosshairs" size={25} color="#5787f5" style={styles.mapButtonStyle} />
+    </TouchableOpacity>
+  );
+
+  const DefaultMapButton = () => (
+    <TouchableOpacity style={styles.initialButton} onPress={() => {
+      goToInitialLocation();
+      setSelectedMarker(null);
+    }}>
+      <Ionicon name="arrow-back" size={25} color="#52525a" style={styles.initButtonStyle} />
     </TouchableOpacity>
   );
 
@@ -266,6 +276,7 @@ export default function Page() {
             else {
               setSelectedMarker(marker);
               goToMarkerLocation(marker);
+            ;
              
             }
             
@@ -306,6 +317,7 @@ export default function Page() {
           {renderMarkers()}
         </MapView>
         <LocationButton />
+        {selectedMarker ? <DefaultMapButton /> : null}
         <BottomSheet
           snapPoints={snapPoints}
           backgroundStyle={localStyles.bottomSheetContainer}
