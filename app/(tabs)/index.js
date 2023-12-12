@@ -18,7 +18,11 @@ import DefaultMap from "../../components/Bottomsheets";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import { db } from "../../firebase";
 import { doc, setDoc, addDoc,getDoc, collection,updateDoc} from "firebase/firestore";
+let BuBridge_numreports = 0;
+let MarshPlaza_numreports = 0;
+let CCDS_numreports = 0;
 
+export {BuBridge_numreports,MarshPlaza_numreports,CCDS_numreports};
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
   // const background = BluetoothClient();
@@ -46,6 +50,8 @@ export default function Page() {
   const [obstacleresult2, setobstacleresult2] = useState("");
   const [accidentresult3, setaccidentresult3] = useState("");
   const [obstacleresult3, setobstacleresult3] = useState("");
+
+  
   useEffect(() => {
     const fetchData = async () => {
         try{
@@ -139,13 +145,16 @@ export default function Page() {
         }
       };
       fetchData()
-      return {MaryaccidentData}
+      
   },[]);
-
+  
   useEffect(() => {
     if (!isLoading){
       let a = accidentresult;
       let o = obstacleresult;
+     
+      MarshPlaza_numreports = MaryaccidentData.length + MaryobstacleData.length;
+      
       for (let i = 0; i< MaryaccidentData.length; i++){
           a += (i+1) + ':'+MaryaccidentData[i] + '\n';
       }
@@ -157,6 +166,8 @@ export default function Page() {
 
       let a2 = accidentresult2;
       let o2 = obstacleresult2;
+      BuBridge_numreports = CentralaccidentData.length + CentralobstacleData.length;
+      
       for (let i = 0; i< CentralaccidentData.length; i++){
         a2 += (i+1) + ':'+ CentralaccidentData[i] + '\n';
       }
@@ -167,6 +178,8 @@ export default function Page() {
         setOData2(o2);
       let a3 = accidentresult3;
       let o3 = obstacleresult3;
+      CCDS_numreports = EastaccidentData.length + EastobstacleData.length;
+      
       for (let i = 0; i< EastaccidentData.length; i++){
         a3 += (i+1) + ':'+ EastaccidentData[i] + '\n';
       }
@@ -378,6 +391,8 @@ export default function Page() {
   );
   
 };
+
+
 
 const localStyles = StyleSheet.create({
   bottomSheetContainer: {
