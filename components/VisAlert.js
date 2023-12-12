@@ -64,7 +64,7 @@ export default function VisAlert() {
         <View style={styles.rowContainer3}>
           <Text style={styles.toggleText}>Visual Alert #2</Text>
           <TouchableOpacity
-            style={styles.button}
+            style={styles.testbutton}
             onPress={() => {
               if (visualAlertEnabled) {
                 setAlert2(true);

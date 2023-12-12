@@ -195,8 +195,16 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: 20,
+    marginTop: 0,
 
+  },
+  testbutton: {
+    backgroundColor: "#B164E8",
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginTop: 0,
+    marginRight: -50,
   },
   buttonHomeScreen: {
     backgroundColor: "#B164E8",
@@ -243,6 +251,7 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 15, // Add padding to separate elements
   },
+
   ReportAccident: {
     color: "black",
     fontSize: 20,
@@ -357,8 +366,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 50,
     paddingVertical: 10,
-    paddingHorizontal: 24,
-    marginBottom: 10,
+    marginLeft: 40,
+    marginTop: 0,
   },
   audiobutton1: {
     backgroundColor: "#fff",
@@ -1003,6 +1012,48 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 25, // Add padding to separate elements
     marginHorizontal: 15,
     marginVertical: 15,
+  },
+  contactUsText: {
+    fontFamily: "Montserrat-SemiBold",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "left",
+    paddingLeft: 10,
+    marginTop: 120,
+    marginBottom: -50,
+  },
+  contactUsText2: {
+    fontFamily: "Montserrat-SemiBold",
+    color: "#52525a",
+    fontSize: 14,
+    textAlign: "left",
+    paddingLeft: 10,
+    marginTop: 80,
+    marginBottom: -20,
+  },
+  ContactContainer: {
+    top: 35,
+    width: "100%",
+    height: "5%",
+    background: "white",
+    borderRadius: 10,
+    backgroundColor: "white",
+    borderRadius: 16,
+    elevation: 5,
+    paddingHorizontal: 15, // Add padding to separate elements
+  },
+  ContactContainer2: {
+    bottom: 50,
+    width: "100%",
+    height: "40%",
+    background: "white",
+    borderRadius: 10,
+    backgroundColor: "white",
+    borderRadius: 16,
+    elevation: 5,
+    marginTop: 80,
+    paddingHorizontal: 15,
+    marginBottom: -50, // Add padding to separate elements
   },
 });
 

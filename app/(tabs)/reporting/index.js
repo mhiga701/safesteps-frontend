@@ -63,7 +63,7 @@ export default function RPage() {
             </View>
             <View style={styles.contactButtonContainer}>
                 <View style={{top:-20}}>
-                <TouchableOpacity style={styles.contactButton}>
+                <TouchableOpacity style={styles.contactButton} onPress={() => router.push("/reporting/contact")}>
                     <Ionicon name="chatbubbles" size={25} color="#5787f5" />
                     <Text style={styles.callButtonText}>Contact Us</Text>
                 </TouchableOpacity>
