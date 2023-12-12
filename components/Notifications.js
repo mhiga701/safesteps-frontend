@@ -85,7 +85,7 @@ export default function PushNotifications() {
     </>
   );
 }
-async function schedulePushNotification() {
+export async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "APPROACHING INTERSECTION! 🚨",

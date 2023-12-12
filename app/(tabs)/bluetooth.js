@@ -18,11 +18,12 @@ import {
   Image,
 } from "react-native";
 import BleManager from "react-native-ble-manager";
+import { Audio } from "expo-av";
 import { styles } from "../../components/styles";
 import BluetoothHeader from "../../assets/BluetoothHeader.svg";
 import { getValueFor } from "../../components/ExpoStorage";
 import { useFocusEffect } from "expo-router";
-// import BluetoothDiff from "../../components/BluetoothDiff";
+import { schedulePushNotification } from "../../components/Notifications";
 
 export const UUID_filter = ["6969"];
 
@@ -40,6 +41,56 @@ const bluetooth = () => {
   const [notificationAlert, setNotificationAlert] = useState(false);
   const [alert, setAlert] = useState(false);
   const [flag, setFlag] = useState(false);
+  const [playAudio, setPlayAudio] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [soundIndex, setSoundIndex] = useState(0);
+
+  const sounds = [
+    "beep.mp3",
+    "chimes.wav",
+    "clicks.wav",
+    "dingdong.wav",
+    "dundun.wav",
+    "flutes.wav",
+  ];
+
+  const soundNames = [
+    "Beep (Default)",
+    "Alert",
+    "Beacon",
+    "Bulletin",
+    "By The Seaside",
+    "Chimes",
+  ];
+
+  const soundFiles = {
+    "beep.mp3": require("../../assets/sounds/beep.mp3"),
+    "chimes.wav": require("../../assets/sounds/chimes.wav"),
+    "clicks.wav": require("../../assets/sounds/clicks.wav"),
+    "dingdong.wav": require("../../assets/sounds/dingdong.wav"),
+    "dundun.wav": require("../../assets/sounds/dundun.wav"),
+    "flutes.wav": require("../../assets/sounds/flutes.wav"),
+  };
+
+  playSound = async () => {
+    const sound = new Audio.Sound();
+    try {
+      let source = sounds[soundIndex];
+      await sound.loadAsync(soundFiles[source]);
+      await sound
+        .playAsync()
+        .then(async (playbackStatus) => {
+          setTimeout(() => {
+            sound.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useFocusEffect(() => {
     getValueFor("visualAlertEnabled").then((value) => {
@@ -54,6 +105,10 @@ const bluetooth = () => {
       console.log("Got value notification: " + value);
       setNotificationAlert(value == "true" ? true : false);
     });
+    getValueFor("soundIndex").then((value) => {
+      console.log("Got value: " + value);
+      setSoundIndex(value == "null" ? 0 : value);
+    });
   });
 
   // useEffect(() => {
@@ -61,12 +116,28 @@ const bluetooth = () => {
   // }, [visAlert, audioAlert, notificationAlert]);
 
   useEffect(() => {
+    console.log(alert, flag);
     if (!alert && !flag && closerDevice === 1) {
       if (visAlert) {
         setAlert(true);
         console.log("Vis alert!");
       } else {
         console.log("Vis alerts disabled");
+      }
+      if (audioAlert) {
+        // setPlayAudio(true);
+        playSound();
+        console.log("Audio alert!");
+      } else {
+        console.log("Audio alerts disabled");
+      }
+      if (notificationAlert) {
+        schedulePushNotification();
+        // console.log("notification");
+        // setShowNotification(true);
+        console.log("Notification alert!");
+      } else {
+        console.log("Notification alerts disabled");
       }
       setFlag(true);
       console.log("bro back up");
@@ -90,7 +161,7 @@ const bluetooth = () => {
     }, 10000);
 
     return () => clearTimeout(timeoutId);
-  }, [alert]);
+  }, [alert, flag, closerDevice]);
 
   const startBleManager = () => {
     BleManager.start({ showAlert: false }).then(() => {
@@ -393,7 +464,10 @@ const bluetooth = () => {
           <Text style={styles.alert2Text}>Look Up!</Text>
           <TouchableOpacity
             style={styles.button1}
-            onPress={() => setAlert(false)}
+            onPress={() => {
+              setAlert(false);
+              // setPlayAudio(false);
+            }}
           >
             <Text style={styles.ackButtonText}>I acknowledge</Text>
           </TouchableOpacity>
