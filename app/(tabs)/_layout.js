@@ -54,7 +54,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <TabBarIcon name="flag" color={color} />,
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="bluetooth"
         options={{
           title: "BTLE",
@@ -63,7 +63,7 @@ export default function TabLayout() {
             <TabBarIcon name="bluetooth" color={color} />
           ),
         }}
-      />
+      /> */}
     </Tabs>
   );
 }
