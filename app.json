@@ -25,6 +25,12 @@
           "locationWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location?",
           "isIosBackgroundLocationEnabled": true
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "sounds": ["/assets/sounds/beep.mp3"]
+        }
       ]
     ],
 

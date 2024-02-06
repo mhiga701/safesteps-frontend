@@ -10,10 +10,9 @@ export const styles = StyleSheet.create({
   profileContainer: {
     flex: 3,
     backgroundColor: "#ecedf2",
-    padding: 20,
+    padding: 10,
     textAlign: "left",
     borderRadius: 10,
-    //marginTop: 35,
     paddingBottom: 60,
   },
   reportingContainer: {
@@ -109,7 +108,7 @@ export const styles = StyleSheet.create({
     color: "#52525a",
     fontSize: 14,
     fontWeight: "500",
-    marginBottom: 15,
+    marginVertical: 20,
     fontFamily: "Montserrat-Regular",
     position: "absolute",
   },

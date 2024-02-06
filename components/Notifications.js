@@ -90,6 +90,7 @@ export async function schedulePushNotification() {
     content: {
       title: "APPROACHING INTERSECTION! 🚨",
       body: "Be careful when walking in this area!",
+      sound: "beep.mp3",
       data: { data: "goes here" },
     },
     trigger: { seconds: 1, repeats: false },
