@@ -1,10 +1,5 @@
 # safesteps-frontend
 
-### We now have a working build........ yeah.
-
-## To run the app locally:
-
-
 ## Install Dependencies
 
 ```shell
@@ -15,3 +10,4 @@
 ```shell
 npx expo start
 ```
+This app requires an EAS account + build in order to get a working local Expo build
