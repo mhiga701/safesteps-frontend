@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
 import { View, Text, TouchableOpacity, Modal } from "react-native";
@@ -8,9 +8,24 @@ import Splash2 from "../assets/logo2.svg";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+const router = useRouter();
 export const unstable_settings = {
   initialRouteName: "index",
 };
+
+const handleOnboarding = async () => {
+  const onboardingCompleted = await SecureStore.getItem('onboardingCompleted');
+  // return onboardingCompleted === 'true';
+}
+// const getStarted =  () => {
+
+//             if (handleOnboarding()) {
+//               router.push("(tabs)");
+                  
+//               } else {
+//                     router.push("index");
+//                   }
+// }
 
 function RootLayoutNav() {
   return (

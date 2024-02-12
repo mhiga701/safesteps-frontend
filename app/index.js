@@ -1,11 +1,12 @@
 import Onboarding from 'react-native-onboarding-swiper';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from '../components/styles';
 import Onboarding1 from '../assets/First.svg';
 import Onboarding2 from '../assets/Second.svg';
 import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
+import SecureStore from 'expo-secure-store';
 
 //custom onboarding dots to show which page you're on
 const Circle = ({ isLight, selected }) => {
@@ -55,17 +56,21 @@ const Skip = ({ ...props }) => {
   );
 }
 export default function OnboardingScreen(){
+  const [completed, setCompleted] = useState(false);
   const router = useRouter();
   //navigates to the home screen after onboarding is done/if skipped
-  const handleDone = () => {
+  const handleDone = async () => {
+    await SecureStore.setItem('onboardingComplete', 'true');
     router.push("(tabs)");
-  };
+    setCompleted(true);
+  }
+ 
 
   return (
     <Onboarding
     onDone={handleDone}
     onSkip={handleDone}
-    showSkip={true}
+    showSkip={completed}
     bottomBarHighlight={false}
     bottomBarHeight={50}
     DotComponent={Circle}

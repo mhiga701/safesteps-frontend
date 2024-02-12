@@ -85,12 +85,13 @@ export default function PushNotifications() {
     </>
   );
 }
+
 export async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
       title: "APPROACHING INTERSECTION! 🚨",
       body: "Be careful when walking in this area!",
-      sound: "beep.mp3",
+      sound: "clicks.wav", //use any of the sound files in assets, if you add a new sound update the sounds array in app.json before using it here
       data: { data: "goes here" },
     },
     trigger: { seconds: 1, repeats: false },

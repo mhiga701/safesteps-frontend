@@ -29,7 +29,7 @@
       [
         "expo-notifications",
         {
-          "sounds": ["/assets/sounds/beep.mp3"]
+          "sounds": ["/assets/sounds/beep.mp3", "/assets/sounds/chimes.wav", "/assets/sounds/clicks.wav", "/assets/sounds/dingdong.wav", "/assets/sounds/dundun.wav", "/assets/sounds/flutes.wav"]
         }
       ]
     ],

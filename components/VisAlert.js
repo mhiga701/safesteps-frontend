@@ -12,7 +12,7 @@ import { styles } from "./styles";
 
 import Alert from "../assets/alert1.svg";
 import AlertHeader from "../assets/AlertTypes3.svg";
-import { save, getValueFor } from "../components/ExpoStorage";
+
 
 
 export default function VisAlert() {
