@@ -6,7 +6,7 @@ import Onboarding1 from '../assets/First.svg';
 import Onboarding2 from '../assets/Second.svg';
 import Onboarding3 from '../assets/Third.svg';
 import { useRouter } from 'expo-router'
-import SecureStore from 'expo-secure-store';
+
 
 //custom onboarding dots to show which page you're on
 const Circle = ({ isLight, selected }) => {
@@ -56,11 +56,11 @@ const Skip = ({ ...props }) => {
   );
 }
 export default function OnboardingScreen(){
-  const [completed, setCompleted] = useState(false);
+ const [completed, setCompleted] = useState(false);
   const router = useRouter();
   //navigates to the home screen after onboarding is done/if skipped
   const handleDone = async () => {
-    await SecureStore.setItem('onboardingComplete', 'true');
+    //await SecureStore.setItem('onboardingComplete', 'true');
     router.push("(tabs)");
     setCompleted(true);
   }
@@ -70,7 +70,7 @@ export default function OnboardingScreen(){
     <Onboarding
     onDone={handleDone}
     onSkip={handleDone}
-    showSkip={completed}
+    showSkip={true}
     bottomBarHighlight={false}
     bottomBarHeight={50}
     DotComponent={Circle}

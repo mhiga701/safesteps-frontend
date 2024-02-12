@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import { styles } from "./styles";
-
+import { getValueFor, save } from "./ExpoStorage";
 import Alert from "../assets/alert1.svg";
 import AlertHeader from "../assets/AlertTypes3.svg";
 

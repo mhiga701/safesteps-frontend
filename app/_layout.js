@@ -13,19 +13,7 @@ export const unstable_settings = {
   initialRouteName: "index",
 };
 
-const handleOnboarding = async () => {
-  const onboardingCompleted = await SecureStore.getItem('onboardingCompleted');
-  // return onboardingCompleted === 'true';
-}
-// const getStarted =  () => {
 
-//             if (handleOnboarding()) {
-//               router.push("(tabs)");
-                  
-//               } else {
-//                     router.push("index");
-//                   }
-// }
 
 function RootLayoutNav() {
   return (
