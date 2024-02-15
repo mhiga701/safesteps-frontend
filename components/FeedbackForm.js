@@ -8,10 +8,16 @@ import Toast from "react-native-root-toast";
 export default function FeedbackForm() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-
+  const [email, setEmail] = useState("");
+  const date = new Date();
+  let day = date.toLocaleDateString();
+  day = day.replace(/\//g, '-');
+  const [data,setData] = useState([]);
+ 
   const handleSubmit = async () => {
+   
     // don't submit if name or message is empty
-    if (name === "" || message === "") {
+    if (name === "" || message === "" || email === "") {
       console.log("Name or message is empty. Returning...");
       let etoast = Toast.show("Error: Name or message is empty.", {
         duration: Toast.durations.LONG,
@@ -27,26 +33,17 @@ export default function FeedbackForm() {
       }, 3000);
       return;
     }
-
-    // Post name and message to Firebase with auto-generated doc name
-
-    // try {
-    //   const docRef = await addDoc(collection(db, "Feedback"), {
-    //     name: name,
-    //     message: message,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
-
-    // Post name and message to Firebase with custom doc name
-
+    
     try {
-      await setDoc(doc(db, "Feedback", name), {
-        name: name,
-        message: message,
-      });
+      const docRef = doc(db,"Feedback",day);
+      
+      // setData([...data, { name: name,  message:message, email:email }]);
+      let add_data = {
+        [day]:data
+      };
+      
+      await setDoc(docRef,add_data,{merge:true});
+     
       console.log("Uploaded!");
       console.log(`Name: ${name}, Message: ${message}`);
     } catch (e) {
@@ -71,7 +68,8 @@ export default function FeedbackForm() {
 
     setName("");
     setMessage("");
-
+    setEmail("");
+    setData([...data,{ name: name,  message:message, email:email }]);
     let toast = Toast.show("Thanks for your feedback!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -123,6 +121,22 @@ export default function FeedbackForm() {
             />
           </View>
 
+          <View style={styles.rowContainer}>
+            <Text style={styles.toggleText}>Email</Text>
+            <TextInput
+              ref={(input) => {
+                this.secondTextInput = input;
+              }}
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Enter your email here"
+              multiline={true}
+              maxLength={500}
+              returnKeyType="done"
+              blurOnSubmit={true}
+            />
+          </View>
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
