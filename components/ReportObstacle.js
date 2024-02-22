@@ -6,7 +6,8 @@ import { db } from "../firebase.js";
 import { doc, setDoc, addDoc, collection,updateDoc} from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { styles } from "./styles";
-
+import * as Location from "expo-location";
+import { useEffect } from 'react';
 const data = [
     { label: 'CCDS', value: '1' },
     { label: "Marsh Plaza", value: '2' },
@@ -22,8 +23,33 @@ const data = [
     const day = date.toLocaleDateString();
     const timeOptions = { hour12: true, hour: 'numeric', minute: 'numeric' };
     const time = date.toLocaleTimeString('en-US', timeOptions);
- 
+    const [location,setLocation] = useState(null);
+
+    const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+     
       const handleSubmit = async () => {
+        const docRef = doc(db, "User Location","Max");
+        const additional_data = {
+          latitude: location.coords.latitude,
+          longitude:  location.coords.longitude,
+          
+        };
+
+        await setDoc(docRef,additional_data);
         // don't submit if intersection is empty
         if (intersection1 === "Choose an Intersection") {
           console.log("Intersection not chosen. Returning...");
