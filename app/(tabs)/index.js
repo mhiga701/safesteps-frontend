@@ -42,6 +42,7 @@ export default function Page() {
   };
   //default view of the bottomsheet
   const DefaultMap = () => {
+    // This needs to be fixed so that it shows the 5 closest reports to the user based on their location
     return (
       <View>
         <Text style={styles.bottomSheetHeader}>Nearby Reports</Text>
