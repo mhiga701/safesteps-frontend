@@ -9,14 +9,21 @@
 
 import React, { useEffect, useState } from "react";
 import Alert from "../../assets/alert1.svg";
-import { Text, View, ScrollView, TouchableOpacity, Modal, Image } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  Image,
+} from "react-native";
 import BleManager from "react-native-ble-manager";
 import { Audio } from "expo-av";
-import { styles } from "./styles";
+import { styles } from "../styles";
 import BluetoothHeader from "../../assets/BluetoothHeader.svg";
-import { getValueFor } from "./ExpoStorage";
+import { getValueFor } from "../ExpoStorage";
 import { useFocusEffect } from "expo-router";
-import { schedulePushNotification } from "./Notifications";
+import { schedulePushNotification } from "../Notifications";
 
 export const UUID_filter = ["6969"];
 
