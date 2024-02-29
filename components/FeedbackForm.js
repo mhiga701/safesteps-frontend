@@ -11,15 +11,14 @@ export default function FeedbackForm() {
   const [email, setEmail] = useState("");
   const date = new Date();
   let day = date.toLocaleDateString();
-  day = day.replace(/\//g, '-');
-  const [data,setData] = useState([]);
- 
+  day = day.replace(/\//g, "-");
+  const [data, setData] = useState([]);
+
   const handleSubmit = async () => {
-   
     // don't submit if name or message is empty
     if (name === "" || message === "" || email === "") {
-      console.log("Name or message is empty. Returning...");
-      let etoast = Toast.show("Error: Name or message is empty.", {
+      console.log("One of the fields is empty. Returning...");
+      let etoast = Toast.show("Error: One of the fields is empty.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
         shadow: true,
@@ -33,19 +32,19 @@ export default function FeedbackForm() {
       }, 3000);
       return;
     }
-    
+
     try {
-      const docRef = doc(db,"Feedback",day);
-      
-      // setData([...data, { name: name,  message:message, email:email }]);
+      const docRef = doc(db, "Feedback", day);
+
+      setData([...data, { name: name, message: message, email: email }]);
       let add_data = {
-        [day]:data
+        [day]: data,
       };
-      
-      await setDoc(docRef,add_data,{merge:true});
-     
+
+      await setDoc(docRef, add_data, { merge: true });
+
       console.log("Uploaded!");
-      console.log(`Name: ${name}, Message: ${message}`);
+      console.log(`Name: ${name}, Message: ${message}, Email: ${email}`);
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -69,7 +68,7 @@ export default function FeedbackForm() {
     setName("");
     setMessage("");
     setEmail("");
-    setData([...data,{ name: name,  message:message, email:email }]);
+    setData([...data, { name: name, message: message, email: email }]);
     let toast = Toast.show("Thanks for your feedback!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -105,10 +104,29 @@ export default function FeedbackForm() {
           </View>
 
           <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Message</Text>
+            <Text style={styles.toggleText}>Email</Text>
             <TextInput
               ref={(input) => {
                 this.secondTextInput = input;
+              }}
+              style={styles.input}
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Enter your email here"
+              maxLength={100}
+              returnKeyType="next"
+              blurOnSubmit={true}
+              onSubmitEditing={() => {
+                this.thirdTextInput.focus();
+              }}
+            />
+          </View>
+
+          <View style={styles.rowContainer}>
+            <Text style={styles.toggleText}>Message</Text>
+            <TextInput
+              ref={(input) => {
+                this.thirdTextInput = input;
               }}
               style={styles.input}
               value={message}
@@ -121,22 +139,6 @@ export default function FeedbackForm() {
             />
           </View>
 
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Email</Text>
-            <TextInput
-              ref={(input) => {
-                this.secondTextInput = input;
-              }}
-              style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Enter your email here"
-              multiline={true}
-              maxLength={500}
-              returnKeyType="done"
-              blurOnSubmit={true}
-            />
-          </View>
           <TouchableOpacity style={styles.button} onPress={handleSubmit}>
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
