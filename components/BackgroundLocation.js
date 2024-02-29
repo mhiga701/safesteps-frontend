@@ -11,6 +11,7 @@ export default function BackgroundLocation() {
         setErrorMsg("Permission to access foreground location was denied");
         return;
       }
+      
       let { status_b } = await Location.requestBackgroundPermissionsAsync();
       if (status_b !== "granted") {
         setErrorMsgBkg(

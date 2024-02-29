@@ -179,8 +179,9 @@ export default function Page() {
       />
     </TouchableOpacity>
   );
-
   const goToMyLocation = async () => {
+    console.log("Latitude:", location.coords.latitude);
+    console.log("Longitude:", location.coords.longitude);
     mapRef.current.animateCamera({
       center: {
         latitude: location.coords.latitude,
