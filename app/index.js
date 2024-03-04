@@ -1,9 +1,8 @@
-import { Stack, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { React, useState } from "react";
 import * as Font from "expo-font";
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "../components/styles";
-import Splash1 from "../assets/Logo.svg";
 import Splash2 from "../assets/logo2.svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { RootSiblingParent } from "react-native-root-siblings";
@@ -15,7 +14,9 @@ export default function RootLayout() {
     const router = useRouter();
     const [fontLoaded, setFontLoaded] = useState(false);
     const [splash, setSplash] = useState(true);
-  
+    // async function onboardingComplete() {
+    //     await g
+    // }
     async function loadFont() {
       await Font.loadAsync({
         "Montserrat-Regular": require("../assets/fonts/Montserrat-Regular.otf"),
@@ -28,7 +29,11 @@ export default function RootLayout() {
     loadFont();
   
     if (!fontLoaded) {
-      return <Splash1 />;
+      return   (
+        <View style={styles.modalContainer}>
+            <Splash2 style={styles.backgroundImage} />
+        </View>
+      );
     } else {
       if (splash) {
         return (
@@ -38,8 +43,9 @@ export default function RootLayout() {
               <View style={styles.contentContainer}>
                 <TouchableOpacity
                   style={styles.buttonHomeScreen}
-                  onPress={() => {
-                    const onboarding =  getValueFor("onboarding");
+                  onPress={async () => {
+                    // const onboarding = "fals[]"
+                    const onboarding = await getValueFor("onboardingComplete");
                 if (onboarding === "true") {
                     router.push("(tabs)");
                 } else {

@@ -3,7 +3,9 @@
 import * as SecureStore from "expo-secure-store";
 
 export async function save(key, value) {
-  await SecureStore.setItemAsync(key, value);
+  await SecureStore.setItemAsync(key, value, {
+    keychainAccessible: SecureStore.ALWAYS_THIS_DEVICE_ONLY,
+  });
   console.log("Saved value " + value + " with key " + key);
 }
 
