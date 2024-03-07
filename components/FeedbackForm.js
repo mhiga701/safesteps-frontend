@@ -8,7 +8,7 @@ import Toast from "react-native-root-toast";
 export default function FeedbackForm() {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
   const date = new Date();
   let day = date.toLocaleDateString();
   day = day.replace(/\//g, "-");
@@ -16,8 +16,8 @@ export default function FeedbackForm() {
 
   const handleSubmit = async () => {
     // don't submit if name or message is empty
-    if (name === "" || message === "" || email === "") {
-      console.log("One of the fields is empty. Returning...");
+    if (name === "" || message === "" || contact === "") {
+      console.log("One or more of the fields is empty. Returning...");
       let etoast = Toast.show("Error: One of the fields is empty.", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -34,17 +34,24 @@ export default function FeedbackForm() {
     }
 
     try {
-      const docRef = doc(db, "Feedback", day);
+      const docRef = doc(db, "Feedback", name);
 
-      setData([...data, { name: name, message: message, email: email }]);
-      let add_data = {
-        [day]: data,
-      };
+      const subcollectionRef = collection(docRef, "History");
 
-      await setDoc(docRef, add_data, { merge: true });
+      setData([...data, {name:name, message: message }]);
+      //Update the firstore database
+      // await setDoc(docRef, {message: message, contact:contact});
+
+      // Add a new document to the subcollection with contact and message data
+      await addDoc(subcollectionRef, {
+        name: name,
+        message: message,
+        date: day
+      }, { id: day});
 
       console.log("Uploaded!");
-      console.log(`Name: ${name}, Message: ${message}, Email: ${email}`);
+      console.log(`Name: ${name}, Message: ${message}`);
+
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -67,8 +74,9 @@ export default function FeedbackForm() {
 
     setName("");
     setMessage("");
-    setEmail("");
-    setData([...data, { name: name, message: message, email: email }]);
+    setContact("");
+  
+   
     let toast = Toast.show("Thanks for your feedback!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -104,21 +112,19 @@ export default function FeedbackForm() {
           </View>
 
           <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Email</Text>
+            <Text style={styles.toggleText}>Contact</Text>
             <TextInput
               ref={(input) => {
-                this.secondTextInput = input;
+                this.thirdTextInput = input;
               }}
               style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Enter your email here"
-              maxLength={100}
-              returnKeyType="next"
+              value={contact}
+              onChangeText={setContact}
+              placeholder="Enter your contact here"
+              multiline={true}
+              maxLength={500}
+              returnKeyType="done"
               blurOnSubmit={true}
-              onSubmitEditing={() => {
-                this.thirdTextInput.focus();
-              }}
             />
           </View>
 
