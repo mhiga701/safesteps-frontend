@@ -32,23 +32,41 @@ export default function FeedbackForm() {
       }, 3000);
       return;
     }
+    //Added some email valid checking by checking if the contact has a "@" symbol in the contact 
+    else if (!(contact.includes("@"))){
+      console.log("Need a valid email")
+      let etoast = Toast.show("Need to have a valid email", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+
+      setTimeout(function hideToast() {
+        Toast.hide(etoast);
+      }, 3000);
+      return;
+    }
 
     try {
-      const docRef = doc(db, "Feedback", name);
-
-      const subcollectionRef = collection(docRef, "History");
-
-      setData([...data, {name:name, message: message }]);
+      //Generate a random document id to add to the Feedback collection
+      const docRef = collection(db, "Feedback");
+      //Add the doc to the random document id with the name, message, and their contact
+      await addDoc(docRef, {name:name,message: message, contact:contact});
+      // setData([...data, {name:name, message: message }]);
+      // const subcollectionRef = collection(docRef, "History");
       //Update the firstore database
       // await setDoc(docRef, {message: message, contact:contact});
 
       // Add a new document to the subcollection with contact and message data
-      await addDoc(subcollectionRef, {
-        name: name,
-        message: message,
-        date: day
-      }, { id: day});
-
+      // await addDoc(subcollectionRef, {
+      //   name: name,
+      //   message: message,
+      //   date: day
+      // }, { id: day});
+      
       console.log("Uploaded!");
       console.log(`Name: ${name}, Message: ${message}`);
 
