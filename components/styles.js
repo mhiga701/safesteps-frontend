@@ -60,8 +60,8 @@ export const styles = StyleSheet.create({
     shadowRadius: 2, // for iOS
   },
   mapButtonStyle: {
-     marginLeft: 3,
-     marginTop: 1,
+    marginLeft: 3,
+    marginTop: 1,
   },
   initButtonStyle: {
     marginLeft: 3,
@@ -161,7 +161,7 @@ export const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 15,
     paddingHorizontal: 15, // Add padding to separate elements
-    paddingTop: 10
+    paddingTop: 10,
   },
   boundary: {
     height: 1,
@@ -195,7 +195,6 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 0,
-
   },
   testbutton: {
     backgroundColor: "#B164E8",
@@ -261,7 +260,7 @@ export const styles = StyleSheet.create({
     bottom: -60,
     left: 5,
   },
-  Intersection: {
+  ReportHeader: {
     color: "#52525A",
     fontSize: 17,
     fontFamily: "Montserrat",
@@ -269,6 +268,7 @@ export const styles = StyleSheet.create({
     lineHeight: 25,
     bottom: -90,
     left: 5,
+    flexDirection: "row",
   },
   Present: {
     color: "#52525A",
@@ -909,18 +909,17 @@ export const styles = StyleSheet.create({
     fontFamily: "Montserrat-Regular",
     marginTop: 8,
   },
-  
 
-  dropdownContainer:{
-    backgroundColor: '#fcfcfc',
-    
+  dropdownContainer: {
+    backgroundColor: "#fcfcfc",
+
     borderRadius: 10,
     shadowColor: "#52525a", // for iOS
     shadowOffset: { width: 0, height: 1 }, // for iOS
     shadowOpacity: 0.5, // for iOS
     shadowRadius: 2, // for iOS
     top: 0,
-    right: 0
+    right: 0,
   },
   dropdownText: {
     fontFamily: "Montserrat-Regular",
@@ -934,7 +933,7 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     position: "relative",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   itemContainer: {
     borderRadius: 10,
@@ -944,10 +943,10 @@ export const styles = StyleSheet.create({
   },
   collapsibleContainer: {
     borderRadius: 10,
-    backgroundColor: '#fcfcfc',
-    alignItems: 'left',
+    backgroundColor: "#fcfcfc",
+    alignItems: "left",
     borderColor: "#fcfcfc",
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   collapsibleTitle: {
     fontFamily: "Bitter-Regular",
@@ -958,8 +957,8 @@ export const styles = StyleSheet.create({
   },
   collapsibleContainerFull: {
     borderRadius: 10,
-    backgroundColor: '#fcfcfc',
-    alignItems: 'left',
+    backgroundColor: "#fcfcfc",
+    alignItems: "left",
     borderTopWidth: 0.3,
     borderColor: "#52525a",
     paddingVertical: 10,
@@ -1055,4 +1054,3 @@ export const styles = StyleSheet.create({
     marginBottom: -50, // Add padding to separate elements
   },
 });
-

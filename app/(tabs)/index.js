@@ -45,7 +45,7 @@ export default function Page() {
     // This needs to be fixed so that it shows the 5 closest reports to the user based on their location
     return (
       <View>
-        <Text style={styles.bottomSheetHeader}>Nearby Reports</Text>
+        <Text style={styles.bottomSheetHeader}>Recent Reports</Text>
         <View style={styles.settingsContainer}>
           <View style={styles.rowContainer}>
             <Text style={styles.toggleText}>Marsh Plaza</Text>
@@ -286,12 +286,11 @@ export default function Page() {
           {selectedMarker !== null && (
             <View>
               <Text style={styles.bottomSheetHeader}>
-                {selectedMarker.value.type} at{" "}
-                {selectedMarker.value.location.latitude}
-                {", "}
-                {selectedMarker.value.location.longitude}
+                {selectedMarker.value.type} at {selectedMarker.value.locale}
               </Text>
               <Text style={styles.bottomSheetSubheader}>
+                Reported on: {selectedMarker.value.timestamp}
+                {"\n"}
                 {selectedMarker.value.description}
               </Text>
               <Text style={styles.bottomSheetSubheader}>

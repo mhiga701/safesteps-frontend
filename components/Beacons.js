@@ -10,17 +10,16 @@ export const locationsGet = async () => {
 
   await Promise.all(
     querySnapshot.docs.map(async (doc) => {
-      qID = doc.id;
-      qData = doc.data();
+      // console.log("doc: ", doc.id, " => ", doc.data());
 
       // console.log(
-      //   `${doc.id} => ${doc.data()}, ${qData.location.latitude}, ${
-      //     qData.location.longitude
+      //   `${doc.id} => ${doc.data().location.latitude}, ${
+      //     doc.data().location.longitude
       //   }`
       // );
 
       const subReports = await getDocs(
-        collection(db, "LocationReport", qID, "SubReport")
+        collection(db, "LocationReport", doc.id, "SubReport")
       );
 
       let seenTrue = 0;
@@ -30,9 +29,11 @@ export const locationsGet = async () => {
 
       subReports.forEach((subDoc) => {
         // console.log(
-        //   `${subDoc.id} => ${subDoc.data().description}, ${
-        //     subDoc.data().seen
-        //   }, ${subDoc.data().timestamp}`
+        //   "Subdoc of " +
+        //     doc.id +
+        //     `${subDoc.id} => ${subDoc.data().description}, ${
+        //       subDoc.data().seen
+        //     }, ${subDoc.data().timestamp}`
         // );
 
         if (subDoc.data().seen) {
@@ -47,23 +48,27 @@ export const locationsGet = async () => {
           seen: subDoc.data().seen,
           timestamp: subDoc.data().timestamp,
         });
-
-        // console.log("le sub report: ", outSubReports);
       });
 
-      // console.log("le sub report hon hon: ", outSubReports);
+      // console.log("le sub report: ", outSubReports);
 
       if (!(seenFalse - seenTrue > threshold)) {
+        // console.log(
+        //   "adding to outMarkerInfo: " + doc.id + " => " + doc.data().type
+        // );
+        let date = new Date(doc.data().timestamp.seconds * 1000);
         outMarkerInfo.push({
-          id: qID,
+          id: doc.id,
           value: {
-            type: qData.type,
-            description: qData.description,
+            type: doc.data().type,
+            locale: doc.data().locale,
+            description: doc.data().description,
+            timestamp: date.toDateString(),
             location: {
-              latitude: qData.location.latitude,
-              longitude: qData.location.longitude,
+              latitude: doc.data().location.latitude,
+              longitude: doc.data().location.longitude,
             },
-            active: qData.active,
+            active: doc.data().active,
             seenTrue: seenTrue,
             seenFalse: seenFalse,
             subReports: outSubReports,
