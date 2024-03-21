@@ -3,11 +3,22 @@ import { StyleSheet } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import { db } from "../firebase.js";
-import { doc, setDoc, addDoc, collection, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  addDoc,
+  collection,
+  updateDoc,
+  GeoPoint,
+  Timestamp,
+} from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { styles } from "./styles";
 import * as Location from "expo-location";
 import { useEffect } from "react";
+
+const templateSubmission = true;
+
 const locationsData = [
   { label: "Kenmore", value: "1" },
   { label: "BU East", value: "2" },
@@ -17,6 +28,7 @@ const locationsData = [
   { label: "BU West", value: "6" },
   { label: "South Campus", value: "7" },
   { label: "Fenway Campus", value: "8" },
+  { label: "BU Bridge", value: "9" },
 ];
 
 const typesData = [
@@ -34,17 +46,10 @@ const typesData = [
 ];
 
 export default function ReportObstacle() {
-  const [value, setValue] = useState(null);
   const [locale, setSelectedLocale] = useState("Choose a Locale");
   const [types, setSelectedTypes] = useState("Choose a Type");
-  const [reports, setreports] = useState([]);
-  const [message, setMessage] = useState("");
-  const date = new Date();
-  const day = date.toLocaleDateString();
-  const timeOptions = { hour12: true, hour: "numeric", minute: "numeric" };
-  const time = date.toLocaleTimeString("en-US", timeOptions);
+  const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
-
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -79,13 +84,29 @@ export default function ReportObstacle() {
   }, []);
 
   const handleSubmit = async () => {
-    // const docRef = doc(db, "User Location", "Max");
-    const additional_data = {
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    };
+    const uploadLocation = new GeoPoint(
+      location.coords.latitude,
+      location.coords.longitude
+    );
 
-    console.log(additional_data);
+    console.log(uploadLocation);
+
+    // get current timestamp
+    const timestamp = new Timestamp.now();
+
+    console.log("Timestamp: " + timestamp);
+
+    const docRef = await addDoc(collection(db, "LocationReport"), {
+      type: types,
+      locale: locale,
+      active: true,
+      template: templateSubmission,
+      description: description,
+      location: uploadLocation,
+      timestamp: timestamp,
+    });
+
+    console.log("Document written with ID: ", docRef.id);
 
     // await setDoc(docRef, additional_data);
     // // don't submit if intersection is empty
@@ -237,84 +258,30 @@ export default function ReportObstacle() {
     //   }
     // }
 
-    // resetForm();
-    // // console.log(reports);
-    // let toast = Toast.show("Thank you for your report!", {
-    //   duration: Toast.durations.LONG,
-    //   position: Toast.positions.BOTTOM,
-    //   shadow: true,
-    //   animation: true,
-    //   hideOnPress: true,
-    //   delay: 0,
-    // });
+    resetForm();
 
-    // setTimeout(function hideToast() {
-    //   Toast.hide(toast);
-    // }, 3000);
+    let toast = Toast.show("Thank you for your report!", {
+      duration: Toast.durations.LONG,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 0,
+    });
+
+    setTimeout(function hideToast() {
+      Toast.hide(toast);
+    }, 3000);
   };
 
-  //   const [objectonRoad, setObjectPressed] = useState(true);
-  //   const [potholesPressed, setPotholesPressed] = useState(true);
-  //   const [roadKillPressed, setRoadKillPressed] = useState(true);
-  //   const [foodPressed, setFoodPressed] = useState(true);
-  //   const [icePressed, setIcePressed] = useState(true);
-  //   const [puddlesPressed, setPuddlesPressed] = useState(true);
-  //   const [otherPressed, setOtherPressed] = useState(true);
-
   const resetForm = () => {
-    // setObjectPressed(true);
-    // setPotholesPressed(true);
-    // setRoadKillPressed(true);
-    // setFoodPressed(true);
-    // setIcePressed(true);
-    // setPuddlesPressed(true);
-    // setOtherPressed(true);
-    setMessage("");
-    setSelectedLocale("Choose an Intersection");
-    setreports([]);
+    setDescription("");
+    setSelectedLocale("Choose a Locale");
+    setSelectedTypes("Choose a Type");
   };
   const handleReset = () => {
     resetForm();
   };
-  //   const handleObjectPress = () => {
-  //     setObjectPressed(!objectonRoad);
-  //     setreports([...reports, "Object on Road"]);
-  //   };
-
-  //   const handlePotHolesPress = () => {
-  //     setPotholesPressed(!potholesPressed);
-  //     setreports([...reports, "Road Potholes"]);
-  //   };
-
-  //   const handleRoadKillPress = () => {
-  //     setRoadKillPressed(!roadKillPressed);
-  //     setreports([...reports, "Road Kill"]);
-  //   };
-  //   const handleFoodPress = () => {
-  //     setFoodPressed(!foodPressed);
-  //     setreports([...reports, "Spilled Food"]);
-  //   };
-
-  //   const handleIcePress = () => {
-  //     setIcePressed(!icePressed);
-  //     setreports([...reports, "Black Ice/Ice"]);
-  //   };
-  //   const handlePuddlePress = () => {
-  //     setPuddlesPressed(!puddlesPressed);
-  //     setreports([...reports, "Puddles"]);
-  //   };
-
-  //   const handleOtherPress = () => {
-  //     setOtherPressed(!otherPressed);
-  //     setreports([...reports, "Other"]);
-  //   };
-  //   const objectButtonColor = objectonRoad ? "#808080" : "#5787F5";
-  //   const potholesButtonColor = potholesPressed ? "#808080" : "#5787F5";
-  //   const RoadKillButtonColor = roadKillPressed ? "#808080" : "#5787F5";
-  //   const FoodButtonColot = foodPressed ? "#808080" : "#5787F5";
-  //   const IceButtonColor = icePressed ? "#808080" : "#5787F5";
-  //   const PuddleButtonColor = puddlesPressed ? "#808080" : "#5787F5";
-  //   const otherButtonColor = otherPressed ? "#808080" : "#5787F5";
 
   return (
     <>
@@ -359,7 +326,7 @@ export default function ReportObstacle() {
             containerStyle={styles.itemContainer}
             itemTextStyle={styles.itemText}
             data={typesData}
-            search={true}
+            search={false}
             showsVerticalScrollIndicator={false}
             maxHeight={200}
             labelField="label"
@@ -371,80 +338,6 @@ export default function ReportObstacle() {
           />
         </View>
 
-        {/* <View>
-          <Text style={styles.Present}>What Obstacles are Present?</Text>
-        </View>
-        <Text style={styles.Options}>Add any relevant options</Text>
-
-        <TouchableOpacity
-          onPress={handleObjectPress}
-          style={[
-            styles.Collisionbutton,
-            { backgroundColor: objectButtonColor },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Object on Road</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handlePotHolesPress}
-          style={[
-            styles.Rolloverbutton,
-            ,
-            { backgroundColor: potholesButtonColor },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Road Potholes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleRoadKillPress}
-          style={[
-            styles.Subwaybutton,
-            { backgroundColor: RoadKillButtonColor },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Road Kill</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleFoodPress}
-          style={[
-            styles.Pedestrianbutton,
-            { backgroundColor: FoodButtonColot },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Spilled Food</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleIcePress}
-          style={[
-            styles.SingleCar,
-            { backgroundColor: IceButtonColor, width: 120 },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Black Ice/Ice</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handlePuddlePress}
-          style={[
-            styles.Other,
-            { backgroundColor: PuddleButtonColor, right: -125 },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Puddles</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleOtherPress}
-          style={[
-            styles.Other,
-            {
-              backgroundColor: otherButtonColor,
-              top: -9,
-              left: 220,
-              width: 120,
-            },
-          ]}
-        >
-          <Text style={styles.AccidentOptions}>Other</Text>
-        </TouchableOpacity> */}
         <View style={{ flexDirection: "row", top: 250 }}>
           <Text
             style={{
@@ -475,8 +368,8 @@ export default function ReportObstacle() {
             ref={(input) => {
               this.secondTextInput = input;
             }}
-            value={message}
-            onChangeText={setMessage}
+            value={description}
+            onChangeText={setDescription}
             placeholder="Enter your message here"
             multiline={true}
             maxLength={500}

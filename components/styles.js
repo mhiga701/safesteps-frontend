@@ -181,7 +181,7 @@ export const styles = StyleSheet.create({
   rowContainer3: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: "right",
     paddingVertical: 15,
   },
   buttonContainer: {
@@ -324,6 +324,7 @@ export const styles = StyleSheet.create({
   toggleText: {
     fontFamily: "Bitter-Regular",
     color: "black",
+    textAlign: "left",
   },
   alert2Container: {
     backgroundColor: "#FE2D01",

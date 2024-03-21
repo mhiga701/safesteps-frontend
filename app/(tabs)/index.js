@@ -11,10 +11,7 @@ import { locationData, locationsGet } from "../../components/Beacons";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/Octicons";
-
-let BuBridge_numreports = 0;
-let MarshPlaza_numreports = 0;
-let CCDS_numreports = 0;
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -22,20 +19,40 @@ export default function Page() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
   const bottomSheetRef = useRef(null);
-
   const [locData, setLocData] = useState([]);
+  const [recentReports, setRecentReports] = useState([]);
 
-  useEffect(() => {
-    const getLocations = async () => {
-      const outinfo = await locationsGet();
-      setLocData(outinfo);
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const getLocations = async () => {
+        const outinfo = await locationsGet();
+        setLocData(outinfo);
+      };
 
-    getLocations();
-  }, []);
+      console.log("useFocusEffect called!");
+
+      getLocations();
+      fiveRecentReports();
+    }, [])
+  );
+
+  const fiveRecentReports = () => {
+    // Takes the five most recent reports in locData (based on value.timestamp) and adds the marker and id to recentReports
+    let recentReports = [];
+    let sortedData = locData.sort((a, b) => {
+      return b.value.timestamp.seconds - a.value.timestamp.seconds;
+    });
+    for (let i = 0; i < (locData.length < 5 ? locData.length : 5); i++) {
+      recentReports.push(sortedData[i]);
+    }
+    // console.log("recentReports: ");
+    // for (let i = 0; i < recentReports.length; i++) {
+    //   console.log(recentReports[i]);
+    // }
+    setRecentReports(recentReports);
+  };
 
   const [location, setLocation] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const RedDot = () => {
     return <Icon2 name="dot-fill" size={20} color="#fe2d01" />;
@@ -46,81 +63,42 @@ export default function Page() {
     return (
       <View>
         <Text style={styles.bottomSheetHeader}>Recent Reports</Text>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Marsh Plaza</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {MarshPlaza_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "Marsh Plaza" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {MarshPlaza_numreports} New Reports Since Yesterday
-              </Text> ? (
+
+        {recentReports.map((marker) => {
+          return (
+            <View style={styles.settingsContainer}>
+              <View style={styles.rowContainer}>
                 <Text style={styles.toggleText}>
-                  {MarshPlaza_numreports} New Reports Since Yesterday
+                  {marker.value.type} at {marker.value.locale}
                 </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>CCDS</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {CCDS_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "CCDS" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {CCDS_numreports} New Reports Since Yesterday
-              </Text> ? (
-                <Text style={styles.toggleText}>
-                  {CCDS_numreports} New Reports Since Yesterday
-                </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>BU Bridge</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {BuBridge_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "BU Bridge" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {BuBridge_numreports} New Reports Since Yesterday
-              </Text> ? (
-                <Text style={styles.toggleText}>
-                  {BuBridge_numreports} New Reports Since Yesterday
-                </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
+              </View>
+              <View style={styles.rowContainer3}>
+                <RedDot />
+                <TouchableOpacity
+                  onPress={() => {
+                    if (selectedMarker !== null && selectedMarker === marker) {
+                      setSelectedMarker(null);
+                      goToInitialLocation();
+                    } else if (
+                      selectedMarker !== null &&
+                      selectedMarker !== marker
+                    ) {
+                      setSelectedMarker(marker);
+                      goToMarkerLocation(marker);
+                    } else {
+                      setSelectedMarker(marker);
+                      goToMarkerLocation(marker);
+                    }
+                  }}
+                >
+                  <Text style={styles.toggleText}>
+                    {marker.value.description.substring(0, 30) + "..."}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          );
+        })}
       </View>
     );
   };
@@ -204,7 +182,7 @@ export default function Page() {
         longitude: marker.value.location.longitude,
       },
       // zoom: 17, // Android, needs to be adjusted after testing on Android
-      altitude: 2000,
+      altitude: 200,
       pitch: 0,
       angle: 0,
       heading: 0,
@@ -308,11 +286,11 @@ export default function Page() {
                   : "people don't "}
                 see this anymore
               </Text> */}
-              {console.log(
+              {/* {console.log(
                 "selectedMarker: ",
                 selectedMarker,
                 selectedMarker.value.subReports
-              )}
+              )} */}
               {selectedMarker.value.subReports.map((subReport, index) => {
                 const date = new Date(subReport.timestamp.seconds * 1000);
                 return (
