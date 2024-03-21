@@ -37,9 +37,23 @@ export default function Page() {
   const [location, setLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  //handleMapPress Function below to add dropped markers on the map based on the coordinates
+  //From the coordinate object from the nativeEvent and adds it to the marker state 
+  //useing set Markers
+  const [markers,setMarkers] = useState([]);
+  const  handleMapPress = (event) => {
+    const {coordinate} = event.nativeEvent;
+    const { latitude, longitude } = coordinate;
+
+    // Log the latitude and longitude
+    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    setMarkers((prevMarkers) => [...prevMarkers,coordinate]);
+  }
+  
   const RedDot = () => {
     return <Icon2 name="dot-fill" size={20} color="#fe2d01" />;
   };
+
   //default view of the bottomsheet
   const DefaultMap = () => {
     // This needs to be fixed so that it shows the 5 closest reports to the user based on their location
@@ -263,6 +277,7 @@ export default function Page() {
             latitudeDelta: 0.015,
             longitudeDelta: 0.015,
           }}
+          onPress={handleMapPress}
           showsUserLocation={true}
           showsCompass={false}
           showsPointsOfInterest={false}
@@ -271,7 +286,22 @@ export default function Page() {
           showsMyLocationButton={true}
         >
           {renderMarkers()}
+
+
+
+          {markers.map((marker, index) => (
+            <Marker
+              key={index}
+              coordinate={marker}
+            />
+          ))}
+          
         </MapView>
+        {markers.map((marker,index) => (
+            <Text key={index}>
+              {`Latitude: ${marker.latitude}, Longitude: ${marker.longitude}`}
+            </Text>
+          ))}
         <LocationButton />
         {selectedMarker ? <DefaultMapButton /> : null}
         <BottomSheet
