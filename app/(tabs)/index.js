@@ -11,10 +11,7 @@ import { locationData, locationsGet } from "../../components/Beacons";
 import CollapsibleView from "@eliav2/react-native-collapsible-view";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/Octicons";
-
-let BuBridge_numreports = 0;
-let MarshPlaza_numreports = 0;
-let CCDS_numreports = 0;
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Page() {
   const [errorMsg, setErrorMsg] = useState(null);
@@ -22,105 +19,128 @@ export default function Page() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const snapPoints = useMemo(() => ["25%", "40%", "90%"], []);
   const bottomSheetRef = useRef(null);
-
   const [locData, setLocData] = useState([]);
+  const [recentReports, setRecentReports] = useState([]);
 
-  useEffect(() => {
-    const getLocations = async () => {
-      const outinfo = await locationsGet();
-      setLocData(outinfo);
-    };
+  useFocusEffect(
+    React.useCallback(() => {
+      const getLocations = async () => {
+        const outinfo = await locationsGet();
+        setLocData(outinfo);
+        console.log("locData: ", locData);
+      };
 
-    getLocations();
-  }, []);
+      const fiveRecentReports = () => {
+        // Takes the five most recent reports in locData (based on value.timestamp) and adds the marker and id to recentReports
+        console.log("locData in reports: ", locData);
+        let tempRecentReports = [];
+        let sortedData = locData.sort((a, b) => {
+          return b.value.timestamp.seconds - a.value.timestamp.seconds;
+        });
+        for (let i = 0; i < (locData.length < 5 ? locData.length : 5); i++) {
+          tempRecentReports.push(sortedData[i]);
+        }
+
+        setRecentReports(tempRecentReports);
+        console.log("recentReports: ");
+        for (let i = 0; i < recentReports.length; i++) {
+          console.log(recentReports[i]);
+        }
+      };
+
+      console.log("useFocusEffect called!");
+
+      getLocations();
+      fiveRecentReports();
+    }, [])
+  );
 
   const [location, setLocation] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [marker, setMarker] = useState({
+    coordinate: {
+      latitude: 42.35021,
+      longitude: -71.10653,
+    },
+    draggable: true,
+  });
+  const handleDragEnd = (event) => {
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
+    setMarker((prevMarker) => ({
+      ...prevMarker,
+      coordinate: { latitude, longitude },
+    }));
+  };
+
+  //handleMapPress Function below to add dropped markers on the map based on the coordinates
+  //From the coordinate object from the nativeEvent and adds it to the marker state
+  //useing set Markers
+  // const [markers, setMarkers] = useState([]);
+  // const handleMapPress = (event) => {
+  //   const { coordinate } = event.nativeEvent;
+  //   const { latitude, longitude } = coordinate;
+
+  //   // Log the latitude and longitude
+  //   console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+  //   setMarkers((prevMarkers) => [...prevMarkers, coordinate]);
+  // };
+
   const RedDot = () => {
     return <Icon2 name="dot-fill" size={20} color="#fe2d01" />;
   };
+
   //default view of the bottomsheet
-  const DefaultMap = () => {
+  const DefaultMap = (props) => {
+    console.log("inputReports: ", props.inputReports.length > 0);
     // This needs to be fixed so that it shows the 5 closest reports to the user based on their location
     return (
       <View>
         <Text style={styles.bottomSheetHeader}>Recent Reports</Text>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>Marsh Plaza</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {MarshPlaza_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "Marsh Plaza" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {MarshPlaza_numreports} New Reports Since Yesterday
-              </Text> ? (
-                <Text style={styles.toggleText}>
-                  {MarshPlaza_numreports} New Reports Since Yesterday
-                </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>CCDS</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {CCDS_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "CCDS" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {CCDS_numreports} New Reports Since Yesterday
-              </Text> ? (
-                <Text style={styles.toggleText}>
-                  {CCDS_numreports} New Reports Since Yesterday
-                </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.settingsContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.toggleText}>BU Bridge</Text>
-          </View>
-          <View style={styles.rowContainer3}>
-            {BuBridge_numreports ? <RedDot /> : null}
-            <TouchableOpacity
-              onPress={() => {
-                // setSelectedMarker({ title: "BU Bridge" });
-              }}
-            >
-              {<Text style={styles.toggleText}>
-                {BuBridge_numreports} New Reports Since Yesterday
-              </Text> ? (
-                <Text style={styles.toggleText}>
-                  {BuBridge_numreports} New Reports Since Yesterday
-                </Text>
-              ) : (
-                <Text style={styles.toggleText}>
-                  0 new Reports Since Yesterday
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
+
+        {props.inputReports ? (
+          props.inputReports.map((marker) => {
+            return (
+              <View style={styles.settingsContainer} key={marker.id}>
+                <View style={styles.rowContainer}>
+                  <Text style={styles.toggleText}>
+                    {marker.value.type} at {marker.value.locale}
+                  </Text>
+                </View>
+                <View style={styles.rowContainer3}>
+                  <RedDot />
+                  <TouchableOpacity
+                    onPress={() => {
+                      if (
+                        selectedMarker !== null &&
+                        selectedMarker === marker
+                      ) {
+                        setSelectedMarker(null);
+                        goToInitialLocation();
+                      } else if (
+                        selectedMarker !== null &&
+                        selectedMarker !== marker
+                      ) {
+                        setSelectedMarker(marker);
+                        goToMarkerLocation(marker);
+                      } else {
+                        setSelectedMarker(marker);
+                        goToMarkerLocation(marker);
+                      }
+                    }}
+                  >
+                    <Text style={styles.toggleText}>
+                      {marker.value.description.substring(0, 30) + "..."}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })
+        ) : (
+          <Text style={styles.bottomSheetSubheader}>Loading</Text>
+        )}
       </View>
     );
   };
@@ -204,7 +224,7 @@ export default function Page() {
         longitude: marker.value.location.longitude,
       },
       // zoom: 17, // Android, needs to be adjusted after testing on Android
-      altitude: 2000,
+      altitude: 200,
       pitch: 0,
       angle: 0,
       heading: 0,
@@ -263,15 +283,30 @@ export default function Page() {
             latitudeDelta: 0.015,
             longitudeDelta: 0.015,
           }}
+          // onPress={handleMapPress}
           showsUserLocation={true}
-          showsCompass={false}
+          showsCompass={true}
           showsPointsOfInterest={false}
           showsTraffic={true}
           showsIndoors={true}
           showsMyLocationButton={true}
         >
           {renderMarkers()}
+          <Marker
+            coordinate={marker.coordinate}
+            draggable={marker.draggable}
+            onDragEnd={handleDragEnd}
+          />
+
+          {/* {markers.map((marker, index) => (
+            <Marker key={index} coordinate={marker} />
+          ))} */}
         </MapView>
+        {/* {markers.map((marker, index) => (
+          <Text key={index}>
+            {`Latitude: ${marker.latitude}, Longitude: ${marker.longitude}`}
+          </Text>
+        ))} */}
         <LocationButton />
         {selectedMarker ? <DefaultMapButton /> : null}
         <BottomSheet
@@ -281,7 +316,9 @@ export default function Page() {
           index={1}
           ref={bottomSheetRef}
         >
-          {selectedMarker === null && <DefaultMap />}
+          {selectedMarker === null && (
+            <DefaultMap inputReports={recentReports} />
+          )}
 
           {selectedMarker !== null && (
             <View>
@@ -308,11 +345,11 @@ export default function Page() {
                   : "people don't "}
                 see this anymore
               </Text> */}
-              {console.log(
+              {/* {console.log(
                 "selectedMarker: ",
                 selectedMarker,
                 selectedMarker.value.subReports
-              )}
+              )} */}
               {selectedMarker.value.subReports.map((subReport, index) => {
                 const date = new Date(subReport.timestamp.seconds * 1000);
                 return (
