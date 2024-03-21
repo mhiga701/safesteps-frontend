@@ -7,6 +7,13 @@ export const styles = StyleSheet.create({
     padding: 20,
     textAlign: "left",
   },
+  reportContainer: {
+    flex: 1,
+    backgroundColor: "#ecedf2",
+    //padding: 20,
+    textAlign: "left",
+    paddingbottom: 60,
+  },
   profileContainer: {
     flex: 3,
     backgroundColor: "#ecedf2",
@@ -28,9 +35,30 @@ export const styles = StyleSheet.create({
   map_container: {
     flex: 1,
   },
+  mapContainer: {
+    top: 90,
+    marginBottom: -375,
+
+  },
   locationButton: {
     position: "absolute",
     top: 50,
+    right: 20,
+    // bottom: 90,
+    padding: 6,
+    backgroundColor: "#fcfcfc",
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    elevation: 10, // for Android
+    shadowColor: "#000000", // for iOS
+    shadowOffset: { width: 0, height: 1 }, // for iOS
+    shadowOpacity: 0.5, // for iOS
+    shadowRadius: 2, // for iOS
+  },
+  smallLocationButton: {
+    position: "absolute",
+    top: 20,
     right: 20,
     // bottom: 90,
     padding: 6,
@@ -71,6 +99,10 @@ export const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
+  }, 
+  smallMap: {
+    width: "100%",
+    height: "55%",
   },
   modalContainer: {
     flex: 1,
@@ -257,7 +289,7 @@ export const styles = StyleSheet.create({
     fontWeight: "700",
     lineHeight: 20,
     letterSpacing: 0.4,
-    bottom: -60,
+    bottom: -50,
     left: 5,
   },
   ReportHeader: {
@@ -266,7 +298,7 @@ export const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontWeight: "600",
     lineHeight: 25,
-    bottom: -90,
+    bottom: -65,
     left: 5,
     flexDirection: "row",
   },

@@ -7,7 +7,10 @@ import { doc, setDoc, addDoc, collection, updateDoc } from "firebase/firestore";
 import Toast from "react-native-root-toast";
 import { styles } from "./styles";
 import * as Location from "expo-location";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import MapView from "react-native-maps";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 const locationsData = [
   { label: "Kenmore", value: "1" },
   { label: "BU East", value: "2" },
@@ -46,6 +49,37 @@ export default function ReportObstacle() {
   const [location, setLocation] = useState(null);
 
   const [errorMsg, setErrorMsg] = useState(null);
+  const mapRef = useRef();
+
+  const goToMyLocation = async () => {
+    console.log("Latitude:", location.coords.latitude);
+    console.log("Longitude:", location.coords.longitude);
+    mapRef.current.animateCamera({
+      center: {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      },
+      // zoom: 17, // Android, needs to be adjusted after testing on Android
+      altitude: 2000,
+      pitch: 0,
+      angle: 0,
+      heading: 0,
+      // useNativeDriver: true,
+    });
+  };
+
+  const LocationButton = () => (
+    <TouchableOpacity style={styles.smallLocationButton} onPress={goToMyLocation}>
+      <Icon
+        name="crosshairs"
+        size={25}
+        color="#5787f5"
+        style={styles.mapButtonStyle}
+      />
+    </TouchableOpacity>
+  );
 
   useEffect(() => {
     (async () => {
@@ -318,15 +352,38 @@ export default function ReportObstacle() {
 
   return (
     <>
-      <View>
+      <View style={styles.reportContainer}>
         <Text style={styles.ReportAccident}>New Report Form</Text>
         <Text style={styles.ReportHeader}>
           Choose your precise location on the map:
         </Text>
-        <Text style={[styles.ReportHeader, { top: 230 }]}>
+        <View style={styles.mapContainer}>
+        <MapView
+          // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md
+          ref={mapRef}
+          style={styles.smallMap}
+          initialRegion={{
+            latitude: 42.35021,
+            longitude: -71.10653,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
+          }}
+          showsUserLocation={true}
+          showsCompass={false}
+          showsPointsOfInterest={false}
+          showsTraffic={true}
+          showsIndoors={true}
+          showsMyLocationButton={true}
+        >
+          {/* {renderMarkers()} */}
+        </MapView>
+        <LocationButton />
+        </View>
+        
+        <Text style={[styles.ReportHeader, { top: 200 }]}>
           Which Locale Are You Closest To?
         </Text>
-        <View style={{ top: 250 }}>
+        <View style={{ top: 210 }}>
           <Dropdown
             mode="default"
             style={styles.dropdownContainer}
@@ -348,8 +405,8 @@ export default function ReportObstacle() {
           />
         </View>
 
-        <Text style={[styles.ReportHeader, { top: 270 }]}>Type of report</Text>
-        <View style={{ top: 280 }}>
+        <Text style={[styles.ReportHeader, { top: 230 }]}>Type of report</Text>
+        <View style={{ top: 240 }}>
           <Dropdown
             mode="default"
             style={styles.dropdownContainer}
@@ -445,7 +502,7 @@ export default function ReportObstacle() {
         >
           <Text style={styles.AccidentOptions}>Other</Text>
         </TouchableOpacity> */}
-        <View style={{ flexDirection: "row", top: 250 }}>
+        <View style={{ flexDirection: "row", top: 210 }}>
           <Text
             style={{
               color: "#52525A",
@@ -461,7 +518,7 @@ export default function ReportObstacle() {
           </Text>
         </View>
         <View
-          style={[styles.MessageContainer, { flexDirection: "row", top: 315 }]}
+          style={[styles.MessageContainer, { flexDirection: "row", top: 270 }]}
         >
           <TextInput
             style={{
@@ -484,7 +541,7 @@ export default function ReportObstacle() {
             blurOnSubmit={true}
           />
         </View>
-        <View style={{ flexDirection: "row", top: 275 }}>
+        <View style={{ flexDirection: "row", top: 240 }}>
           <TouchableOpacity style={styles.cancelButton} onPress={handleReset}>
             <Text
               style={{
