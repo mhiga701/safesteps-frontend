@@ -31,7 +31,7 @@ export default function Profile() {
 
           <AudioAlert />
 
-          <Text style={styles.subheadingText}>Feedback Form</Text>
+          <Text style={styles.subheadingText}>FEEDBACK FORM</Text>
 
           <FeedbackForm />
         </ScrollView>

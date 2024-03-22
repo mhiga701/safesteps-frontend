@@ -8,11 +8,12 @@ export const styles = StyleSheet.create({
     textAlign: "left",
   },
   reportContainer: {
-    flex: 1,
+    flex: 3,
     backgroundColor: "#ecedf2",
-    //padding: 20,
+    padding: 10,
     textAlign: "left",
-    paddingbottom: 60,
+    // borderRadius: 10,
+    paddingBottom: 90,
   },
   profileContainer: {
     flex: 3,
@@ -37,7 +38,7 @@ export const styles = StyleSheet.create({
   },
   mapContainer: {
     top: 90,
-    marginBottom: -375,
+    marginBottom: -355,
     paddingBottom: 30,
 
   },
