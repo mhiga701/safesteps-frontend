@@ -116,19 +116,23 @@ export default function Page() {
                     onPress={() => {
                       if (
                         selectedMarker !== null &&
-                        selectedMarker === marker
+                        selectedMarker === marker 
                       ) {
                         setSelectedMarker(null);
                         goToInitialLocation();
+                        bottomSheetRef.current.snapToIndex(1);
                       } else if (
                         selectedMarker !== null &&
                         selectedMarker !== marker
+                        
                       ) {
                         setSelectedMarker(marker);
                         goToMarkerLocation(marker);
+                        bottomSheetRef.current.snapToIndex(1);
                       } else {
                         setSelectedMarker(marker);
                         goToMarkerLocation(marker);
+                        bottomSheetRef.current.snapToIndex(1);
                       }
                     }}
                   >
@@ -241,6 +245,10 @@ export default function Page() {
       },
       altitude: 9000,
     });
+   
+    
+  
+
   };
 
   const renderMarkers = () => {
