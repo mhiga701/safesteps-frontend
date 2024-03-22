@@ -17,10 +17,10 @@ export const styles = StyleSheet.create({
   profileContainer: {
     flex: 3,
     backgroundColor: "#ecedf2",
-    padding: 10,
+    padding: 20,
     textAlign: "left",
     borderRadius: 10,
-    paddingBottom: 60,
+    paddingBottom: 160,
   },
   reportingContainer: {
     flex: 3,
@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
   mapContainer: {
     top: 90,
     marginBottom: -375,
+    paddingBottom: 30,
 
   },
   locationButton: {
@@ -102,7 +103,7 @@ export const styles = StyleSheet.create({
   }, 
   smallMap: {
     width: "100%",
-    height: "55%",
+    height: "40%",
   },
   modalContainer: {
     flex: 1,

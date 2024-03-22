@@ -19,7 +19,7 @@ import { useEffect, useRef } from "react";
 
 const templateSubmission = true;
 
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const locationsData = [
@@ -63,8 +63,8 @@ export default function ReportObstacle() {
       center: {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005,
+        latitudeDelta: 0.003,
+        longitudeDelta: 0.003,
       },
       // zoom: 17, // Android, needs to be adjusted after testing on Android
       altitude: 2000,
@@ -85,6 +85,22 @@ export default function ReportObstacle() {
       />
     </TouchableOpacity>
   );
+
+  const [marker, setMarker] = useState({
+    coordinate: {
+      latitude: location ? location.coords.latitude : 42.35021,
+      longitude: location ? location.coords.longitude : -71.10653,
+    },
+    draggable: true,
+  });
+  const handleDragEnd = (event) => {
+    const { latitude, longitude } = event.nativeEvent.coordinate;
+    console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
+    setMarker((prevMarker) => ({
+      ...prevMarker,
+      coordinate: { latitude, longitude },
+    }));
+  };
 
   useEffect(() => {
     (async () => {
@@ -294,19 +310,25 @@ export default function ReportObstacle() {
 
     resetForm();
 
+   
+  };
+
+  useEffect(() => {
     let toast = Toast.show("Thank you for your report!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
       shadow: true,
       animation: true,
-      hideOnPress: true,
-      delay: 0,
+      // hideOnPress: true,
+      // delay: 0,
     });
 
     setTimeout(function hideToast() {
+      console.log("Toast appeared");
       Toast.hide(toast);
+      console.log("Toast hidden");
     }, 3000);
-  };
+  });
 
   const resetForm = () => {
     setDescription("");
@@ -332,8 +354,8 @@ export default function ReportObstacle() {
           initialRegion={{
             latitude: 42.35021,
             longitude: -71.10653,
-            latitudeDelta: 0.005,
-            longitudeDelta: 0.005,
+            latitudeDelta: 0.003,
+            longitudeDelta: 0.003,
           }}
           showsUserLocation={true}
           showsCompass={false}
@@ -343,6 +365,12 @@ export default function ReportObstacle() {
           showsMyLocationButton={true}
         >
           {/* {renderMarkers()} */}
+          <Marker
+            coordinate={marker.coordinate}
+            draggable={marker.draggable}
+            onDragEnd={handleDragEnd}
+          />
+
         </MapView>
         <LocationButton />
         </View>
@@ -395,7 +423,7 @@ export default function ReportObstacle() {
           />
         </View>
 
-        <View style={{ flexDirection: "row", top: 250 }}>
+        <View style={{ flexDirection: "row", top: 210 }}>
           <Text
             style={{
               color: "#52525A",

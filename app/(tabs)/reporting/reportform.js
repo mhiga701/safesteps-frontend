@@ -11,7 +11,7 @@ export default function ReportFormScreen() {
   return (
     <>
       <ScrollView
-        style={styles.container}
+        style={styles.profileContainer}
         automaticallyAdjustKeyboardInsets={true}
         contentContainerStyle={{
           flexGrow: 1,
