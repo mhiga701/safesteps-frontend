@@ -245,10 +245,7 @@ export default function Page() {
       },
       altitude: 9000,
     });
-   
-    
-  
-
+    bottomSheetRef.current.snapToIndex(1);
   };
 
   const renderMarkers = () => {
