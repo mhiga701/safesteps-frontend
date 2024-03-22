@@ -76,7 +76,10 @@ export default function ReportObstacle() {
   };
 
   const LocationButton = () => (
-    <TouchableOpacity style={styles.smallLocationButton} onPress={goToMyLocation}>
+    <TouchableOpacity
+      style={styles.smallLocationButton}
+      onPress={goToMyLocation}
+    >
       <Icon
         name="crosshairs"
         size={25}
@@ -146,17 +149,39 @@ export default function ReportObstacle() {
 
     console.log("Timestamp: " + timestamp);
 
-    const docRef = await addDoc(collection(db, "LocationReport"), {
-      type: types,
-      locale: locale,
-      active: true,
-      template: templateSubmission,
-      description: description,
-      location: uploadLocation,
-      timestamp: timestamp,
-    });
+    if (
+      types !== "Choose a Type" &&
+      locale != "Choose a Locale" &&
+      description !== "" &&
+      uploadLocation &&
+      timestamp
+    ) {
+      const docRef = await addDoc(collection(db, "LocationReport"), {
+        type: types,
+        locale: locale,
+        active: true,
+        template: templateSubmission,
+        description: description,
+        location: uploadLocation,
+        timestamp: timestamp,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } else {
+      console.log("Error: Please fill out all fields.");
 
-    console.log("Document written with ID: ", docRef.id);
+      let etoast = Toast.show("Error: Please fill out all fields.", {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0,
+      });
+
+      setTimeout(function hideToast() {
+        Toast.hide(etoast);
+      }, 3000);
+    }
 
     // await setDoc(docRef, additional_data);
     // // don't submit if intersection is empty
@@ -309,26 +334,24 @@ export default function ReportObstacle() {
     // }
 
     resetForm();
-
-   
   };
 
-  useEffect(() => {
-    let toast = Toast.show("Thank you for your report!", {
-      duration: Toast.durations.LONG,
-      position: Toast.positions.BOTTOM,
-      shadow: true,
-      animation: true,
-      // hideOnPress: true,
-      // delay: 0,
-    });
+  // useEffect(() => {
+  //   let toast = Toast.show("Thank you for your report!", {
+  //     duration: Toast.durations.LONG,
+  //     position: Toast.positions.BOTTOM,
+  //     shadow: true,
+  //     animation: true,
+  //     // hideOnPress: true,
+  //     // delay: 0,
+  //   });
 
-    setTimeout(function hideToast() {
-      console.log("Toast appeared");
-      Toast.hide(toast);
-      console.log("Toast hidden");
-    }, 3000);
-  });
+  //   setTimeout(function hideToast() {
+  //     console.log("Toast appeared");
+  //     Toast.hide(toast);
+  //     console.log("Toast hidden");
+  //   }, 3000);
+  // });
 
   const resetForm = () => {
     setDescription("");
@@ -347,34 +370,32 @@ export default function ReportObstacle() {
           Choose your precise location on the map:
         </Text>
         <View style={styles.mapContainer}>
-        <MapView
-          // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md
-          ref={mapRef}
-          style={styles.smallMap}
-          initialRegion={{
-            latitude: 42.35021,
-            longitude: -71.10653,
-            latitudeDelta: 0.003,
-            longitudeDelta: 0.003,
-          }}
-          showsUserLocation={true}
-          showsCompass={false}
-          showsPointsOfInterest={false}
-          showsTraffic={true}
-          showsIndoors={true}
-          showsMyLocationButton={true}
-        >
-          {/* {renderMarkers()} */}
-          <Marker
-            coordinate={marker.coordinate}
-            draggable={marker.draggable}
-            onDragEnd={handleDragEnd}
-          />
-
-        </MapView>
-        <LocationButton />
+          <MapView
+            // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md
+            ref={mapRef}
+            style={styles.smallMap}
+            initialRegion={{
+              latitude: 42.35021,
+              longitude: -71.10653,
+              latitudeDelta: 0.003,
+              longitudeDelta: 0.003,
+            }}
+            showsUserLocation={true}
+            showsCompass={false}
+            showsPointsOfInterest={false}
+            showsTraffic={true}
+            showsIndoors={true}
+            showsMyLocationButton={true}
+          >
+            {/* {renderMarkers()} */}
+            <Marker
+              coordinate={marker.coordinate}
+              draggable={marker.draggable}
+              onDragEnd={handleDragEnd}
+            />
+          </MapView>
+          <LocationButton />
         </View>
-        
         <Text style={[styles.ReportHeader, { top: 200 }]}>
           Which Locale Are You Closest To?
         </Text>
@@ -399,7 +420,6 @@ export default function ReportObstacle() {
             onChange={(locale) => setSelectedLocale(locale.label)}
           />
         </View>
-
         <Text style={[styles.ReportHeader, { top: 230 }]}>Type of report</Text>
         <View style={{ top: 240 }}>
           <Dropdown
@@ -422,7 +442,6 @@ export default function ReportObstacle() {
             onChange={(types) => setSelectedTypes(types.label)}
           />
         </View>
-
         <View style={{ flexDirection: "row", top: 210 }}>
           <Text
             style={{

@@ -30,33 +30,35 @@ export default function Page() {
         console.log("locData: ", locData);
       };
 
-      const fiveRecentReports = () => {
-        // Takes the five most recent reports in locData (based on value.timestamp) and adds the marker and id to recentReports
-        console.log("locData in reports: ", locData);
-        let tempRecentReports = [];
-        let sortedData = locData.sort((a, b) => {
-          return b.value.timestamp.seconds - a.value.timestamp.seconds;
-        });
-        for (let i = 0; i < (locData.length < 5 ? locData.length : 5); i++) {
-          tempRecentReports.push(sortedData[i]);
-        }
-
-        setRecentReports(tempRecentReports);
-        console.log("recentReports: ");
-        for (let i = 0; i < recentReports.length; i++) {
-          console.log(recentReports[i]);
-        }
-      };
-
       console.log("useFocusEffect called!");
 
       getLocations();
-      fiveRecentReports();
     }, [])
   );
 
+  useEffect(() => {
+    const fiveRecentReports = () => {
+      // Takes the five most recent reports in locData (based on value.timestamp) and adds the marker and id to recentReports
+      // console.log("locData in reports: ", locData);
+      let tempRecentReports = [];
+      let sortedData = locData.sort((a, b) => {
+        return b.value.timestamp.seconds - a.value.timestamp.seconds;
+      });
+      for (let i = 0; i < (locData.length < 5 ? locData.length : 5); i++) {
+        tempRecentReports.push(sortedData[i]);
+      }
+
+      setRecentReports(tempRecentReports);
+      console.log("recentReports: ");
+      for (let i = 0; i < recentReports.length; i++) {
+        console.log(recentReports[i]);
+      }
+    };
+
+    fiveRecentReports();
+  }, [locData]);
+
   const [location, setLocation] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const [marker, setMarker] = useState({
     coordinate: {
@@ -99,7 +101,7 @@ export default function Page() {
       <View>
         <Text style={styles.bottomSheetHeader}>Recent Reports</Text>
 
-        {props.inputReports ? (
+        {recentReports ? (
           props.inputReports.map((marker) => {
             return (
               <View style={styles.settingsContainer} key={marker.id}>
@@ -109,7 +111,7 @@ export default function Page() {
                   </Text>
                 </View>
                 <View style={styles.rowContainer3}>
-                  <RedDot />
+                  {/* <RedDot /> */}
                   <TouchableOpacity
                     onPress={() => {
                       if (
