@@ -60,21 +60,21 @@ export default function Page() {
 
   const [location, setLocation] = useState(null);
 
-  const [marker, setMarker] = useState({
-    coordinate: {
-      latitude: 42.35021,
-      longitude: -71.10653,
-    },
-    draggable: true,
-  });
-  const handleDragEnd = (event) => {
-    const { latitude, longitude } = event.nativeEvent.coordinate;
-    console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
-    setMarker((prevMarker) => ({
-      ...prevMarker,
-      coordinate: { latitude, longitude },
-    }));
-  };
+  // const [marker, setMarker] = useState({
+  //   coordinate: {
+  //     latitude: 42.35021,
+  //     longitude: -71.10653,
+  //   },
+  //   draggable: true,
+  // });
+  // const handleDragEnd = (event) => {
+  //   const { latitude, longitude } = event.nativeEvent.coordinate;
+  //   console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
+  //   setMarker((prevMarker) => ({
+  //     ...prevMarker,
+  //     coordinate: { latitude, longitude },
+  //   }));
+  // };
 
   //handleMapPress Function below to add dropped markers on the map based on the coordinates
   //From the coordinate object from the nativeEvent and adds it to the marker state
@@ -287,28 +287,19 @@ export default function Page() {
           }}
           // onPress={handleMapPress}
           showsUserLocation={true}
-          showsCompass={true}
+          showsCompass={false}
           showsPointsOfInterest={false}
           showsTraffic={true}
           showsIndoors={true}
           showsMyLocationButton={true}
         >
           {renderMarkers()}
-          <Marker
+          {/* <Marker
             coordinate={marker.coordinate}
             draggable={marker.draggable}
             onDragEnd={handleDragEnd}
-          />
-
-          {/* {markers.map((marker, index) => (
-            <Marker key={index} coordinate={marker} />
-          ))} */}
+          /> */}
         </MapView>
-        {/* {markers.map((marker, index) => (
-          <Text key={index}>
-            {`Latitude: ${marker.latitude}, Longitude: ${marker.longitude}`}
-          </Text>
-        ))} */}
         <LocationButton />
         {selectedMarker ? <DefaultMapButton /> : null}
         <BottomSheet

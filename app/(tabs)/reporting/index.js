@@ -97,7 +97,7 @@ export default function RPage() {
           non-emergencies.
         </Text>
 
-        <View style={[styles.ReportContainer, { top: 15, height: 120 }]}>
+        {/* <View style={[styles.ReportContainer, { top: 15, height: 120 }]}>
           <Ionicon name="car" size={30} color="#5787f5" />
           <TouchableOpacity onPress={() => router.push("/reporting/accident")}>
             <Text style={styles.callButtonText}>
@@ -107,7 +107,7 @@ export default function RPage() {
               Notify other users about an accident
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* <View style={[styles.ReportContainer, { bottom: -25, height: 120 }]}>
             <View style={{ left: -18 }}>
@@ -144,7 +144,7 @@ export default function RPage() {
         </View>
 
         <View style={styles.contactButtonContainer}>
-          <View style={{ top: -20 }}>
+          <View style={{ top: 100 }}>
             <TouchableOpacity
               style={styles.contactButton}
               onPress={() => router.push("/reporting/contact")}

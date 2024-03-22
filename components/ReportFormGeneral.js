@@ -32,6 +32,7 @@ const locationsData = [
   { label: "South Campus", value: "7" },
   { label: "Fenway Campus", value: "8" },
   { label: "BU Bridge", value: "9" },
+  { label: "Agganis Arena", value: "10" },
 ];
 
 const typesData = [
@@ -137,9 +138,14 @@ export default function ReportObstacle() {
   }, []);
 
   const handleSubmit = async () => {
+    // const uploadLocation = new GeoPoint(
+    //   location.coords.latitude,
+    //   location.coords.longitude
+    // );
+
     const uploadLocation = new GeoPoint(
-      location.coords.latitude,
-      location.coords.longitude
+      marker.coordinate.latitude,
+      marker.coordinate.longitude
     );
 
     console.log(uploadLocation);
