@@ -42,6 +42,13 @@ export const styles = StyleSheet.create({
     paddingBottom: 30,
 
   },
+  markerFixed: {
+    left: '50%',
+    marginLeft: -10, // Adjust based on your marker icon's size
+    marginTop: -128, // Adjust based on your marker icon's size
+    position: 'absolute',
+    top: '50%'
+  },
   locationButton: {
     position: "absolute",
     top: 50,

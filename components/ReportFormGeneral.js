@@ -21,6 +21,7 @@ const templateSubmission = true;
 
 import MapView, { Marker } from "react-native-maps";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const locationsData = [
   { label: "Kenmore", value: "1" },
@@ -55,11 +56,21 @@ export default function ReportObstacle() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [mapCenter, setMapCenter] = useState({
+    latitude: 42.35021,
+    longitude: -71.10653,
+  });
+
+  const onRegionChange = (region) => {
+    setMapCenter(region);
+    console.log("Region changed: ", region.latitude, region.longitude);
+  }
   const mapRef = useRef();
 
   const goToMyLocation = async () => {
     console.log("Latitude:", location.coords.latitude);
     console.log("Longitude:", location.coords.longitude);
+    
     mapRef.current.animateCamera({
       center: {
         latitude: location.coords.latitude,
@@ -68,12 +79,14 @@ export default function ReportObstacle() {
         longitudeDelta: 0.003,
       },
       // zoom: 17, // Android, needs to be adjusted after testing on Android
-      altitude: 2000,
+      altitude: 200,
       pitch: 0,
       angle: 0,
       heading: 0,
       // useNativeDriver: true,
+      
     });
+   setMapCenter({latitude: location.coords.latitude, longitude: location.coords.longitude});
   };
 
   const LocationButton = () => (
@@ -90,21 +103,31 @@ export default function ReportObstacle() {
     </TouchableOpacity>
   );
 
-  const [marker, setMarker] = useState({
-    coordinate: {
-      latitude: location ? location.coords.latitude : 42.35021,
-      longitude: location ? location.coords.longitude : -71.10653,
-    },
-    draggable: true,
-  });
-  const handleDragEnd = (event) => {
-    const { latitude, longitude } = event.nativeEvent.coordinate;
-    console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
-    setMarker((prevMarker) => ({
-      ...prevMarker,
-      coordinate: { latitude, longitude },
-    }));
-  };
+  const MarkerIcon = () => (
+    <Ionicon
+      name="pin"
+      size={30}
+      color="#fe2d01"
+      style={styles.markerFixed}
+    />
+
+  )
+
+  // const [marker, setMarker] = useState({
+  //   coordinate: {
+  //     latitude: location ? location.coords.latitude : 42.35021,
+  //     longitude: location ? location.coords.longitude : -71.10653,
+  //   },
+  //   draggable: true,
+  // });
+  // const handleDragEnd = (event) => {
+  //   const { latitude, longitude } = event.nativeEvent.coordinate;
+  //   console.log(`New latitude: ${latitude}, New longitude: ${longitude}`);
+  //   setMarker((prevMarker) => ({
+  //     ...prevMarker,
+  //     coordinate: { latitude, longitude },
+  //   }));
+  // };
 
   useEffect(() => {
     (async () => {
@@ -383,23 +406,28 @@ export default function ReportObstacle() {
             initialRegion={{
               latitude: 42.35021,
               longitude: -71.10653,
-              latitudeDelta: 0.003,
-              longitudeDelta: 0.003,
-            }}
+              latitudeDelta: 0.0009,
+              longitudeDelta: 0.0009,
+             
+            }
+          }
             showsUserLocation={true}
             showsCompass={false}
             showsPointsOfInterest={false}
             showsTraffic={true}
             showsIndoors={true}
             showsMyLocationButton={true}
+            onRegionChangeComplete={onRegionChange}
           >
             {/* {renderMarkers()} */}
-            <Marker
+            {/* <Marker
               coordinate={marker.coordinate}
               draggable={marker.draggable}
               onDragEnd={handleDragEnd}
-            />
+            /> */}
+            
           </MapView>
+          <MarkerIcon />
           <LocationButton />
         </View>
         <Text style={[styles.ReportHeader, { top: 200 }]}>
