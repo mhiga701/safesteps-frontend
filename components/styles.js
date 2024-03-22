@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     padding: 20,
     textAlign: "left",
     borderRadius: 10,
-    paddingBottom: 160,
+    paddingBottom: 60,
   },
   reportingContainer: {
     flex: 3,
