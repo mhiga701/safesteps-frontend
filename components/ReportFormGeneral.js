@@ -64,13 +64,13 @@ export default function ReportObstacle() {
   const onRegionChange = (region) => {
     setMapCenter(region);
     console.log("Region changed: ", region.latitude, region.longitude);
-  }
+  };
   const mapRef = useRef();
 
   const goToMyLocation = async () => {
     console.log("Latitude:", location.coords.latitude);
     console.log("Longitude:", location.coords.longitude);
-    
+
     mapRef.current.animateCamera({
       center: {
         latitude: location.coords.latitude,
@@ -84,9 +84,11 @@ export default function ReportObstacle() {
       angle: 0,
       heading: 0,
       // useNativeDriver: true,
-      
     });
-   setMapCenter({latitude: location.coords.latitude, longitude: location.coords.longitude});
+    setMapCenter({
+      latitude: location.coords.latitude,
+      longitude: location.coords.longitude,
+    });
   };
 
   const LocationButton = () => (
@@ -104,14 +106,8 @@ export default function ReportObstacle() {
   );
 
   const MarkerIcon = () => (
-    <Ionicon
-      name="pin"
-      size={30}
-      color="#fe2d01"
-      style={styles.markerFixed}
-    />
-
-  )
+    <Ionicon name="pin" size={30} color="#fe2d01" style={styles.markerFixed} />
+  );
 
   // const [marker, setMarker] = useState({
   //   coordinate: {
@@ -167,8 +163,8 @@ export default function ReportObstacle() {
     // );
 
     const uploadLocation = new GeoPoint(
-      marker.coordinate.latitude,
-      marker.coordinate.longitude
+      mapCenter.latitude,
+      mapCenter.longitude
     );
 
     console.log(uploadLocation);
@@ -408,9 +404,7 @@ export default function ReportObstacle() {
               longitude: -71.10653,
               latitudeDelta: 0.0009,
               longitudeDelta: 0.0009,
-             
-            }
-          }
+            }}
             showsUserLocation={true}
             showsCompass={false}
             showsPointsOfInterest={false}
@@ -425,7 +419,6 @@ export default function ReportObstacle() {
               draggable={marker.draggable}
               onDragEnd={handleDragEnd}
             /> */}
-            
           </MapView>
           <MarkerIcon />
           <LocationButton />

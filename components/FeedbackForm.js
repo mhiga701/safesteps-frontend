@@ -32,9 +32,9 @@ export default function FeedbackForm() {
       }, 3000);
       return;
     }
-    //Added some email valid checking by checking if the contact has a "@" symbol in the contact 
-    else if (!(contact.includes("@"))){
-      console.log("Need a valid email")
+    //Added some email valid checking by checking if the contact has a "@" symbol in the contact
+    else if (!contact.includes("@")) {
+      console.log("Need a valid email");
       let etoast = Toast.show("Need to have a valid email", {
         duration: Toast.durations.LONG,
         position: Toast.positions.BOTTOM,
@@ -51,25 +51,12 @@ export default function FeedbackForm() {
     }
 
     try {
-      //Generate a random document id to add to the Feedback collection
       const docRef = collection(db, "Feedback");
-      //Add the doc to the random document id with the name, message, and their contact
-      await addDoc(docRef, {name:name,message: message, contact:contact});
-      // setData([...data, {name:name, message: message }]);
-      // const subcollectionRef = collection(docRef, "History");
-      //Update the firstore database
-      // await setDoc(docRef, {message: message, contact:contact});
 
-      // Add a new document to the subcollection with contact and message data
-      // await addDoc(subcollectionRef, {
-      //   name: name,
-      //   message: message,
-      //   date: day
-      // }, { id: day});
-      
+      await addDoc(docRef, { name: name, message: message, contact: contact });
+
       console.log("Uploaded!");
       console.log(`Name: ${name}, Message: ${message}`);
-
     } catch (e) {
       console.error("Error adding document: ", e);
 
@@ -93,8 +80,7 @@ export default function FeedbackForm() {
     setName("");
     setMessage("");
     setContact("");
-  
-   
+
     let toast = Toast.show("Thanks for your feedback!", {
       duration: Toast.durations.LONG,
       position: Toast.positions.BOTTOM,
@@ -125,7 +111,7 @@ export default function FeedbackForm() {
               onSubmitEditing={() => {
                 this.secondTextInput.focus();
               }}
-              blurOnSubmit={false}
+              blurOnSubmit={true}
             />
           </View>
 
@@ -133,7 +119,7 @@ export default function FeedbackForm() {
             <Text style={styles.toggleText}>Contact</Text>
             <TextInput
               ref={(input) => {
-                this.thirdTextInput = input;
+                this.secondTextInput = input;
               }}
               style={styles.input}
               value={contact}
@@ -141,7 +127,10 @@ export default function FeedbackForm() {
               placeholder="Enter your contact here"
               multiline={true}
               maxLength={500}
-              returnKeyType="done"
+              returnKeyType="next"
+              onSubmitEditing={() => {
+                this.thirdTextInput.focus();
+              }}
               blurOnSubmit={true}
             />
           </View>

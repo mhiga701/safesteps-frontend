@@ -116,7 +116,7 @@ export default function Page() {
                     onPress={() => {
                       if (
                         selectedMarker !== null &&
-                        selectedMarker === marker 
+                        selectedMarker === marker
                       ) {
                         setSelectedMarker(null);
                         goToInitialLocation();
@@ -124,7 +124,6 @@ export default function Page() {
                       } else if (
                         selectedMarker !== null &&
                         selectedMarker !== marker
-                        
                       ) {
                         setSelectedMarker(marker);
                         goToMarkerLocation(marker);
