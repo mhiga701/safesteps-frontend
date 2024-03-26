@@ -106,7 +106,7 @@ export default function ReportObstacle() {
   );
 
   const MarkerIcon = () => (
-    <Ionicon name="pin" size={30} color="#fe2d01" style={styles.markerFixed} />
+    <Ionicon name="location-sharp" size={30} color="#fe2d01" style={styles.markerFixed} />
   );
 
   // const [marker, setMarker] = useState({
