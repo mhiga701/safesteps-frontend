@@ -19,7 +19,7 @@ import { useEffect, useRef } from "react";
 
 const templateSubmission = true;
 
-import MapView, { Marker } from "react-native-maps";
+import MapView from "react-native-maps";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicon from "react-native-vector-icons/Ionicons";
 
@@ -391,38 +391,7 @@ export default function ReportObstacle() {
     <>
       <View style={styles.reportContainer}>
         <Text style={styles.ReportAccident}>New Report Form</Text>
-        <Text style={styles.ReportHeader}>
-          Choose your precise location on the map:
-        </Text>
-        <View style={styles.mapContainer}>
-          <MapView
-            // https://github.com/react-native-maps/react-native-maps/blob/master/docs/mapview.md
-            ref={mapRef}
-            style={styles.smallMap}
-            initialRegion={{
-              latitude: 42.35021,
-              longitude: -71.10653,
-              latitudeDelta: 0.0009,
-              longitudeDelta: 0.0009,
-            }}
-            showsUserLocation={true}
-            showsCompass={false}
-            showsPointsOfInterest={false}
-            showsTraffic={true}
-            showsIndoors={true}
-            showsMyLocationButton={true}
-            onRegionChangeComplete={onRegionChange}
-          >
-            {/* {renderMarkers()} */}
-            {/* <Marker
-              coordinate={marker.coordinate}
-              draggable={marker.draggable}
-              onDragEnd={handleDragEnd}
-            /> */}
-          </MapView>
-          <MarkerIcon />
-          <LocationButton />
-        </View>
+      
         <Text style={[styles.ReportHeader, { top: 200 }]}>
           Which Locale Are You Closest To?
         </Text>
