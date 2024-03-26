@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { StackOverflow } from "react-bootstrap-icons";
 
 const ReportLayout = () => {
   return (
@@ -8,6 +9,7 @@ const ReportLayout = () => {
       <Stack.Screen name="obstacle" options={{ headerShown: false }} />
       <Stack.Screen name="reportform" options={{ headerShown: false }} />
       <Stack.Screen name="contact" options={{ headerShown: false }} />
+      <Stack.Screen name="toast" options={{ headerShown: false }} />
     </Stack>
   );
 };

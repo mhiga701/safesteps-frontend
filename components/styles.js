@@ -1095,4 +1095,12 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: -50, // Add padding to separate elements
   },
+  toastContainer: {
+     // flex: 1,
+      backgroundColor: "#ecedf2",
+      padding: 20,
+      textAlign: "left",
+      marginLeft: 40,
+      marginBottom: 40,
+    },
 });
